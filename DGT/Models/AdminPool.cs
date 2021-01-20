@@ -6,6 +6,7 @@ namespace DGT.Models
 {
 	public class CrashRecordPool
 	{
+		public string               Name                 { get; set; }
 		public DateTime             Year                 { get; set; }
 		public DateTime             StartDate            { get; set; }
 		public DateTime             EndDate              { get; set; }
@@ -17,12 +18,6 @@ namespace DGT.Models
 		public EtlGeolocationStatus EtlGeolocationStatus { get; set; }
 
 		[JsonExtensionData]
-		public Dictionary<string, object> ExtensionData { get; set; }
-
-		public CrashRecordPool()
-		{
-
-
-		}
+		public Dictionary<string, object> ExtensionData  { get; set; }
 	}
 }
