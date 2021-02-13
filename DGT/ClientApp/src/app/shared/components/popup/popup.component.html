@@ -1,0 +1,29 @@
+<ng-template [ngIf]="isReady">
+
+    <button #anchor class="s4-btn pos-abs" style="right: -1rem; top: -1rem;" (click)="toggleOpen()">
+        <i *ngIf="hasIcon" class="fal fa-question-circle fa-xs txt-helper hover-fill"></i>
+    </button>
+
+    <ng-template [ngIf]="isOpen">
+        <kendo-popup [anchor]="anchor" [anchorAlign]="anchorAlign" [popupAlign]="popupAlign" [margin]="popupMargin">
+            <div class="popup-content d-flex flex-column light txt-active p-1" awaitsClickOutside="popup-content"
+                (clickOutside)="close()">
+                <div class="d-flex flex-row align-items-start justify-content-between mb-1">
+                    <div class="d-flex flex-row align-items-center justify-content-between">
+                        <s4-logo class="mr-2 pull-top-1 opacity-high" color="dark" width="24px"></s4-logo>
+                        <span *ngIf="popup.name" class="font-heading on-bg opacity-mid txt3"
+                            [innerHtml]="popup.name"></span>
+                    </div>
+                    <s4-icon class="pull-top-2" icon="times" faStyle="fal"
+                        cssClass="txt-helper opacity-mid hover-fill cursor-pointer" (trigger)="close()">
+                    </s4-icon>
+                </div>
+                <div *ngIf="popup.description" class="popup-body txt-active txt5 opacity-high"
+                    [innerHtml]="popup.description"></div>
+
+            </div>
+        </kendo-popup>
+    </ng-template>
+
+
+</ng-template>

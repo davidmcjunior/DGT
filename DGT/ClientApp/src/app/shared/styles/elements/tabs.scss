@@ -1,0 +1,47 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: $bg;
+
+    .tab {
+        overflow: hidden;
+        white-space: nowrap;
+
+        .label {
+            color: $on-bg;
+            opacity: $opacity-mid;
+            font-family: $font-main;
+            transition: all $dur125 $easing-std;
+        }
+
+
+        &.selected,
+        &:hover {
+            .label {
+                opacity: $opacity-high;
+                cursor: pointer;
+                transition: all $dur150 $easing-std;
+            }
+        }
+    }
+}
+
+.marker-wrap {
+    margin: 0 auto;
+    width: 200px;
+    height: 2px;
+    overflow: hidden;
+    border-radius: $border-radius $border-radius 0 0;
+
+
+    .marker {
+        width: 100%;
+        height: 100%;
+        opacity: $opacity-high;
+        background: $primary;
+    }
+}

@@ -1,0 +1,18 @@
+<div kendoTooltip filter=".tooltip-icon" [titleTemplate]="titleTemplate" [tooltipTemplate]="template"
+  [position]="position" tooltipWidth="300">
+  <ng-template #titleTemplate let-anchor>
+    <div class="d-flex flex-row align-items-center">
+      <s4-logo class="mr-2" [style]="'icon'" [width]="'20px'" [height]="'20px'" color="light"></s4-logo>
+      <span class="font-heading txt6">
+        {{ anchor.nativeElement.getAttribute("data-name") }}
+      </span>
+    </div>
+  </ng-template>
+  <ng-template #template let-anchor>
+    <span class="opacity-high serif txt7">{{ anchor.nativeElement.getAttribute("data-description") }}</span>
+  </ng-template>
+  <div class="pos-abs tooltip-icon" style="right:-13px; top: -13px;" [attr.data-name]="tooltip.name"
+    [attr.data-description]="tooltip.description">
+    <i [class]="iconClass"></i>
+  </div>
+</div>

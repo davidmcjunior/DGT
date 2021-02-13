@@ -1,0 +1,129 @@
+/*
+* Classes defined by Highcharts.js
+* Changing these classes will alter ALL charts
+* Most chart styles can be adjusted within the chart options
+*/
+
+.highcharts-color-0 {
+  fill: $secondary !important;
+  stroke: $secondary !important;
+}
+
+.highcharts-color-0 .highcharts-point {
+  fill: $secondary !important;
+}
+
+.highcharts-color-1 {
+  fill: $primary !important;
+  stroke: $primary !important;
+
+  .highcharts-point {
+    fill: $primary !important;
+  }
+}
+
+.highcharts-color-2 {
+  fill: $secondary-l !important;
+  stroke: $secondary-l !important;
+
+  .highcharts-point {
+    fill: $secondary-l !important;
+
+  }
+}
+
+.highcharts-color-3 {
+  fill: $primary-l !important;
+  stroke: $primary-l !important;
+
+  .highcharts-point {
+    fill: $primary-l !important;
+  }
+}
+
+.highcharts-color-4 {
+  fill: $indigo !important;
+  stroke: $indigo !important;
+
+  .highcharts-point {
+    fill: $indigo !important;
+  }
+}
+
+.highcharts-color-5 {
+  fill: $violet !important;
+  stroke: $violet !important;
+
+  .highcharts-point {
+    fill: $violet !important;
+  }
+}
+
+.highcharts-color-6 {
+  fill: $orange !important;
+  stroke: $orange !important;
+
+  .highcharts-point {
+    fill: $orange !important;
+  }
+}
+
+.dark-point-series {
+  & .highcharts-color-0 {
+    fill: $primary !important;
+    stroke: $primary !important;
+
+    .highcharts-point {
+      fill: $primary !important;
+    }
+  }
+}
+
+.highcharts-title,
+.highcharts-legend {
+  font-family: $font-heading !important;
+}
+
+/*
+ * reduces y positioning of pie chart from (10px,48px) so it
+ * fits in chart component space
+ */
+.reduce-vertical-transform {
+  .highcharts-tracker {
+    transform: translate(10px, 8px);
+  }
+}
+
+.highcharts-container {
+  text.highcharts-credits {
+    display: none !important;
+  }
+}
+
+.highcharts-grid-line {
+  // display: none !important;
+  opacity: 0.5 !important;
+}
+
+.highcharts-plot-band {
+  fill: $primary-d;
+  fill-opacity: 0.05;
+}
+
+
+.highcharts-tooltip {
+  .highcharts-tooltip-box {
+    fill: $light !important;
+    fill-opacity: $opacity-high;
+    // stroke-width: 0;
+    stroke: $primary-d;
+    box-shadow: $box-shadow-raised;
+
+  }
+
+  text {
+    fill: $on-bg !important;
+    stroke: $on-bg !important;
+    color: $on-bg !important;
+  }
+}

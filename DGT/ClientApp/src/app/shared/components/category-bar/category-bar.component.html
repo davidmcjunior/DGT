@@ -1,0 +1,17 @@
+  <div class="category-bar ml-3 d-flex flex-row justify-content-between align-items-center"
+    [ngClass]="{'light-theme': theme === 'light', 'dark-theme': theme === 'dark', active: !disabled}">
+
+    <div class="d-flex flex-row justify-content-start ">
+      <div *ngFor="let cat of categories" class="d-flex flex-column mr-2" [class.selected]="cat.value === category">
+
+        <div class="category d-flex flex-column align-items-center cursor-pointer" (click)="onSelect(cat.value)">
+          <s4-icon [icon]="cat.icon" [customIcon]="cat.customIcon" cssClass="cat-option circle p-1 centered">
+          </s4-icon>
+          <div class="cat-label font-heading txt9">{{cat.label | uppercase}}</div>
+        </div>
+
+        <!-- <marker [value]="cat.category" customClasses="primary-l" [selected]="category"></marker> -->
+
+      </div>
+    </div>
+  </div>

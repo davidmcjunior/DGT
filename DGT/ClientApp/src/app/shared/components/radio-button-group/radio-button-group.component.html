@@ -1,0 +1,11 @@
+<fieldset class="form-group">
+  <h6><b>{{groupLabel}}</b></h6>
+  <div class="form-check" [class.form-check-inline]="inline" *ngFor="let item of items">
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" [name]="name" [checked]="isChecked(item)" (click)="select(item)" />
+      <span title="{{getItemTooltip(item)}}" container="body" placement="right">
+        {{getItemLabel(item)}}
+      </span>
+    </label>
+  </div>
+</fieldset>

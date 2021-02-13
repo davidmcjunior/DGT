@@ -1,0 +1,87 @@
+// Positioning
+.brdr {
+    &.brdr-all {
+        border: 1px solid;
+    }
+
+    &.brdr-bottom {
+        border-bottom: 1px solid;
+    }
+
+    &.brdr-top {
+        border-top: 1px solid;
+    }
+
+    &.brdr-left {
+        border-left: 1px solid;
+    }
+
+    &.brdr-right {
+        border-right: 1px solid;
+    }
+
+    // Coloring
+    &.brdr-clr-primary {
+        border-color: $primary;
+    }
+
+    &.brdr-clr-secondary {
+        border-color: $secondary;
+    }
+
+    &.brdr-clr-dark {
+        border-color: $txt-active
+    }
+
+    &.brdr-clr-mid {
+        border-color: $txt-helper;
+    }
+
+    &.brdr-clr-teal {
+        border-color: $teal;
+    }
+
+    &.brdr-clr-indigo {
+        border-color: $indigo;
+    }
+
+    &.brdr-clr-light {
+        border-color: $light;
+    }
+
+    &.brdr-clr-orange {
+        border-color: $orange;
+    }
+
+    &.brdr-clr-yellow {
+        border-color: $yellow;
+    }
+
+    &.brdr-clr-orange-d {
+        border-color: $orange-dark;
+    }
+
+    &.brdr-clr-green {
+        border-color: $green;
+    }
+
+    &.brdr-clr-green-d {
+        border-color: $green-dark;
+    }
+
+    &.brdr-clr-red {
+        border-color: $red;
+    }
+
+    &.brdr-clr-red-d {
+        border-color: $red-dark;
+    }
+
+    &.brdr-clr-mid-l {
+        border-color: $mid-l;
+    }
+}
+
+.no-border {
+    border: none !important;
+}

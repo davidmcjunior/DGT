@@ -1,0 +1,104 @@
+// * crash-summary
+.cs {
+    //max-width: $layout-breakpoint-xl;
+    margin: 0 auto;
+    overflow: auto;
+
+    .cs-filters {
+        height: 710px;
+        width: $sidePanelWidth !important;
+        min-width: $sidePanelWidth !important;
+        margin-left: 0.5em;
+        padding-right: 0.5em;
+
+        .csf-submit {
+            transition: all $dur200 $easing-std;
+
+            .csf-submit-span {
+                display: inline;
+                margin-right: 0.5em;
+            }
+        }
+    }
+
+    .cs-grid {
+        th {
+            font-family: $font-heading !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
+            line-height: 18px !important;
+        }
+
+        .k-grid-toolbar {
+            border-top: 1px solid rgba(25, 25, 25, 0.12)
+        }
+
+        .k-grid-norecords {
+            text-align: left;
+        }
+
+    }
+
+    .emphasis-summary-grid,
+    .crash-summary-grid {
+        height: 710px;
+    }
+
+    .emphasis-summary-grid {
+        width: 600px;
+    }
+
+    .pdf-export {
+        .k-grid {
+            th {
+                font-size: 12px !important;
+                background-color: $primary-d !important;
+                color: $on-primary;
+                opacity: $opacity-high;
+                font-family: $font-heading !important;
+            }
+
+            tr {
+                &.l1 {
+                    font-weight: 800 !important;
+                    background-color: $primary;
+                    color: $on-primary;
+                    opacity: $opacity-high;
+                    font-size: 12px !important;
+                    font-family: $font-heading !important;
+                }
+
+                &.l2 {
+                    background-color: $bg !important;
+                    color: $txt-active !important;
+                    font-size: 12px !important;
+                    border-bottom: 1px solid $primary-l !important;
+                }
+
+                &.l3 {
+                    background-color: $bg;
+                    color: $txt-helper !important;
+                    font-size: 11px !important;
+                }
+
+                &.spacer {
+                    background-color: $bg !important;
+                    border: none;
+                    line-height: 5px;
+                    height: 5px !important;
+                }
+
+                &.total {
+                    background-color: $primary-d !important;
+                    color: $on-primary !important;
+                    opacity: $opacity-high !important;
+                    font-weight: 800 !important;
+                    font-size: 12px !important;
+                    font-family: $font-heading !important;
+
+                }
+            }
+        }
+    }
+
+}

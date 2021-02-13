@@ -1,0 +1,251 @@
+// * KENDO UI CLASSES/COMPONENTS THAT HAVE TO BE OVERWRITTEN *//
+
+
+kendo-tabstrip {
+    margin: 0;
+    padding: 8px;
+}
+
+kendo-combobox {
+    width: 100%;
+
+    span {
+        border-width: 0 !important;
+    }
+
+    kendo-searchbar {
+        border-width: 0 !important;
+    }
+}
+
+
+// rounds the top of the splitter bar to match title-bars
+kendo-splitter-bar {
+    border-radius: $border-radius $border-radius 0 0 !important;
+}
+
+.k-splitbar {
+    pointer-events: auto;
+
+    * {
+        opacity: $opacity-mid;
+    }
+
+    &:hover {
+        * {
+            opacity: $opacity-high;
+        }
+    }
+}
+
+.k-dropdown-wrap {
+    margin-bottom: 0 !important;
+}
+
+.k-i-loading {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 0;
+    bottom: 0;
+    opacity: 0.6;
+    font-size: 64px;
+}
+
+.k-checkbox-label {
+    margin-top: 3px;
+}
+
+// * remove large gap between items
+.filter-card-list {
+    margin: 0;
+}
+
+/* decreased gap between items in filter */
+.k-treeview .k-in {
+    padding: 0;
+    border-radius: 0;
+}
+
+.k-grid td,
+.k-grid th {
+    padding: .5rem;
+}
+
+.k-grid td.k-detail-cell {
+    padding: 0 !important;
+}
+
+// * Grid classes *//
+.k-grid {
+    td {
+        font-size: 0.8em;
+        white-space: nowrap;
+    }
+
+    th,
+    .k-grid-header,
+    .k-grid-footer {
+        font-family: $font-heading !important;
+        color: $txt-active !important;
+    }
+
+    tbody tr {
+        font-family: $font-main;
+    }
+
+    .k-grid-header {
+        font-size: 0.8em;
+    }
+}
+
+.k-dateinput .k-dateinput-wrap,
+.k-combobox .k-dropdown-wrap,
+.k-datepicker .k-picker-wrap,
+.k-dropdown .k-dropdown-wrap,
+.k-autocomplete,
+.k-autocomplete .k-dropdown-wrap,
+.k-multiselect .k-multiselect-wrap {
+    border-width: 0;
+    font-size: 1em;
+    line-height: 1.1em;
+    font-family: $font-main;
+
+    .k-input {
+        padding-left: 0.25rem;
+    }
+}
+
+.k-datepicker,
+.k-dateinput,
+.k-autocomplete,
+.k-dropdown,
+.k-combobox,
+.k-multiselect {
+    .k-select {
+        margin-bottom: 0;
+    }
+
+    .k-icon {
+        &.k-i-arrow-s:before {
+            content: "\e015"; // uses a chevron instead of a triangle
+
+        }
+    }
+}
+
+// used in popups
+.k-animation-container-shown {
+    box-shadow: $box-shadow-raised;
+}
+
+
+.k-tooltip,
+.k-popup {
+    color: $on-bg;
+    border-radius: $border-radius !important;
+    padding: .1em;
+}
+
+.k-tooltip {
+    background: $bg;
+    color: $txt-active;
+    font-family: $font-serif;
+    // border: none;
+    box-shadow: $box-shadow-main;
+    padding: 0.2em 1em;
+}
+
+// .k-popup {
+//     background: $primary-d;
+// }
+.light-input {
+    .k-select {
+        background: $bg;
+
+        .k-icon {
+            color: $primary-l;
+        }
+
+        &:hover {
+            background: $bg;
+
+            .k-icon {
+                color: $primary;
+            }
+        }
+    }
+}
+
+.dark-input.k-dropdown {
+    width: unset;
+}
+
+
+.dark-input {
+    &.k-autocomplete.k-header {
+        background-color: $primary;
+    }
+
+    &.k-state-focused {
+        box-shadow: unset;
+    }
+
+    &.k-combobox {
+        width: 100%;
+
+    }
+
+    &.k-autocomplete,
+    &.k-combobox .k-dropdown-wrap,
+    &.k-multiselect .k-multiselect-wrap,
+    &.k-dropdown .k-dropdown-wrap {
+        background: $primary;
+        background-color: $primary;
+        line-height: unset;
+        width: 100%;
+
+        .k-input {
+            background: $primary;
+
+            // padding: 0;
+            font-size: calc(10px + 0.49vw);
+            color: $on-primary;
+            opacity: $opacity-high;
+
+            &:hover {
+                background: $primary;
+                background-color: $primary;
+                cursor: pointer;
+            }
+        }
+
+        ::placeholder {
+            color: $light;
+            opacity: $opacity-mid;
+        }
+
+    }
+
+    .k-icon.k-clear-value.k-i-close {
+        color: $light !important;
+    }
+}
+
+
+kendo-daterange.panel-daterange,
+div.panel-daterange {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+
+    kendo-dateinput {
+        input {
+            text-align: center;
+            // padding: 1em 2em;
+        }
+    }
+}

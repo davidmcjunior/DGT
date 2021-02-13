@@ -1,0 +1,14 @@
+<div [class]="buttonClass">
+  <button *ngIf="hasAnyOrAll" class="s4-btn member" [class.active]="isAnyOrAllChecked" (click)="toggleAnyOrAll()">
+    <span class="text txt7">{{anyOrAllText}}</span>
+  </button>
+
+  <button *ngFor="let item of items" class="s4-btn member brdr brdr-left brdr-clr-mid" (click)="toggle(item)"
+    [disabled]="isDisabled(item)" [class.active]="isChecked(item)">
+    <span class="text txt7">{{getItemLabel(item)}}</span>
+    <!-- <span ngbTooltip="{{getItemTooltip(item)}}" container="body" placement="{{getTooltipPlacement()}}">
+      {{getItemLabel(item)}}
+      <img src="{{getItemIcon(item)}}">
+    </span> -->
+  </button>
+</div>

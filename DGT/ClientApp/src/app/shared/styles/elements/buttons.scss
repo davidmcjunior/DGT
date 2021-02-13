@@ -1,0 +1,274 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+button:focus {
+    outline: none
+}
+
+// *Used by Icon Button* // *
+// ************ // **
+@mixin baseBtn() {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: all $dur100 $easing-std;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.s4-btn {
+    @include baseBtn();
+
+
+
+    &.std {
+        width: 30px;
+        height: 30px;
+        background: $surface;
+        @include lightenColorOnHover($secondary-d, 20%);
+        color: $primary-d !important;
+        stroke: $primary-d !important;
+        // fill: $on-surface;
+        @include centered();
+
+        i,
+        svg,
+        span {
+            width: 20px;
+            height: 20px;
+            opacity: $opacity-high;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &.secondary-toggle {
+        color: $txt-helper;
+
+        &:hover {
+            color: $txt-active;
+        }
+
+        &.active {
+            background: $secondary;
+            color: $on-secondary !important;
+
+            &:hover {
+                color: $on-secondary;
+            }
+
+            @include lightenBgOnHover($secondary, 20%);
+        }
+    }
+
+    &.primary {
+        background: $primary !important;
+        color: $on-primary !important;
+        stroke: $on-primary !important;
+    }
+
+    &.secondary {
+        background: $secondary;
+        color: $on-secondary;
+    }
+}
+
+.icon-disabled .s4-btn {
+    pointer-events: none;
+
+    i,
+    svg,
+    span,
+    svg * {
+        color: $txt-disabled !important;
+        fill-opacity: $opacity-mid;
+        stroke-opacity: $opacity-mid;
+    }
+}
+
+.cancel-btn {
+    background-color: $light;
+    color: $txt-helper;
+
+    &:hover {
+        background-color: $red-dark;
+        border-color: $dark;
+        color: $on-primary
+    }
+}
+
+.success-btn {
+    border: 1px solid $green-dark;
+
+    background-color: $light;
+    color: $txt-helper;
+
+
+    &.active {
+        background: $success;
+        color: $light-d;
+        border: 1px solid $light-d;
+
+        &:hover {
+            color: $light-l;
+            border-color: $bg;
+        }
+    }
+}
+
+.btn-group {
+    box-shadow: $box-shadow-flat;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: $border-radius;
+    border: 1px solid $txt-disabled;
+
+    .member {
+        @include centered();
+        flex: 1;
+        background: $primary;
+
+        .text {
+            color: $on-primary;
+            opacity: $opacity-mid;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            .text {
+                opacity: $opacity-high;
+            }
+        }
+
+        &.active {
+            background: $secondary;
+
+            .text {
+                color: $on-secondary;
+                opacity: $opacity-high;
+            }
+        }
+    }
+}
+
+.pill {
+    @include baseBtn();
+    border-radius: 500px !important; // more effective than trying to round each corner
+    opacity: $opacity-high;
+    box-shadow: $box-shadow-flat;
+    border: 1px solid;
+    padding: 0.25rem !important;
+
+    &.pill-dark {
+        color: $on-primary;
+        @include lightenBgOnHover($primary, 20%);
+
+        border-color: $primary-l;
+
+        &:hover {
+
+            border-color: scale-color($bg, $lightness: -20%);
+        }
+    }
+
+    &.pill-light {
+        background: $surface;
+        color: $on-surface;
+        border-color: $primary;
+
+        &:hover {
+            color: $secondary;
+            border-color: $secondary;
+        }
+    }
+
+    &.pill-secondary {
+        background: $secondary;
+        color: $on-secondary;
+        border-color: $on-secondary;
+    }
+}
+
+//*** panel-action-button ***//
+.pab {
+    @include baseBtn();
+    @include centered();
+    height: 48px;
+    min-height: 48px !important;
+    width: 100%;
+    display: block;
+    background: $primary;
+
+    .on-primary {
+        opacity: $opacity-mid;
+    }
+
+    &.enabled {
+
+        .on-primary {
+            opacity: $opacity-high;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        @include lightenBgOnHover($primary, 10%);
+    }
+}
+
+.hsmv-rpt-link {
+    color: $secondary !important;
+
+    &:hover {
+        text-decoration: underline !important;
+        cursor: pointer;
+    }
+}
+
+// ** state of florida svg **//
+.florida {
+    stroke: $primary !important;
+    fill: $light-d !important;
+    stroke-width: 2px;
+
+    &:hover {
+        stroke: $secondary !important;
+        fill: $secondary !important;
+    }
+}
+
+// .svg-heatmap,
+// .point-svg,
+// .cluster-svg {
+//     stroke: $primary;
+// }
+
+// .cluster-svg,
+// .point-svg {
+//     fill: $primary;
+// }
+
+
+.point-svg,
+.svg-fdm-auto {
+    fill: $primary;
+}
+
+.svg-heatmap {
+    stroke-width: 5px;
+}
+
+.sideMenuButton {
+    width: 46px;
+    height: 46px;
+    text-decoration: none;
+    transition: all $dur200 $easing-std;
+
+}

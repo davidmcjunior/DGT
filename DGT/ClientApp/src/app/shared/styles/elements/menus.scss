@@ -1,0 +1,58 @@
+.s4-menu {
+  position: absolute;
+  z-index: 1030;
+  top: 56px; // Place content 60px from the top
+}
+
+
+.user-menu {
+  width: $sidePanelWidth;
+  margin: 5px;
+  background: $on-primary;
+  right: 0;
+}
+
+.overlay {
+  z-index: 998;
+}
+
+.side-menu {
+  position: absolute;
+  z-index: 999;
+  height: $height;
+  width: $sidePanelWidth + 10px;
+  top: 56px;
+  left: 0;
+  background: $primary-d;
+  overflow: hidden;
+  box-shadow: $box-shadow-raised;
+
+  .link {
+    text-decoration: none;
+    display: block;
+    border: none;
+    overflow: hidden;
+    overflow-wrap: unset;
+    white-space: nowrap;
+    line-height: 36px;
+    font-size: 24px;
+    transition: all $dur150 $easing-std;
+    color: $on-primary !important;
+
+
+    span {
+      opacity: $opacity-mid;
+    }
+
+    &:hover {
+      background: $secondary;
+      color: $on-secondary;
+
+      span {
+        opacity: $opacity-high;
+      }
+
+      transition: all $dur125 $easing-std;
+    }
+  }
+}

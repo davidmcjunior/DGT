@@ -1,0 +1,101 @@
+.s4-map-overlayed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100vw !important;
+}
+
+.s4-map-framed {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+
+.s4-legend {
+    max-height: 256px;
+    max-width: $sidePanelWidth;
+}
+
+.control-overlay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
+
+    .half {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &.top-half {
+            align-items: flex-start;
+
+        }
+
+        &.bottom-half {
+            align-items: flex-end;
+
+        }
+
+        .quadrant {
+            pointer-events: auto;
+        }
+    }
+}
+
+
+
+/**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.8);
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    overflow: auto;
+    border-radius: 3px;
+}
+
+#legend {
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 21px;
+    height: 150px;
+    margin-bottom: 40px;
+    width: 120px;
+
+}
+
+.legend-key {
+    display: inline-block;
+    border-radius: 20%;
+    opacity: 0.7;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+
+.feature-display-mode {
+    .active {
+        div {
+            background: $secondary;
+
+            svg,
+            i {
+                color: $light;
+                fill: $light;
+                stroke: $light;
+            }
+        }
+    }
+}

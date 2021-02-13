@@ -1,0 +1,8 @@
+.simple-link {
+    color: $primary;
+    text-decoration: underline;
+
+    &:hover {
+        color: $secondary;
+    }
+}

@@ -1,0 +1,24 @@
+.logoSVG {
+
+  .light,
+  &.light {
+    stroke: $white;
+    fill: $white;
+  }
+
+  .dark,
+  &.dark {
+    stroke: $primary;
+    fill: $primary;
+  }
+}
+
+.logoSVGLight {
+  stroke: $white;
+  fill: $white;
+}
+
+.logoSVGDark {
+  stroke: $primary;
+  fill: $primary;
+}
