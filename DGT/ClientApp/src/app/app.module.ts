@@ -17,13 +17,13 @@ import { QueuePanelComponent } from './queue-panel/queue-panel.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-    ])
+    // RouterModule.forRoot([
+    //   { path: '', component: '', pathMatch: 'full' },
+    // ])
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  ],
+  // providers: [
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
