@@ -1,0 +1,5 @@
+<form class="w-full p-2">
+  <div *ngFor="let control of form.controls | keyvalue" class="form-row">
+    <dgt-crash-event-record-dynamic-field (update)="onUpdate($event)" [control]="control.value" [form]="form"></dgt-crash-event-record-dynamic-field>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<ng-template [ngIf]="currentRecord" class="">
+  <div id="title-bar-container" class="w-screen p-1 sticky top-0 bg-gray-100">
+    <dgt-title-bar [currentRecord]="currentRecord"></dgt-title-bar>
+  </div>
+  <div class="flex items-stretch divide-x divide-gray-300">
+    <div id="" class="inline-block w-3/5 resize">
+      <dgt-map></dgt-map>
+    </div>
+    <div id="crash-event-record-container" class="ml-1 inline-block w-2/5">
+      <dgt-crash-event-record [currentRecord]="currentRecord"></dgt-crash-event-record>
+    </div>
+  </div>
+  <div id="buttons-bar-container" class="w-screen p-2 sticky bottom-0 bg-gray-100 divide-y divide-gray-300">
+    <dgt-buttons-bar [currentRecord]="currentRecord"></dgt-buttons-bar>
+  </div>
+</ng-template>

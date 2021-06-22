@@ -1,0 +1,17 @@
+<div class="flex p-1">
+  <div class="w-1/2">
+    <div class="flex justify-center">
+<!--      <span class="etl-status-indicator {{currentRecord.originalGeocoding.etlGeoLocationStatus.toLowerCase().replace(' ', '-')}}"></span>-->
+      <h2 class="common-header ml-4">
+        HSMV Report Number: {{currentRecord.hsmvReportNumber}} - {{currentRecord.originalGeocoding?.etlGeoLocationStatus}}
+      </h2>
+    </div>
+  </div>
+  <div class="w-1/2">
+    <div class="float-right">
+      <button class="button revert">
+        Revert
+      </button>
+    </div>
+  </div>
+</div>

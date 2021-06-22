@@ -1,29 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { QueuePanelComponent } from './queue-panel/queue-panel.component';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { CrashEventInMemoryDataService } from './services/crash-event/test/crash-event-in-memory-test.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    QueuePanelComponent,
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    // RouterModule.forRoot([
-    //   { path: '', component: '', pathMatch: 'full' },
-    // ])
-  ],
-  // providers: [
-  //   { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  // ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        // HttpClientInMemoryWebApiModule.forRoot(
+        //     CrashEventInMemoryDataService, {dataEncapsulation: false}
+        // ),
+        AppRoutingModule
+    ],
+    providers: [],
+    exports: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

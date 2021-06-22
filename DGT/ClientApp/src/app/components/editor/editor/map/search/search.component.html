@@ -1,0 +1,13 @@
+<form class="search-form">
+  <mat-form-field [classList]="classList">
+    <mat-form-field  class="border-gray-300">
+      <input class="search" type="text" matInput [formControl]="input" [matAutocomplete]="auto">
+    </mat-form-field>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option (onSelectionChange)="onSuggestionSelect(suggestion)" *ngFor="let suggestion of suggestions" [value]="suggestion.location">
+        {{ suggestion.address }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

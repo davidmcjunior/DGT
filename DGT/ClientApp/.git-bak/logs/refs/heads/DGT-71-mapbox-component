@@ -1,0 +1,3 @@
+0000000000000000000000000000000000000000 a3653182e28f46c8cd70b60f873af757af7c66af David McClure Humphrey <5810616-davidmhjr@users.noreply.gitlab.com> 1620049057 -0400	branch: Created from HEAD
+a3653182e28f46c8cd70b60f873af757af7c66af 44d0e4786e09cefa1608ef74da8c61e9d0f6eab3 David McClure Humphrey <5810616-davidmhjr@users.noreply.gitlab.com> 1620070540 -0400	commit: Fiddling with stuff...
+44d0e4786e09cefa1608ef74da8c61e9d0f6eab3 a1f2c1e1b678d83cb096e62521885be3b28147e6 David McClure Humphrey <5810616-davidmhjr@users.noreply.gitlab.com> 1620132049 -0400	commit: Adding LeafletJS Node package. Trying out subclassing FormControl.
