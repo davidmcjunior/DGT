@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CrashEventInMemoryDataService as TestDataService } from 'app/services/s4/crash-event/test/crash-event-in-memory-data.service';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
-import { NavigationBehaviorOptions } from '@angular/router';
 import { environment } from 'environments/environment';
 import { WorkQueueService } from 'app/services/s4/work-queue.service';
 import {map} from "rxjs/operators";
@@ -19,7 +18,7 @@ export class CrashEventService implements OnInit {
 
   constructor(private http: HttpClient, private testDataService: TestDataService, private workQueueService: WorkQueueService) {}
 
-  public nextRecord(hsmvReportNumber: number): any {
+  public nextRecord(hsmvReportNumber: number = 123321): any {
     this.http.get<CrashEvent>(this.url + hsmvReportNumber).pipe( map( v => {
       this.crashEventSubject.next(v);
       return v;

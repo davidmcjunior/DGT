@@ -16,7 +16,7 @@ export const environment = {
   },
   s4: {
     crashEventService: {
-      url: ''
+      url: 'https://localhost:5001/api/v1/crash-event/'
     },
     reverseGeocodeService: {
       // full API route: key/lat/lng/agency/mode'

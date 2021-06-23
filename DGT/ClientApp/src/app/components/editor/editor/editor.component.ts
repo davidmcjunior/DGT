@@ -32,6 +32,8 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.userService.getCurrentS4User();
+    console.log(this.dataService.nextRecord(1999234));
+
     this.dataService.nextRecord(1999234).subscribe(
       (response: CrashEvent) => this.currentRecord = response
     );
