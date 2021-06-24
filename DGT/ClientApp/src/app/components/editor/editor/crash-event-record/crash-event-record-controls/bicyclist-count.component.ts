@@ -4,7 +4,7 @@ import {BicyclistCountControl} from "app/models/form/controls/crash-report/bicyc
 
 @Component({
   selector: 'dgt-bicyclist-count',
-  templateUrl: 'templates/text.template.html',
+  templateUrl: 'templates/control.template.html',
 })
 export class BicyclistCountComponent implements OnInit {
   constructor(public crashEventService: CrashEventService, public control: BicyclistCountControl) { }

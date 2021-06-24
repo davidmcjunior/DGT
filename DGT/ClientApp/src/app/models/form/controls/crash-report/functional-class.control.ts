@@ -7,5 +7,9 @@ import {Injectable} from "@angular/core";
 export class FunctionalClassControl extends SelectControl<string> {
   key   = 'functionalClass';
   label = 'Functional Class';
-  options = [];
+
+  options = [
+    {key: 'yes',  value: 'Yes'},
+    {key: 'no',  value: 'No'}
+  ];
 }

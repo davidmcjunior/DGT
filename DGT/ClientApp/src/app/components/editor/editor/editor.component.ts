@@ -14,19 +14,13 @@ import { CrashEventRecordComponent } from "./crash-event-record/crash-event-reco
 })
 export class EditorComponent implements OnInit {
   // @ViewChild(StatusBarComponent) titleBarComponent: StatusBarComponent;
-  @ViewChild(MapComponent) mapComponent: MapComponent;
-  @ViewChild(CrashEventRecordComponent) crashEventRecordComponent: CrashEventRecordComponent;
+  // @ViewChild(MapComponent) mapComponent: MapComponent;
+  // @ViewChild(CrashEventRecordComponent) crashEventRecordComponent: CrashEventRecordComponent;
   // @ViewChild(ReadonlyAttributesComponent) attributesComponent: ReadonlyAttributesComponent;
   // @ViewChild(ButtonsBarComponent) buttonBarComponent: ButtonsBarComponent;
 
   // public currentRecord: CrashEvent;
   public currentUser: Observable<S4User> | false;
-  public dataService: CrashEventService;
-
-
-  constructor(recordService: CrashEventService, private userService: UserService) {
-    this.dataService = recordService;
-  }
 
   ngOnInit(): void {
     // this.currentUser = this.userService.getCurrentS4User();

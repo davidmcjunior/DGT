@@ -4,7 +4,7 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 
 @Component({
   selector: 'dgt-location-only',
-  templateUrl: 'templates/select.template.html',
+  templateUrl: 'templates/control.template.html',
 })
 export class OnPublicRoadsComponent implements OnInit {
   constructor(public crashEventService: CrashEventService, public control: OnPublicRoadsControl) { }

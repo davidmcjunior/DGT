@@ -4,7 +4,7 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-crash-info-panel',
-  templateUrl: 'templates/text.template.html',
+  templateUrl: 'templates/crash-info-panel.template.html',
 })
 export class CrashInfoPanelComponent implements OnInit {
   constructor(public crashEventService: CrashEventService, public control: FieldControlBase<any>) { }

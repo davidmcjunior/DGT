@@ -4,11 +4,7 @@
  * https://angular.io/guide/dynamic-form#define-control-classes
  */
 
-import { IFormUpdater } from 'app/models/interfaces/form-updater';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IUpdatable } from 'app/models/interfaces/updatable';
-
-export abstract class FieldControlBase<T> extends FormControl implements IFormUpdater, IUpdatable {
+export abstract class FieldControlBase<T> {
   public value: T | undefined;
   public key: string;
   public label: string;
@@ -21,7 +17,6 @@ export abstract class FieldControlBase<T> extends FormControl implements IFormUp
   public type: string;
   public readonly: boolean;
   public keyValueOptions = false;
-  public validators: Validators;
   public options: {key: string | number, value: string}[];
 
   public constructor(
@@ -32,22 +27,16 @@ export abstract class FieldControlBase<T> extends FormControl implements IFormUp
       required?: boolean,
       order?: number
       readonly?: boolean,
-      validators?: Validators
+      controlType?: string
     } = {}) {
-    super(value, options.validators);
+    this.value = value || undefined;
     this.active = options?.active || true;
     this.visible = options?.visible || true;
     this.required = options?.required || false;
     this.order = options?.order || undefined;
     this.readonly = options?.readonly || false;
+    this.controlType = options?.controlType || 'text';
   }
-
-  /*
-   * Virtual functions...
-   */
-  public updateForm(newValue: any, form: FormGroup): void {}
-
-  public update(sender: string, value: any): void {}
 
 }
 

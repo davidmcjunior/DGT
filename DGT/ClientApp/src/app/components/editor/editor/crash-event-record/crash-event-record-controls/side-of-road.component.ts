@@ -4,7 +4,7 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 
 @Component({
   selector: 'dgt-side-of-road',
-  templateUrl: 'templates/select.template.html',
+  templateUrl: 'templates/control.template.html',
 })
 export class SideOfRoadComponent implements OnInit {
   constructor(public crashEventService: CrashEventService, public control: SideOfRoadControl) { }

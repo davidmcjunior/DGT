@@ -23,7 +23,13 @@ import { DotPropertyComponent } from "app/components/editor/editor/crash-event-r
 import { OnPublicRoadsComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/on-public-roads.component";
 import { RoadwaySystemIdComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/roadway-system-id.component";
 import { SideOfRoadComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/side-of-road.component";
-import {BicyclistCountComponent} from "./editor/crash-event-record/crash-event-record-controls/bicyclist-count.component";
+import { BicyclistCountComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/bicyclist-count.component";
+import { FunctionalClassComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/functional-class.component";
+import { NumberOfLanesComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/number-of-lanes.component";
+import { OwnershipComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/ownership.component";
+import { PedestrianCountComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/pedestrian-count.component";
+import { PostedSpeedLimitComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/posted-speed-limit.component";
+import { RouteSignageComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/route-signage.component";
 
 
 @NgModule({
@@ -46,7 +52,13 @@ import {BicyclistCountComponent} from "./editor/crash-event-record/crash-event-r
     OnPublicRoadsComponent,
     RoadwaySystemIdComponent,
     SideOfRoadComponent,
-    BicyclistCountComponent
+    BicyclistCountComponent,
+    FunctionalClassComponent,
+    NumberOfLanesComponent,
+    OwnershipComponent,
+    PedestrianCountComponent,
+    PostedSpeedLimitComponent,
+    RouteSignageComponent
   ],
   imports: [
     CommonModule,
