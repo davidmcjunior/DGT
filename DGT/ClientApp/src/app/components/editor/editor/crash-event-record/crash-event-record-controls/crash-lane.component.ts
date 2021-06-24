@@ -6,7 +6,7 @@ import {CrashLaneControl} from "../../../../../models/form/controls/crash-report
   templateUrl: 'templates/text.template.html',
 })
 export class CrashLaneComponent implements OnInit {
-  constructor(private control: CrashLaneControl) { }
+  constructor(public control: CrashLaneControl) { }
 
   ngOnInit(): void {
   }

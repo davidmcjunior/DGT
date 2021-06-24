@@ -6,7 +6,7 @@ import {RoadwaySystemIdControl} from "../../../../../models/form/controls/crash-
   templateUrl: 'templates/text.template.html',
 })
 export class RoadwaySystemIdComponent implements OnInit {
-  constructor(private control:  RoadwaySystemIdControl) { }
+  constructor(public control:  RoadwaySystemIdControl) { }
 
   ngOnInit(): void {
   }

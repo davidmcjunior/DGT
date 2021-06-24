@@ -6,7 +6,7 @@ import {DotPropertyControl} from "../../../../../models/form/controls/crash-repo
   templateUrl: 'templates/text.template.html',
 })
 export class DotPropertyComponent implements OnInit {
-  constructor(private control: DotPropertyControl) { }
+  constructor(public control: DotPropertyControl) { }
 
   ngOnInit(): void {
   }

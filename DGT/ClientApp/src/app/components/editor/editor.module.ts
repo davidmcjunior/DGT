@@ -11,19 +11,19 @@ import { EditorRoutingModule } from './editor-routing.module';
 import { TimePipe } from 'app/pipes/time.pipe';
 import { GiveUpDialogComponent } from './editor/dialogs/give-up-dialog/give-up-dialog.component';
 import { CrashEventRecordDynamicFieldComponent } from './editor/crash-event-record/crash-event-record-dynamic-field/crash-event-record-dynamic-field.component';
-import { SearchComponent } from './editor/map/search/search.component';
+import { SearchComponent } from 'app/components/editor/editor/map/search/search.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SiteLocationComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/site-location.component";
 import { CrashInfoPanelComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/crash-info-panel.component";
-import { CrashInjuryComponent } from "./editor/crash-event-record/crash-event-record-controls/crash-injury.component";
-import { CrashLaneComponent } from "./editor/crash-event-record/crash-event-record-controls/crash-lane.component";
-import { DotPropertyComponent } from "./editor/crash-event-record/crash-event-record-controls/dot-property.component";
-import { OnPublicRoadsComponent } from "./editor/crash-event-record/crash-event-record-controls/on-public-roads.component";
-import { RoadwaySystemIdComponent } from "./editor/crash-event-record/crash-event-record-controls/roadway-system-id.component";
-import { SideOfRoadComponent } from "./editor/crash-event-record/crash-event-record-controls/side-of-road.component";
+import { CrashInjuryComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/crash-injury.component";
+import { CrashLaneComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/crash-lane.component";
+import { DotPropertyComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/dot-property.component";
+import { OnPublicRoadsComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/on-public-roads.component";
+import { RoadwaySystemIdComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/roadway-system-id.component";
+import { SideOfRoadComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/side-of-road.component";
 
 
 @NgModule({

@@ -6,7 +6,7 @@ import {SideOfRoadControl} from "../../../../../models/form/controls/crash-repor
   templateUrl: 'templates/text.template.html',
 })
 export class SideOfRoadComponent implements OnInit {
-  constructor(private control: SideOfRoadControl) { }
+  constructor(public control: SideOfRoadControl) { }
 
   ngOnInit(): void {
   }

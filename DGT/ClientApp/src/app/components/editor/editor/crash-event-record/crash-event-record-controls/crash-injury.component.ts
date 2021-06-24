@@ -6,7 +6,7 @@ import {CrashInjuryControl} from "../../../../../models/form/controls/crash-repo
   templateUrl: 'templates/text.template.html',
 })
 export class CrashInjuryComponent implements OnInit {
-  constructor(private control: CrashInjuryControl) { }
+  constructor(public control: CrashInjuryControl) { }
 
   ngOnInit(): void {
   }

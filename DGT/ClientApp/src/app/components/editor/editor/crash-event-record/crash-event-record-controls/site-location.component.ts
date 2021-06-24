@@ -6,7 +6,7 @@ import {SiteLocationControl} from "../../../../../models/form/controls/crash-rep
   templateUrl: 'templates/text.template.html',
 })
 export class SiteLocationComponent implements OnInit {
-  constructor(private control: SiteLocationControl) { }
+  constructor(public control: SiteLocationControl) { }
 
   ngOnInit(): void {
   }

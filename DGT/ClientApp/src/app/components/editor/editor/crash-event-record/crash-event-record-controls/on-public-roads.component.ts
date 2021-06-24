@@ -6,7 +6,7 @@ import {OnPublicRoadsControl} from "../../../../../models/form/controls/crash-re
   templateUrl: 'templates/text.template.html',
 })
 export class OnPublicRoadsComponent implements OnInit {
-  constructor(private control: OnPublicRoadsControl) { }
+  constructor(public control: OnPublicRoadsControl) { }
 
   ngOnInit(): void {
   }
