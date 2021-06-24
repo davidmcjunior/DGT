@@ -4,10 +4,10 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 
 @Component({
   selector: 'dgt-site-location',
-  templateUrl: 'templates/text.template.html',
+  templateUrl: 'templates/select.template.html',
 })
 export class SiteLocationComponent implements OnInit {
-  constructor(private crashEventService: CrashEventService, public control: SiteLocationControl) { }
+  constructor(public crashEventService: CrashEventService, public control: SiteLocationControl) { }
 
   ngOnInit(): void {
   }

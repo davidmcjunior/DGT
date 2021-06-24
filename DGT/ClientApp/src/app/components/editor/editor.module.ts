@@ -10,7 +10,6 @@ import { ButtonsBarComponent } from './editor/buttons-bar/buttons-bar.component'
 import { EditorRoutingModule } from './editor-routing.module';
 import { TimePipe } from 'app/pipes/time.pipe';
 import { GiveUpDialogComponent } from './editor/dialogs/give-up-dialog/give-up-dialog.component';
-import { CrashEventRecordDynamicFieldComponent } from './editor/crash-event-record/crash-event-record-dynamic-field/crash-event-record-dynamic-field.component';
 import { SearchComponent } from 'app/components/editor/editor/map/search/search.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -24,6 +23,7 @@ import { DotPropertyComponent } from "app/components/editor/editor/crash-event-r
 import { OnPublicRoadsComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/on-public-roads.component";
 import { RoadwaySystemIdComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/roadway-system-id.component";
 import { SideOfRoadComponent } from "app/components/editor/editor/crash-event-record/crash-event-record-controls/side-of-road.component";
+import {BicyclistCountComponent} from "./editor/crash-event-record/crash-event-record-controls/bicyclist-count.component";
 
 
 @NgModule({
@@ -37,7 +37,6 @@ import { SideOfRoadComponent } from "app/components/editor/editor/crash-event-re
     ButtonsBarComponent,
     TimePipe,
     GiveUpDialogComponent,
-    CrashEventRecordDynamicFieldComponent,
     SearchComponent,
     SiteLocationComponent,
     CrashInfoPanelComponent,
@@ -46,7 +45,8 @@ import { SideOfRoadComponent } from "app/components/editor/editor/crash-event-re
     DotPropertyComponent,
     OnPublicRoadsComponent,
     RoadwaySystemIdComponent,
-    SideOfRoadComponent
+    SideOfRoadComponent,
+    BicyclistCountComponent
   ],
   imports: [
     CommonModule,

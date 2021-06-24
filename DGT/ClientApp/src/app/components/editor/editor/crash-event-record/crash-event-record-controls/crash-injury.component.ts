@@ -4,10 +4,10 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 
 @Component({
   selector: 'dgt-crash-injury',
-  templateUrl: 'templates/text.template.html',
+  templateUrl: 'templates/select.template.html',
 })
 export class CrashInjuryComponent implements OnInit {
-  constructor(private crashEventService: CrashEventService, public control: CrashInjuryControl) { }
+  constructor(public crashEventService: CrashEventService, public control: CrashInjuryControl) { }
 
   ngOnInit(): void {
   }
