@@ -8,11 +8,11 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
   styleUrls: ['./buttons-bar.component.scss']
 })
 export class ButtonsBarComponent implements OnInit {
-  @Input() currentRecord: CrashEvent;
+  // @Input() currentRecord: CrashEvent;
   public formGroup: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    const cr = this.currentRecord;
+    // const cr = this.currentRecord;
 
     this.formGroup = this.fb.group({
 

@@ -7,7 +7,7 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
   styleUrls: ['./status-bar.component.scss']
 })
 export class StatusBarComponent implements OnInit {
-  @Input() currentRecord: CrashEvent;
+  // @Input() currentRecord: CrashEvent;
 
   ngOnInit(): void {
 

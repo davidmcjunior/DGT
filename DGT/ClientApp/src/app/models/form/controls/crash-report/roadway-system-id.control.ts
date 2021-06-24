@@ -1,5 +1,9 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class RoadwaySystemIdControl extends SelectControl<number> {
   public static Ids = [
     {key: 1, value: 'Interstate'},

@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { EsriLeafletMapService } from 'app/services/leaflet/esri-leaflet-map.service';
 import { SearchComponent } from 'app/components/editor/editor/map/search/search.component';
 import { MapboxService as MapService } from 'app/services/mapbox/mapbox.service';
 import { Location } from 'app/models/geolocation/location';

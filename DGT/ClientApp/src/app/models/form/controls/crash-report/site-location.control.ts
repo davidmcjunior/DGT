@@ -1,7 +1,11 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
 import { IFormUpdater, IFormUpdates } from 'app/models/interfaces/form-updater';
 import { FormGroup } from '@angular/forms';
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class SiteLocationControl extends SelectControl<number> {
   public static Codes = [
     {key: 0, value: 'Unknown'},

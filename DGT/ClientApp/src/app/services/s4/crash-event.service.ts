@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CrashEventInMemoryDataService as TestDataService } from 'app/services/s4/crash-event/test/crash-event-in-memory-data.service';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
-import { WorkQueueService } from 'app/services/s4/work-queue.service';
+import { EditorQueueService } from 'app/services/s4/editor-queue.service';
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -16,10 +16,10 @@ export class CrashEventService implements OnInit {
   private crashEventSubject: Subject<CrashEvent>;
   public crashEvent$: Observable<CrashEvent>;
 
-  constructor(private http: HttpClient, private testDataService: TestDataService, private workQueueService: WorkQueueService) {}
+  constructor(private http: HttpClient, private testDataService: TestDataService, private workQueueService: EditorQueueService) {}
 
-  public nextRecord(hsmvReportNumber: number = 123321): any {
-    this.http.get<CrashEvent>(this.url + hsmvReportNumber).pipe( map( v => {
+  public nextRecord(hsmvReportNumber: number): any {
+    return this.http.get<CrashEvent>(this.url + hsmvReportNumber).pipe(map(v => {
       this.crashEventSubject.next(v);
       return v;
     }));
@@ -29,7 +29,4 @@ export class CrashEventService implements OnInit {
     this.crashEventSubject = new Subject<CrashEvent>();
   }
 
-  public getTestRecord(hsmvReportNumber: number): Observable<CrashEvent> {
-    return this.testDataService.getRecord(hsmvReportNumber);
-  }
 }

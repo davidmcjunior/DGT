@@ -1,5 +1,9 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class SideOfRoadControl extends SelectControl<string> {
   public static Codes = [
     {key: 'I', value: 'Middle of Intersection'},

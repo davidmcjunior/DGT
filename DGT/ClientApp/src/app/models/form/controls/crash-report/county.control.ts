@@ -1,5 +1,9 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class CountyControl extends SelectControl<string> {
   public static Counties = [
     {key: 'ALA', value: 'Alachua'},

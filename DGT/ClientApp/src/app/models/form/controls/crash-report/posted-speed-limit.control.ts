@@ -1,5 +1,9 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class PostedSpeedLimitControl extends SelectControl<number> {
   // TODO: with what values do we populate this field?
   public static SpeedLimits = [

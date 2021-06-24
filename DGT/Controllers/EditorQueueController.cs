@@ -13,34 +13,9 @@ namespace DGT.Controllers
     {
         // GET: api/EditorQueue
         [HttpGet]
-        public static IEnumerable<string> Get()
+        public static IEnumerable<int> Get()
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/EditorQueue/5
-        [HttpGet("{id}", Name = "Get")]
-        public static string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/EditorQueue
-        [HttpPost]
-        public static void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/EditorQueue/5
-        [HttpPut("{id}")]
-        public static void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/EditorQueue/5
-        [HttpDelete("{id}")]
-        public static void Delete(int id)
-        {
+            return new int[] { 1234, 5678 };
         }
     }
 }

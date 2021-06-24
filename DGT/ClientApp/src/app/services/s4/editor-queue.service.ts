@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkQueueService {
+export class EditorQueueService {
   constructor(private http: HttpClient) { }
 
   public getQueue(): Observable<any> {
