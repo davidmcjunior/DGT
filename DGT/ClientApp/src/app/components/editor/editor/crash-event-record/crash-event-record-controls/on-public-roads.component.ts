@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {OnPublicRoadsControl} from "../../../../../models/form/controls/crash-report/on-public-roads.control";
+import {OnPublicRoadsControl} from "app/models/form/controls/crash-report/on-public-roads.control";
+import {CrashEventService} from "app/services/s4/crash-event.service";
 
 @Component({
   selector: 'dgt-location-only',
   templateUrl: 'templates/text.template.html',
 })
 export class OnPublicRoadsComponent implements OnInit {
-  constructor(public control: OnPublicRoadsControl) { }
+  constructor(private crashEventService: CrashEventService, public control: OnPublicRoadsControl) { }
 
   ngOnInit(): void {
   }
