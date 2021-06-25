@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { S4User, S4Role } from 'app/models/s4-user';
 import { Observable, of } from 'rxjs';
-import { CrashEventInMemoryDataService } from '../s4/crash-event/test/crash-event-in-memory-data.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   currentUser: S4User;
 
-  constructor(private dataService: CrashEventInMemoryDataService, /*private http: HttpClient, @Inject('API_URL') protected apiUrl: string*/) {}
+  constructor(private http: HttpClient) {}
 
   public getCurrentS4User(): Observable<S4User> | false {
     return of({

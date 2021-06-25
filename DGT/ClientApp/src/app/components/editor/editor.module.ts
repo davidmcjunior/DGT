@@ -15,11 +15,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CrashEventModule } from "./editor/crash-event-record/crash-event-record.module";
+import { CrashEventRecordComponent } from "./editor/crash-event-record/crash-event-record.component";
 
 
 @NgModule({
   declarations: [
     EditorComponent,
+    CrashEventRecordComponent,
     ReadonlyAttributesComponent,
     MapComponent,
     StatusBarComponent,

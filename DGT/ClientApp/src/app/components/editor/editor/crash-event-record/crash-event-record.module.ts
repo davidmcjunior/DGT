@@ -1,5 +1,4 @@
 import {NgModule} from "@angular/core";
-import { CrashEventRecordComponent } from './crash-event-record.component';
 import { SiteLocationComponent } from "./crash-event-record-controls/site-location.component";
 import { CrashInfoPanelComponent } from "./crash-event-record-controls/crash-info-panel.component";
 import { CrashInjuryComponent } from "./crash-event-record-controls/crash-injury.component";
@@ -17,7 +16,6 @@ import { PostedSpeedLimitComponent } from "./crash-event-record-controls/posted-
 import { RouteSignageComponent } from "./crash-event-record-controls/route-signage.component";
 
 const classList = [
-  CrashEventRecordComponent,
   SiteLocationComponent,
   CrashInfoPanelComponent,
   CrashInjuryComponent,
