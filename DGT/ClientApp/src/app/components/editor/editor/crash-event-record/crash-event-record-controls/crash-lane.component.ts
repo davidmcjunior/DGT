@@ -1,3 +1,4 @@
+import {CommonModule} from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { CrashEventService } from "app/services/s4/crash-event.service";
 import {FormControlFactory} from "app/models/form/form-control-factory";

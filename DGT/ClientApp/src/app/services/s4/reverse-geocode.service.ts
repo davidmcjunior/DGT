@@ -14,7 +14,6 @@ export class ReverseGeocodeService {
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${mode}`);
 
     this.http.get<any>(url).subscribe(v => {
-      console.log(v);
       response = v;
     });
 

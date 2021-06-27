@@ -15,6 +15,7 @@ import { PedestrianCountComponent } from "./crash-event-record-controls/pedestri
 import { PostedSpeedLimitComponent } from "./crash-event-record-controls/posted-speed-limit.component";
 import { RouteSignageComponent } from "./crash-event-record-controls/route-signage.component";
 import { CrashEventRecordComponent } from "./crash-event-record.component";
+import {CommonModule} from "@angular/common";
 
 const classList = [
   CrashEventRecordComponent,
@@ -38,6 +39,8 @@ const classList = [
 @NgModule({
   declarations: classList,
   exports: classList,
-  imports: []
+  imports: [
+    CommonModule
+  ]
 })
 export class CrashEventRecordModule {}
