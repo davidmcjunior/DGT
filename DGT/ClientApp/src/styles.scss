@@ -14,7 +14,7 @@ h3.common-header {
   @apply block text-gray-500 text-sm font-bold;
 }
 
-input.common-input, select.common-input, kendo-searchbar.common-input {
+input.common-input, select.common-input {
   @apply h-9 appearance-none block w-full bg-gray-50 text-gray-700 text-xs border border-gray-300 rounded py-2 pl-2 mx-2 my-1 leading-tight;
 }
 

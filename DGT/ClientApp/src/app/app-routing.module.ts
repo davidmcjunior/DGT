@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: () => import('app/components/admin/admin.module').then(m => m.AdminModule),
+    loadChildren: () => import('app/components/admin/admin.module').then(m => m.AdminModule)
+      .catch( err => console.log('Oh no!', err) ),
     canLoad: []
   },
   {
     path: 'editor',
-    loadChildren: () => import('app/components/editor/editor.module').then(m => m.EditorModule),
+    loadChildren: () => import('app/components/editor/editor.module').then(m => m.EditorModule)
+      .catch( err => console.log('Oh no!', err) ),
     canLoad: []
   },
   {

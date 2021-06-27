@@ -8,7 +8,7 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
   styleUrls: ['./readonly-attributes.component.scss']
 })
 export class ReadonlyAttributesComponent implements OnInit {
-  @Input() currentRecord: CrashEvent;
+  // @Input() currentRecord: CrashEvent;
 
   public noVal = '(No Value)';
 

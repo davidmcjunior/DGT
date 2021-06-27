@@ -6,21 +6,23 @@ import { MapComponent } from './map/map.component';
 import { S4User } from 'app/models/s4-user';
 import { UserService } from 'app/services/auth/user.service';
 import { CrashEventRecordComponent } from "./crash-event-record/crash-event-record.component";
+import {ReadonlyAttributesComponent} from "./attributes/readonly-attributes.component";
+import {ButtonsBarComponent} from "./buttons-bar/buttons-bar.component";
+import {StatusBarComponent} from "./status-bar/status-bar.component";
 
 @Component({
   selector: 'dgt-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss']
+  templateUrl: './editor.component.html'
 })
 export class EditorComponent implements OnInit {
-  // @ViewChild(StatusBarComponent) titleBarComponent: StatusBarComponent;
-  // @ViewChild(MapComponent) mapComponent: MapComponent;
-  // @ViewChild(CrashEventRecordComponent) crashEventRecordComponent: CrashEventRecordComponent;
-  // @ViewChild(ReadonlyAttributesComponent) attributesComponent: ReadonlyAttributesComponent;
-  // @ViewChild(ButtonsBarComponent) buttonBarComponent: ButtonsBarComponent;
+  @ViewChild(StatusBarComponent) titleBarComponent: StatusBarComponent;
+  @ViewChild(MapComponent) mapComponent: MapComponent;
+  @ViewChild(CrashEventRecordComponent) crashEventRecordComponent: CrashEventRecordComponent;
+  @ViewChild(ReadonlyAttributesComponent) attributesComponent: ReadonlyAttributesComponent;
+  @ViewChild(ButtonsBarComponent) buttonBarComponent: ButtonsBarComponent;
 
   // public currentRecord: CrashEvent;
-  public currentUser: Observable<S4User> | false;
+  // public currentUser: Observable<S4User> | false;
 
   ngOnInit(): void {
     // this.currentUser = this.userService.getCurrentS4User();

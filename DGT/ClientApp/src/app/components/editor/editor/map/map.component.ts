@@ -6,8 +6,7 @@ import { ReverseGeocodeService } from 'app/services/s4/reverse-geocode.service';
 
 @Component({
   selector: 'dgt-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  templateUrl: './map.component.html'
 })
 export class MapComponent implements AfterViewInit {
   @ViewChild(SearchComponent) searchComponent: SearchComponent;

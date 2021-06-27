@@ -20,5 +20,3 @@ const providers = [
   { provide: 'API_URL', useFactory: getBaseUrl }
 ];
 
-platformBrowserDynamic(providers).bootstrapModule(AppModule)
-  .catch(err => console.log(err));

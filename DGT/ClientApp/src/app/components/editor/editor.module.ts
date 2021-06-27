@@ -14,14 +14,14 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CrashEventModule } from "./editor/crash-event-record/crash-event-record.module";
-import { CrashEventRecordComponent } from "./editor/crash-event-record/crash-event-record.component";
+import { CrashEventRecordModule } from "./editor/crash-event-record/crash-event-record.module";
+import {BicyclistCountControl} from "../../models/form/controls/crash-report/bicyclist-count.control";
+import {CityControl} from "../../models/form/controls/crash-report/city.control";
 
 
 @NgModule({
   declarations: [
     EditorComponent,
-    CrashEventRecordComponent,
     ReadonlyAttributesComponent,
     MapComponent,
     StatusBarComponent,
@@ -38,7 +38,11 @@ import { CrashEventRecordComponent } from "./editor/crash-event-record/crash-eve
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    CrashEventModule
+    CrashEventRecordModule
+  ],
+  providers: [
+    BicyclistCountControl,
+    CityControl
   ]
 })
 export class EditorModule {}

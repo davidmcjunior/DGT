@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {SideOfRoadControl} from "app/models/form/controls/crash-report/side-of-road.control";
 import {CrashEventService} from "app/services/s4/crash-event.service";
+import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-side-of-road',
   templateUrl: 'templates/control.template.html',
 })
 export class SideOfRoadComponent implements OnInit {
-  constructor(public crashEventService: CrashEventService, public control: SideOfRoadControl) { }
+  public control: FieldControlBase<any>;
+
+  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) { }
 
   ngOnInit(): void {
   }

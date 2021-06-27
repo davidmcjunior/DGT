@@ -14,8 +14,10 @@ import { OwnershipComponent } from "./crash-event-record-controls/ownership.comp
 import { PedestrianCountComponent } from "./crash-event-record-controls/pedestrian-count.component";
 import { PostedSpeedLimitComponent } from "./crash-event-record-controls/posted-speed-limit.component";
 import { RouteSignageComponent } from "./crash-event-record-controls/route-signage.component";
+import { CrashEventRecordComponent } from "./crash-event-record.component";
 
 const classList = [
+  CrashEventRecordComponent,
   SiteLocationComponent,
   CrashInfoPanelComponent,
   CrashInjuryComponent,
@@ -38,4 +40,4 @@ const classList = [
   exports: classList,
   imports: []
 })
-export class CrashEventModule {}
+export class CrashEventRecordModule {}

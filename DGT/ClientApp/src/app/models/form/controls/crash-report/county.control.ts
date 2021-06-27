@@ -2,7 +2,7 @@ import { SelectControl } from 'app/models/form/controls/select-control';
 import {Injectable} from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class CountyControl extends SelectControl<string> {
   public static Counties = [

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {OwnershipControl} from "app/models/form/controls/crash-report/ownership.control";
+import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-ownership',
   templateUrl: 'templates/control.template.html',
 })
 export class OwnershipComponent implements OnInit {
-  constructor(public crashEventService: CrashEventService, public control: OwnershipControl) { }
+  public control: FieldControlBase<any>;
+
+  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) { }
 
   ngOnInit(): void {
   }

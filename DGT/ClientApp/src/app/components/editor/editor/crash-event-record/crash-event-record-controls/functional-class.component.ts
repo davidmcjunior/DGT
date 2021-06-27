@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {FunctionalClassControl} from "app/models/form/controls/crash-report/functional-class.control";
+import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-functional-class',
   templateUrl: 'templates/control.template.html',
 })
 export class FunctionalClassComponent implements OnInit {
-  constructor(public crashEventService: CrashEventService, public control: FunctionalClassControl) { }
+  public control: FieldControlBase<any>;
+
+  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) { }
 
   ngOnInit(): void {
   }

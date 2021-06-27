@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {RouteSignageControl} from "app/models/form/controls/crash-report/route-signage.control";
+import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-route-signage',
   templateUrl: 'templates/control.template.html',
 })
 export class RouteSignageComponent implements OnInit {
-  constructor(public crashEventService: CrashEventService, public control: RouteSignageControl) { }
+  public control: FieldControlBase<any>;
+
+  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) { }
 
   ngOnInit(): void {
   }
