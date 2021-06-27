@@ -33,7 +33,7 @@ import { CommentsControl } from 'app/models/form/controls/crash-report/comments.
 })
 export class FormControlFactory {
 
-  public getControl(key: string, value: any): FieldControlBase<any> {
+  public getControl(key: string, value: any = ''): FieldControlBase<any> {
     let control: FieldControlBase<any>;
 
     switch (key) {

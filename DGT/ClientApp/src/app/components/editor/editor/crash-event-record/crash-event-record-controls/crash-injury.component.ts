@@ -10,7 +10,9 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
 export class CrashInjuryComponent implements OnInit {
   public control: FieldControlBase<any>;
 
-  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) { }
+  constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) {
+    this.control = this.controlFactory.getControl('crashInjury');
+  }
 
   ngOnInit(): void {
   }
