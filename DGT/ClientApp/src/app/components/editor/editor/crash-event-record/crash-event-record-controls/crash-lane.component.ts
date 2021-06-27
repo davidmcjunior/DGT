@@ -18,4 +18,7 @@ export class CrashLaneComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }

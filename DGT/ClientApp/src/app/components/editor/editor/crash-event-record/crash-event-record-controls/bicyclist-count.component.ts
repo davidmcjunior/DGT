@@ -18,4 +18,8 @@ export class BicyclistCountComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+    console.log($event.target);
+  }
+
 }

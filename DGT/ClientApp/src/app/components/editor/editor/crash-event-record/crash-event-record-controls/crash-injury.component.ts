@@ -18,4 +18,7 @@ export class CrashInjuryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }

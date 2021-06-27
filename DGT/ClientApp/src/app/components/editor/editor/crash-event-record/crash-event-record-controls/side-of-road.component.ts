@@ -18,4 +18,7 @@ export class SideOfRoadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }

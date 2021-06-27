@@ -18,4 +18,7 @@ export class PostedSpeedLimitComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }

@@ -18,4 +18,7 @@ export class NumberOfLanesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }

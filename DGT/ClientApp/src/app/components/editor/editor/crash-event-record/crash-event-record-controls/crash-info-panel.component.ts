@@ -18,4 +18,7 @@ export class CrashInfoPanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onValueChanged($event: Event): void {
+  }
+
 }
