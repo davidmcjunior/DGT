@@ -1,5 +1,5 @@
 import {FormBuilder} from "@angular/forms";
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlFactory} from "app/models/form/form-control-factory";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
@@ -9,17 +9,21 @@ import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-f
   templateUrl: '../templates/control.template.html',
 })
 export class FunctionalClassComponent extends CrashEventRecordFieldBase implements OnInit, OnValueChanged {
-    constructor(
+  @Input('value') value: any = 'Bob';
+
+  constructor(
     private formBuilder: FormBuilder,
     public crashEventService: CrashEventService,
     public controlFactory: FormControlFactory
   ) {
     super();
     this.controlModel = this.controlFactory.getControl('functionalClass');
+    // this.value = this.crashEventService.getFieldValue(this.controlModel.key);
   }
 
   ngOnInit(): void {
-      this.control = this.formBuilder.control('');
+    const initialVal = this.crashEventService.getFieldValue(this.controlModel.key);
+    this.control = this.formBuilder.control(initialVal);
   }
 
   onValueChanged($event: Event): void {

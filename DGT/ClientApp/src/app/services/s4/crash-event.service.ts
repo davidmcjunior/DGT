@@ -15,30 +15,43 @@ export class CrashEventService implements OnInit {
   private $data: BehaviorSubject<CrashEvent>;
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
-    this.nextRecord(1);
+    this.nextRecord(12345);
   }
 
-  public nextRecord(hsmvReportNumber: number = 1234): any {
+  public nextRecord(hsmvReportNumber: number): any {
     this.http.get<CrashEvent>(this.url + hsmvReportNumber).subscribe(response => {
-      if (this.$data === undefined) {
+      if (!this.$data) {
         this.$data = new BehaviorSubject<CrashEvent>(response);
         this.cache = response;
+      } else {
+        this.$data.next(response);
       }
-
-      this.$data.next(response);
-      return response;
     });
   }
 
   public updateFieldValue(fieldName: string, value: any): void {
-    const currentVal = this.$data.getValue();
+    const currentVal = this.$data.value;
     const newVal = {...currentVal, [fieldName]: value};
 
     this.$data.next(newVal);
   }
 
+  public getFieldValue(field: string): any {
+    const value = this.$data.value;
+
+    if (value.hasOwnProperty(field)) {
+      // @ts-ignore
+      console.log(field + ': ' + value[field]);
+      // @ts-ignore
+      return value[field];
+    }
+  }
+
+  public getValue(): CrashEvent {
+    return this.$data.value;
+  }
+
   public ngOnInit(): void {
-    this.nextRecord(12345);
   }
 
 }
