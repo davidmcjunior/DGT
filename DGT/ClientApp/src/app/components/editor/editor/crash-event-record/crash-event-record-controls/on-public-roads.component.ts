@@ -5,7 +5,7 @@ import {FormControlFactory} from "app/models/form/form-control-factory";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
-  selector: 'dgt-location-only',
+  selector: 'dgt-on-public-roads',
   templateUrl: 'templates/control.template.html',
 })
 export class OnPublicRoadsComponent implements OnInit {
@@ -19,6 +19,9 @@ export class OnPublicRoadsComponent implements OnInit {
   }
 
   onValueChanged($event: Event): void {
+    //@ts-ignore
+    const val = $event.target.value;
+    this.crashEventService.updateFieldValue(this.control.key, val);
   }
 
 }

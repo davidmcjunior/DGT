@@ -19,6 +19,9 @@ export class SideOfRoadComponent implements OnInit {
   }
 
   onValueChanged($event: Event): void {
+    //@ts-ignore
+    const val = $event.target.value;
+    this.crashEventService.updateFieldValue(this.control.key, val);
   }
 
 }

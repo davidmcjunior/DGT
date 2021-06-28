@@ -11,21 +11,34 @@ import {map} from "rxjs/operators";
 })
 export class CrashEventService implements OnInit {
   private url = environment.s4.crashEventService.url;
+  private cache: CrashEvent;
+  private $data: BehaviorSubject<CrashEvent>;
 
-  private crashEventSubject: Subject<CrashEvent>;
-  public crashEvent$: Observable<CrashEvent>;
+  constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
+    console.log(this.url);
+  }
 
-  constructor(private http: HttpClient, private workQueueService: EditorQueueService) {}
+  public nextRecord(hsmvReportNumber: number = 1234): any {
+    return this.http.get<CrashEvent>(this.url + hsmvReportNumber).pipe(map(response => {
+      console.log(response);
 
-  public nextRecord(hsmvReportNumber: number): any {
-    return this.http.get<CrashEvent>(this.url + hsmvReportNumber).pipe(map(v => {
-      this.crashEventSubject.next(v);
-      return v;
+      if (this.$data === undefined) {
+        this.$data = new BehaviorSubject<CrashEvent>(response);
+        this.cache = response;
+      }
+
+      this.$data.next(response);
+      return response;
     }));
   }
 
+  public updateFieldValue(fieldName: string, value: any): void {
+    const currentVal = this.$data.getValue()
+    this.$data.next({...currentVal, [fieldName]: value});
+  }
+
   public ngOnInit(): void {
-    this.crashEventSubject = new Subject<CrashEvent>();
+    this.nextRecord(12345);
   }
 
 }

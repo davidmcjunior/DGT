@@ -19,7 +19,9 @@ export class DotPropertyComponent implements OnInit {
   }
 
   onValueChanged($event: Event): void {
-    console.log($event.target);
+    //@ts-ignore
+    const val = $event.target.value;
+    this.crashEventService.updateFieldValue(this.control.key, val);
   }
 
 }
