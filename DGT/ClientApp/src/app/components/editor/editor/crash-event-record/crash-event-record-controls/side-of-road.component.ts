@@ -9,10 +9,10 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
   templateUrl: 'templates/control.template.html',
 })
 export class SideOfRoadComponent implements OnInit {
-  public control: FieldControlBase<any>;
+  public controlModel: FieldControlBase<any>;
 
   constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) {
-    this.control = this.controlFactory.getControl('sideOfRoad');
+    this.controlModel = this.controlFactory.getControl('sideOfRoad');
   }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class SideOfRoadComponent implements OnInit {
   onValueChanged($event: Event): void {
     //@ts-ignore
     const val = $event.target.value;
-    this.crashEventService.updateFieldValue(this.control.key, val);
+    this.crashEventService.updateFieldValue(this.controlModel.key, val);
   }
 
 }

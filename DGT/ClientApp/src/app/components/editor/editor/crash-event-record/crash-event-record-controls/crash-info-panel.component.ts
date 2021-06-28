@@ -9,10 +9,10 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
   templateUrl: 'templates/crash-info-panel.template.html',
 })
 export class CrashInfoPanelComponent implements OnInit {
-  public control: FieldControlBase<any>;
+  public controlModel: FieldControlBase<any>;
 
   constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) {
-    //this.control = this.controlFactory.getControl('');
+    //this.controlModel = this.controlFactory.getControl('');
   }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class CrashInfoPanelComponent implements OnInit {
   onValueChanged($event: Event): void {
     //@ts-ignore
     const val = $event.target.value;
-    this.crashEventService.updateFieldValue(this.control.key, val);
+    this.crashEventService.updateFieldValue(this.controlModel.key, val);
   }
 
 }

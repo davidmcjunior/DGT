@@ -1,16 +1,16 @@
 <div class="input-container">
   <div class="label-container">
-    <label [attr.for]="control.key" class="common-label font-bold text-gray-500">{{control.label}}</label>
+    <label [attr.for]="controlModel.key" class="common-label font-bold text-gray-500">{{controlModel.label}}</label>
   </div>
-  <div class="full-width-input" [ngSwitch]="control.controlType">
-    <input *ngSwitchCase="'textbox'" [id]="control.key" class="common-input" [type]="control.type" (change)="onValueChanged($event)">
-    <select [id]="control.key" *ngSwitchCase="'select'" class="common-input" (change)="onValueChanged($event)">
-      <option *ngFor="let opt of control.options" [value]="opt.key">
-        {{control.keyValueOptions ? opt.key + ': ' + opt.value : opt.value}}
+  <div class="full-width-input" [ngSwitch]="controlModel.controlType">
+    <input *ngSwitchCase="'textbox'" [id]="controlModel.key" class="common-input" [type]="controlModel.type" (change)="onValueChanged($event)">
+    <select [id]="controlModel.key" *ngSwitchCase="'select'" class="common-input" (change)="onValueChanged($event)">
+      <option *ngFor="let opt of controlModel.options" [value]="opt.key">
+        {{controlModel.keyValueOptions ? opt.key + ': ' + opt.value : opt.value}}
       </option>
     </select>
   </div>
   <div class="label-container">
-    <span class="common-label font-italic text-blue-800">{{control.value}}</span>
+    <span class="common-label font-italic text-blue-800">{{controlModel.value}}</span>
   </div>
 </div>
