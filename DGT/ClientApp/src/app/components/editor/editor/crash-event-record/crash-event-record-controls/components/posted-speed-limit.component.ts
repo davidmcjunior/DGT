@@ -5,14 +5,14 @@ import {FormControlFactory} from "app/models/form/form-control-factory";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
-  selector: 'dgt-side-of-road',
-  templateUrl: 'templates/control.template.html',
+  selector: 'dgt-posted-speed-limit',
+  templateUrl: '../templates/control.template.html',
 })
-export class SideOfRoadComponent implements OnInit {
+export class PostedSpeedLimitComponent implements OnInit {
   public controlModel: FieldControlBase<any>;
 
   constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) {
-    this.controlModel = this.controlFactory.getControl('sideOfRoad');
+    this.controlModel = this.controlFactory.getControl('postedSpeedLimit');
   }
 
   ngOnInit(): void {

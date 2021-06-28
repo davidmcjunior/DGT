@@ -6,7 +6,7 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
   selector: 'dgt-dot-property',
-  templateUrl: 'templates/control.template.html',
+  templateUrl: '../templates/control.template.html',
 })
 export class DotPropertyComponent implements OnInit {
   public controlModel: FieldControlBase<any>;

@@ -5,14 +5,14 @@ import {FormControlFactory} from "app/models/form/form-control-factory";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
 @Component({
-  selector: 'dgt-functional-class',
-  templateUrl: 'templates/control.template.html',
+  selector: 'dgt-crash-info-panel',
+  templateUrl: '../templates/crash-info-panel.template.html',
 })
-export class FunctionalClassComponent implements OnInit {
+export class CrashInfoPanelComponent implements OnInit {
   public controlModel: FieldControlBase<any>;
 
   constructor(public crashEventService: CrashEventService, public controlFactory: FormControlFactory) {
-    this.controlModel = this.controlFactory.getControl('functionalClass');
+    //this.controlModel = this.controlFactory.getControl('');
   }
 
   ngOnInit(): void {
