@@ -17,6 +17,7 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
     public controlFactory: FormControlFactory
   ) {
     super();
+    console.log('CrashInjury');
     this.controlModel = this.controlFactory.getControl('crashInjury');
   }
 

@@ -7,38 +7,41 @@ import { EditorQueueService } from 'app/services/s4/editor-queue.service';
 import {map} from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'any', // EditorModule
+  providedIn: 'root', // EditorModule
 })
 export class CrashEventService implements OnInit {
   private url = environment.s4.crashEventService.url;
   private cache: CrashEvent;
-  private $data: BehaviorSubject<CrashEvent>;
+  private data$: BehaviorSubject<CrashEvent>;
+  private hasRecordLoaded$: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
+    console.log('CrashEventService');
+    this.hasRecordLoaded$ = new BehaviorSubject<boolean>(false);
     this.nextRecord(12345);
   }
 
-  public nextRecord(hsmvReportNumber: number): any {
+  public nextRecord(hsmvReportNumber: number): void {
     this.http.get<CrashEvent>(this.url + hsmvReportNumber).subscribe(response => {
-      if (!this.$data) {
-        this.$data = new BehaviorSubject<CrashEvent>(response);
+      if (!this.data$) {
+        this.data$ = new BehaviorSubject<CrashEvent>(response);
         this.cache = response;
       } else {
-        this.$data.next(response);
+        this.data$.next(response);
       }
     });
   }
 
   public updateFieldValue(fieldName: string, value: any): void {
-    const currentVal = this.$data.value;
+    const currentVal = this.data$.value;
     const newVal = {...currentVal, [fieldName]: value};
 
-    this.$data.next(newVal);
+    this.data$.next(newVal);
   }
 
   public getField(field: string): any {
     // @ts-ignore
-    return this.$data.pipe(map(object => object[field]));
+    return this.data$.pipe(map(object => object[field]));
   }
 
   public ngOnInit(): void {
