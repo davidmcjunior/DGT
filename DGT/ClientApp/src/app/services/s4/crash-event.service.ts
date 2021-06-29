@@ -36,19 +36,9 @@ export class CrashEventService implements OnInit {
     this.$data.next(newVal);
   }
 
-  public getFieldValue(field: string): any {
-    const value = this.$data.value;
-
-    if (value.hasOwnProperty(field)) {
-      // @ts-ignore
-      console.log(field + ': ' + value[field]);
-      // @ts-ignore
-      return value[field];
-    }
-  }
-
-  public getValue(): CrashEvent {
-    return this.$data.value;
+  public getField(field: string): any {
+    // @ts-ignore
+    return this.$data.pipe(map(object => object[field]));
   }
 
   public ngOnInit(): void {
