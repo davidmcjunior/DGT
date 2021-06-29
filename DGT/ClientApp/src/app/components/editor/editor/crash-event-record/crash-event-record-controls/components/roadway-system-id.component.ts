@@ -21,6 +21,8 @@ export class RoadwaySystemIdComponent extends CrashEventRecordFieldBase implemen
   }
 
   ngOnInit(): void {
+    this.crashEventService.getField(this.controlModel.key).subscribe((val: string) => this.value = val);
+    this.subscribe();
   }
 
   onValueChanged($event: Event): void {
@@ -30,6 +32,12 @@ export class RoadwaySystemIdComponent extends CrashEventRecordFieldBase implemen
   }
 
   ngAfterViewInit(): void {
+  }
+
+  private subscribe(): void {
+    this.crashEventService
+      .getField(this.controlModel.key)
+      .subscribe((val: any) => this.value = val);
   }
 
 }

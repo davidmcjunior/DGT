@@ -21,6 +21,7 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase implements Aft
   }
 
   ngOnInit(): void {
+    this.subscribe();
   }
 
   onValueChanged($event: Event): void {
@@ -30,6 +31,12 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase implements Aft
   }
 
   ngAfterViewInit(): void {
+  }
+
+  private subscribe(): void {
+    this.crashEventService
+      .getField(this.controlModel.key)
+      .subscribe((val: any) => this.value = val);
   }
 
 }

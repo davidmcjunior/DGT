@@ -14,7 +14,7 @@ import { CrashEventService } from 'app/services/s4/crash-event.service';
 export class CrashEventResolver implements Resolve<CrashEvent> {
   constructor(private service: CrashEventService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<CrashEvent> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     return this.service.nextRecord(0);
   }
 }

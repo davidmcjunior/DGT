@@ -9,30 +9,26 @@ import {map} from "rxjs/operators";
 @Injectable({
   providedIn: 'root', // EditorModule
 })
-export class CrashEventService implements OnInit {
+export class CrashEventService {
   private url = environment.s4.crashEventService.url;
   private cache: CrashEvent;
-  private data$: BehaviorSubject<CrashEvent>;
-  private hasRecordLoaded$: BehaviorSubject<boolean>;
+  private readonly data$: Subject<CrashEvent>;
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
     console.log('CrashEventService');
-    this.hasRecordLoaded$ = new BehaviorSubject<boolean>(false);
+    this.data$ = new Subject<CrashEvent>();
     this.nextRecord(12345);
   }
 
   public nextRecord(hsmvReportNumber: number): void {
     this.http.get<CrashEvent>(this.url + hsmvReportNumber).subscribe(response => {
-      if (!this.data$) {
-        this.data$ = new BehaviorSubject<CrashEvent>(response);
-        this.cache = response;
-      } else {
-        this.data$.next(response);
-      }
+      this.data$.next(response);
+      this.cache = response;
     });
   }
 
   public updateFieldValue(fieldName: string, value: any): void {
+    // @ts-ignore
     const currentVal = this.data$.value;
     const newVal = {...currentVal, [fieldName]: value};
 
@@ -42,9 +38,6 @@ export class CrashEventService implements OnInit {
   public getField(field: string): any {
     // @ts-ignore
     return this.data$.pipe(map(object => object[field]));
-  }
-
-  public ngOnInit(): void {
   }
 
 }

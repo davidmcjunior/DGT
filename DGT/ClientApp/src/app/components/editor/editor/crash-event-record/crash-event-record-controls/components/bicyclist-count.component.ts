@@ -20,6 +20,7 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase implement
   }
 
   ngOnInit(): void {
+    this.subscribe();
   }
 
   onValueChanged($event: Event): void {
@@ -29,6 +30,12 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase implement
   }
 
   ngAfterViewInit(): void {
+  }
+
+  private subscribe(): void {
+    this.crashEventService
+      .getField(this.controlModel.key)
+      .subscribe((val: any) => this.value = val);
   }
 
 }

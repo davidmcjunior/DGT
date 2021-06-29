@@ -21,6 +21,7 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
   }
 
   ngOnInit(): void {
+    this.subscribe();
   }
 
   onValueChanged($event: Event): void {
@@ -32,5 +33,10 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
   ngAfterViewInit(): void {
   }
 
+  private subscribe(): void {
+    this.crashEventService
+      .getField(this.controlModel.key)
+      .subscribe((val: any) => this.value = val);
+  }
 
 }

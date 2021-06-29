@@ -21,6 +21,7 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase implements Af
   }
 
   ngOnInit(): void {
+    this.subscribe();
   }
 
   onValueChanged($event: Event): void {
@@ -30,7 +31,6 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase implements Af
   }
 
   ngAfterViewInit(): void {
-    // this.subscribe();
   }
 
   private subscribe(): void {
@@ -38,4 +38,5 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase implements Af
       .getField(this.controlModel.key)
       .subscribe((val: any) => this.value = val);
   }
+
 }
