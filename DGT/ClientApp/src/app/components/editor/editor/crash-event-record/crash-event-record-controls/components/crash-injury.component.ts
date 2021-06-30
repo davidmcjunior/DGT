@@ -16,14 +16,15 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
     public controlFactory: FormControlFactory
   ) {
     super();
-    console.log('CrashInjury');
     this.controlModel = this.controlFactory.getControl('crashInjury');
   }
 
   ngOnInit(): void {
     this.crashEvent.crashInjury.subscribe({
       next: (v) => {
+        this.setInitValIf(v);
         this.controlModel.value = v;
+        console.log(`Updated to ${v}`);
       },
       error: (err) => {
         console.log(`Error: ${this.controlModel.key} value was not set`);

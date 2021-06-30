@@ -11,7 +11,8 @@ import {map} from "rxjs/operators";
 })
 export class CrashEventService {
   private _url = environment.s4.crashEventService.url;
-  private _crashEvent: CrashEvent;
+  private _data: CrashEvent;
+  private _cache: CrashEvent;
 
   public crashDate = new Subject<Date>();
   public onStreet = new Subject<string>();
@@ -37,40 +38,52 @@ export class CrashEventService {
   public comments = new Subject<string>();
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
-    this.getRecord(10001);
+    this._getRecord(10001);
+    // setInterval(() => {
+    //   console.log(this._data);
+    // }, 5000);
   }
 
-  private getRecord(hsmvReportNumber: number): void {
+  private _getRecord(hsmvReportNumber: number): void {
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(response => {
-      this._crashEvent = response;
-      this.setSubjects(response);
+      if (!this._cache) {
+        this._cache = response;
+      }
+      this._data = response;
+      this._initSubjects();
     });
   }
 
-  private setSubjects(ce: CrashEvent) {
-    this.crashLane.next(ce.crashLane);
-    this.onStreet.next(ce.onStreet);
-    this.intersectingStreet.next(ce.intersectingStreet);
-    this.offsetDirection.next(ce.offsetDirection);
-    this.offsetDistance.next(ce.offsetDistance);
-    this.city.next(ce.city);
-    this.county.next(ce.county);
-    this.onPublicRoads.next(ce.onPublicRoads);
-    this.dotProperty.next(ce.fdotPropertyCode);
-    this.siteLocation.next(ce.siteLocation);
-    this.sideOfRoad.next(ce.sideOfRoad);
-    this.crashLane.next(ce.crashLane);
-    this.crashInjury.next(ce.crashSeverity);
-    this.roadwaySystemId.next(ce.roadwaySystemId);
-    this.numberOfLanes.next(ce.numberOfLanes);
-    this.ownership.next(ce.ownership);
-    this.routeSignage.next(ce.routeSignage);
-    this.postedSpeedLimit.next(ce.postedSpeedLimit);
-    this.functionalClass.next(ce.functionalClass);
-    this.bicyclistCount.next(ce.bicyclistCount);
-    this.pedestrianCount.next(ce.pedestrianCount);
+  private _subscribe(): void {
+    this.crashLane.subscribe({
+      next: (v) => { this._data.crashLane = v; },
+      error: (err) => {}
+    });
+  }
+
+  private _initSubjects(): void {
+    this.crashLane.next(this._data.crashLane);
+    this.onStreet.next(this._data.onStreet);
+    this.intersectingStreet.next(this._data.intersectingStreet);
+    this.offsetDirection.next(this._data.offsetDirection);
+    this.offsetDistance.next(this._data.offsetDistance);
+    this.city.next(this._data.city);
+    this.county.next(this._data.county);
+    this.onPublicRoads.next(this._data.onPublicRoads);
+    this.dotProperty.next(this._data.fdotPropertyCode);
+    this.siteLocation.next(this._data.siteLocation);
+    this.sideOfRoad.next(this._data.sideOfRoad);
+    this.crashLane.next(this._data.crashLane);
+    this.crashInjury.next(this._data.crashSeverity);
+    this.roadwaySystemId.next(this._data.roadwaySystemId);
+    this.numberOfLanes.next(this._data.numberOfLanes);
+    this.ownership.next(this._data.ownership);
+    this.routeSignage.next(this._data.routeSignage);
+    this.postedSpeedLimit.next(this._data.postedSpeedLimit);
+    this.functionalClass.next(this._data.functionalClass);
+    this.bicyclistCount.next(this._data.bicyclistCount);
+    this.pedestrianCount.next(this._data.pedestrianCount);
     this.comments.next('');
-    console.log(this);
   }
 
 }

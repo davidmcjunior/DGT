@@ -27,7 +27,9 @@ namespace DGT.Controllers
                 StreetAddressNumber = "231",
                 OnPublicRoads = true,
                 SideOfRoad = "P",
-                CrashLane = "V"
+                CrashLane = "V",
+                Ownership = "Florida Dept of W and M",
+                RouteSignage = "No Fishing"
             });
         }
     }

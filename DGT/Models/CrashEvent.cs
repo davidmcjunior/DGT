@@ -53,6 +53,10 @@ namespace DGT.Models
           public string SideOfRoad { get; set; }
 
           public string CrashLane { get; set; }
+          
+          public string Ownership { get; set; }
+          
+          public string RouteSignage { get; set; }
 
           public string Narrative { get; set; }
 

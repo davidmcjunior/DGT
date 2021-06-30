@@ -9,7 +9,7 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
   templateUrl: '../templates/control.template.html',
 })
 export class DotPropertyComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
-  @Input('control') controlModel: FieldControlBase<number>;
+  @Input('control') controlModel: FieldControlBase<string>;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -22,7 +22,9 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
   ngOnInit(): void {
     this.crashEvent.dotProperty.subscribe({
       next: (v) => {
+        this.setInitValIf(v);
         this.controlModel.value = v;
+        console.log(`Updated to ${v}`);
       },
       error: (err) => {
         console.log(`Error: ${this.controlModel.key} value was not set`);

@@ -3,11 +3,11 @@
  * select and textbox test in form components.
  * https://angular.io/guide/dynamic-form#define-control-classes
  */
-import {Injectable} from "@angular/core";
 
 
 export abstract class FieldControlBase<T> {
   public value: T | undefined;
+  public initialValue: T | undefined;
   public key: string;
   public label: string;
   public description: string;
@@ -32,6 +32,7 @@ export abstract class FieldControlBase<T> {
       controlType?: string
     } = {}) {
     this.value = value || undefined;
+    this.initialValue = value || undefined;
     this.active = options?.active || true;
     this.visible = options?.visible || true;
     this.required = options?.required || false;

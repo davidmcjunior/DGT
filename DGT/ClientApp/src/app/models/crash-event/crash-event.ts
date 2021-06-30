@@ -123,9 +123,11 @@ export class CrashEvent {
     this.editDate = opts.editDate || undefined;
     this.editStatus = opts.editStatus || undefined;
     this.reviewDate = opts.reviewDate || undefined;
+    this.routeSignage = opts.routeSignage || undefined;
     this.reviewStatus = opts.reviewStatus || undefined;
     this.siteLocation = opts.siteLocation || undefined;
     this.onPublicRoads = opts.offNetwork || undefined;
+    this.functionalClass = opts.functionalClass || undefined;
     this.fdotPropertyCode = opts.fdotPropertyCode || undefined;
     this.sideOfRoad = opts.sideOfRoad || undefined;
     this.crashLane = opts.crashLane || undefined;

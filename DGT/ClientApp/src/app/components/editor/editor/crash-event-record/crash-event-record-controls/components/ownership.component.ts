@@ -22,7 +22,9 @@ export class OwnershipComponent extends CrashEventRecordFieldBase implements Aft
   ngOnInit(): void {
     this.crashEvent.ownership.subscribe({
       next: (v) => {
+        this.setInitValIf(v);
         this.controlModel.value = v;
+        console.log(`Updated to ${v}`);
       },
       error: (err) => {
         console.log(`Error: ${this.controlModel.key} value was not set`);

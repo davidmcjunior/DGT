@@ -3,7 +3,7 @@
     <label [attr.for]="controlModel.key" class="common-label font-bold text-gray-500">{{controlModel.label}}</label>
   </div>
   <div class="full-width-input" [ngSwitch]="controlModel.controlType">
-    <input *ngSwitchCase="'textbox'" [id]="controlModel.key" class="common-input" [type]="controlModel.type" (change)="onValueChanged($event)">
+    <input *ngSwitchCase="'textbox'" [id]="controlModel.key" class="common-input" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
     <select [id]="controlModel.key" *ngSwitchCase="'select'" class="common-input" (change)="onValueChanged($event)">
       <option *ngFor="let opt of controlModel.options" [value]="opt.key">
         {{controlModel.keyValueOptions ? opt.key + ': ' + opt.value : opt.value}}
@@ -11,6 +11,6 @@
     </select>
   </div>
   <div class="label-container">
-    <span class="common-label font-italic text-blue-800">{{controlModel.key}}: {{controlModel.value}}</span>
+    <span class="common-label font-italic text-blue-800">{{controlModel.key}}: {{controlModel.initialValue}}</span>
   </div>
 </div>
