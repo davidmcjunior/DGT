@@ -14,6 +14,8 @@ export class CrashEventService {
   private _data: CrashEvent;
   private _cache: CrashEvent;
 
+  public crashEvent$: Observable<CrashEvent>;
+
   public crashDate = new Subject<Date>();
   public onStreet = new Subject<string>();
   public intersectingStreet = new Subject<string>();
@@ -39,9 +41,7 @@ export class CrashEventService {
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
     this._getRecord(10001);
-    // setInterval(() => {
-    //   console.log(this._data);
-    // }, 5000);
+    this.crashEvent$ = of(this._data);
   }
 
   private _getRecord(hsmvReportNumber: number): void {
@@ -54,10 +54,115 @@ export class CrashEventService {
     });
   }
 
+  private _handleError(error: Error): void {
+    console.log(error);
+  }
+
   private _subscribe(): void {
     this.crashLane.subscribe({
-      next: (v) => { this._data.crashLane = v; },
-      error: (err) => {}
+      next: (val) => {
+        this._data.crashLane = val;
+      }
+    });
+
+    this.onStreet.subscribe({
+        next: (val) => { this._data.onStreet = val; },
+        error: (err) => { this._handleError(err); }
+    });
+
+    this.intersectingStreet.subscribe({
+      next: (val) => { this._data.intersectingStreet = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.offsetDirection.subscribe({
+      next: (val) => { this._data.offsetDirection = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.offsetDistance.subscribe({
+      next: (val) => { this._data.offsetDistance = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.city.subscribe({
+      next: (val) => { this._data.city = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.county.subscribe({
+      next: (val) => { this._data.county = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.onPublicRoads.subscribe({
+      next: (val) => { this._data.onPublicRoads = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.dotProperty.subscribe({
+      next: (val) => { this._data.fdotPropertyCode = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.siteLocation.subscribe({
+      next: (val) => { this._data.siteLocation = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.sideOfRoad.subscribe({
+      next: (val) => { this._data.sideOfRoad = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.crashLane.subscribe({
+      next: (val) => { this._data.crashLane = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.crashInjury.subscribe({
+      next: (val) => { this._data.crashSeverity = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.roadwaySystemId.subscribe({
+      next: (val) => { this._data.roadwaySystemId = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.numberOfLanes.subscribe({
+      next: (val) => { this._data.numberOfLanes = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.ownership.subscribe({
+      next: (val) => { this._data.ownership = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.routeSignage.subscribe({
+      next: (val) => { this._data.routeSignage = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.postedSpeedLimit.subscribe({
+      next: (val) => { this._data.postedSpeedLimit = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.functionalClass.subscribe({
+      next: (val) => { this._data.functionalClass = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.bicyclistCount.subscribe({
+      next: (val) => { this._data.bicyclistCount = val; },
+      error: (err) => { this._handleError(err); }
+    });
+
+    this.pedestrianCount.subscribe({
+      next: (val) => { this._data.pedestrianCount = val; },
+      error: (err) => { this._handleError(err); }
     });
   }
 

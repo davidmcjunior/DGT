@@ -20,9 +20,9 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-   this.crashEvent.crashDate.subscribe({
-     next: (v) => this.date = v
-   });
+    this.crashEvent.crashDate.subscribe({
+      next: (v) => this.date = v
+    });
     this.crashEvent.city.subscribe({
       next: (v) => this.city = v
     });
@@ -40,6 +40,10 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
     });
     this.crashEvent.offsetDirection.subscribe({
       next: (v) => this.direction = v
+    });
+
+    this.crashEvent.crashEvent$.subscribe((v) => {
+      console.log(v);
     });
   }
 
