@@ -1,4 +1,4 @@
-<div class="input-container">
+<div class="input-container" *ngIf="controlModel.visible">
   <div class="label-container">
     <label [attr.for]="controlModel.key" class="common-label font-bold text-gray-500">{{controlModel.label}}</label>
   </div>
@@ -11,6 +11,6 @@
     </select>
   </div>
   <div class="label-container">
-    <span class="common-label font-italic text-blue-800">{{controlModel.key}}: {{value}}</span>
+    <span class="common-label font-italic text-blue-800">{{controlModel.key}}: {{controlModel.value}}</span>
   </div>
 </div>

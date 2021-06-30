@@ -15,6 +15,5 @@ export class CrashEventResolver implements Resolve<CrashEvent> {
   constructor(private service: CrashEventService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    return this.service.nextRecord(0);
   }
 }
