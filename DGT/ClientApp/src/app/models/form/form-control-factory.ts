@@ -41,10 +41,6 @@ export class FormControlFactory {
         control = new CrashYearControl(value);
         break;
 
-      case 'crashDate':
-        control = new CrashDateControl(value);
-        break;
-
       case 'crashTime':
         control = new CrashTimeControl(value);
         break;

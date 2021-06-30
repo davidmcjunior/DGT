@@ -8,12 +8,11 @@ import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-f
   selector: 'dgt-crash-injury',
   templateUrl: '../templates/control.template.html',
 })
-export class CrashInjuryComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged
-{
-  @Input('value') value: string;
+export class CrashInjuryComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+  @Input('value') value: number;
 
   constructor(
-    public crashEventService: CrashEventService,
+    public crashEvent: CrashEventService,
     public controlFactory: FormControlFactory
   ) {
     super();
@@ -22,22 +21,22 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
   }
 
   ngOnInit(): void {
-    this.subscribe();
+    this.crashEvent.crashInjury.subscribe({
+      next: (v) => {
+        this.value = v;
+      },
+      error: (err) => {
+        console.log(`Error: ${this.controlModel.key} value was not set`);
+      }
+    });
   }
 
   onValueChanged($event: Event): void {
-    //@ts-ignore
-    const val = $event.target.value;
-    this.crashEventService.updateFieldValue(this.controlModel.key, val);
+    // @ts-ignore
+    this.crashEvent.crashInjury.next($event.target.value);
   }
 
   ngAfterViewInit(): void {
-  }
-
-  private subscribe(): void {
-    this.crashEventService
-      .getField(this.controlModel.key)
-      .subscribe((val: any) => this.value = val);
   }
 
 }

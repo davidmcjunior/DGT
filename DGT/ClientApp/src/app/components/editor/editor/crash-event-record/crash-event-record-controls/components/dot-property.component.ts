@@ -13,7 +13,7 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
   @Input('value') value: string;
 
   constructor(
-    public crashEventService: CrashEventService,
+    public crashEvent: CrashEventService,
     public controlFactory: FormControlFactory
   ) {
     super();
@@ -21,22 +21,22 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
   }
 
   ngOnInit(): void {
-    this.subscribe();
+    this.crashEvent.dotProperty.subscribe({
+      next: (v) => {
+        this.value = v;
+      },
+      error: (err) => {
+        console.log(`Error: ${this.controlModel.key} value was not set`);
+      }
+    });
   }
 
   onValueChanged($event: Event): void {
-    //@ts-ignore
-    const val = $event.target.value;
-    this.crashEventService.updateFieldValue(this.controlModel.key, val);
+    // @ts-ignore
+    this.crashEvent.dotProperty.next($event.target.value);
   }
 
   ngAfterViewInit(): void {
-  }
-
-  private subscribe(): void {
-    this.crashEventService
-      .getField(this.controlModel.key)
-      .subscribe((val: any) => this.value = val);
   }
 
 }

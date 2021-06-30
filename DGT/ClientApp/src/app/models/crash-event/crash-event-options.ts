@@ -24,7 +24,7 @@ export interface CrashEventOptions {
   editStatus?: Date | undefined;
   reviewDate?: Date | undefined;
   reviewStatus?: Date | undefined;
-  siteLocation?: string | undefined;
+  siteLocation?: number | undefined;
   offNetwork?: string | undefined;
   fdotPropertyCode?: string | undefined;
   sideOfRoad?: string | undefined;

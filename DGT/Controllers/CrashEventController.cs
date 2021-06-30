@@ -19,12 +19,15 @@ namespace DGT.Controllers
                 CrashSeverity = 2,
                 FormType = 'L',
                 HsmvReportNumber = hsmvReportNumber,
-                IntersectingStreetName = "Archer Rd.",
+                IntersectingStreet = "Archer Rd.",
                 OffsetDirection = "North",
                 OffsetDistance = 45,
-                OnStreetName = "SW 13th St.",
+                OnStreet = "SW 13th St.",
                 RoadwaySystemId = 1,
                 StreetAddressNumber = "231",
+                OnPublicRoads = true,
+                SideOfRoad = "P",
+                CrashLane = "V"
             });
         }
     }

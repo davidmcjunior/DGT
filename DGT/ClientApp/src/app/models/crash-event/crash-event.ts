@@ -22,10 +22,10 @@ export class CrashEvent {
   city: string;
 
   // On Street – the street name on which vehicle 1 was traveling prior to the crash
-  onStreetName: string;
+  onStreet: string;
 
   // Intersecting Street – the street name of the nearest intersecting street, for reference
-  intersectingStreetName: string;
+  intersectingStreet: string;
 
   // Offset Distance – the distance from the nearest intersection to the crash point
   offsetDistance: number;
@@ -67,10 +67,10 @@ export class CrashEvent {
   reviewStatus: Date | undefined;
 
   // Site Location
-  siteLocation: string | undefined;
+  siteLocation: number | undefined;
 
   // Location Only Code
-  offNetwork: string | undefined;
+  onPublicRoads: string | undefined;
 
   // FDOT Property Code – indicates if any properties damaged are owned by FDOT
   fdotPropertyCode: string | undefined;
@@ -80,6 +80,16 @@ export class CrashEvent {
 
   // Crash Lane
   crashLane: string | undefined;
+
+  numberOfLanes: number | undefined;
+
+  ownership: string | undefined;
+
+  routeSignage: string | undefined;
+
+  postedSpeedLimit: string | undefined;
+
+  functionalClass: string | undefined;
 
   // Narrative – describes the crash scene, including the sequence of events prior to, at, and post
   // collision for each vehicle, driver, and non-motorist
@@ -99,8 +109,8 @@ export class CrashEvent {
     this.crashDate = opts.crashDate;
     this.county = opts.county;
     this.city = opts.city;
-    this.onStreetName = opts.onStreetName;
-    this.intersectingStreetName = opts.intersectingStreetName;
+    this.onStreet = opts.onStreetName;
+    this.intersectingStreet = opts.intersectingStreetName;
     this.offsetDistance = opts.offsetDistance;
     this.offsetDirection = opts.offsetDirection;
     this.crashSeverity = opts.crashSeverity;
@@ -115,7 +125,7 @@ export class CrashEvent {
     this.reviewDate = opts.reviewDate || undefined;
     this.reviewStatus = opts.reviewStatus || undefined;
     this.siteLocation = opts.siteLocation || undefined;
-    this.offNetwork = opts.offNetwork || undefined;
+    this.onPublicRoads = opts.offNetwork || undefined;
     this.fdotPropertyCode = opts.fdotPropertyCode || undefined;
     this.sideOfRoad = opts.sideOfRoad || undefined;
     this.crashLane = opts.crashLane || undefined;

@@ -3,6 +3,7 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlFactory} from "app/models/form/form-control-factory";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'dgt-site-location',
@@ -10,10 +11,11 @@ import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-f
 })
 export class SiteLocationComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged
 {
-  @Input('value') value: string;
+  @Input('value') value: number;
+  private subscription: Subscription;
 
   constructor(
-    public crashEventService: CrashEventService,
+    public crashEvent: CrashEventService,
     public controlFactory: FormControlFactory
   ) {
     super();
@@ -21,22 +23,22 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
   }
 
   ngOnInit(): void {
-    this.subscribe();
+    this.crashEvent.siteLocation.subscribe({
+      next: (v) => {
+        this.value = v;
+      },
+      error: (err) => {
+        console.log(`Error: ${this.controlModel.key} value was not set`);
+      }
+    });
   }
 
   onValueChanged($event: Event): void {
-    //@ts-ignore
-    const val = $event.target.value;
-    this.crashEventService.updateFieldValue(this.controlModel.key, val);
+    // @ts-ignore
+    this.crashEvent.siteLocation.next($event.target.value);
   }
 
   ngAfterViewInit(): void {
-  }
-
-  private subscribe(): void {
-    this.crashEventService
-      .getField(this.controlModel.key)
-      .subscribe((val: any) => this.value = val);
   }
 
 }

@@ -14,9 +14,9 @@ namespace DGT.Models
 
           public string City { get; set; }
 
-          public string OnStreetName { get; set; }
+          public string OnStreet { get; set; }
 
-          public string IntersectingStreetName { get; set; }
+          public string IntersectingStreet { get; set; }
 
           public int OffsetDistance { get; set; }
 
@@ -46,7 +46,7 @@ namespace DGT.Models
 
           public string SiteLocation { get; set; }
 
-          public bool OffNetwork { get; set; }
+          public bool OnPublicRoads { get; set; }
 
           public string FdotPropertyCode { get; set; }
 
