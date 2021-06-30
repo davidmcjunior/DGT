@@ -20,13 +20,14 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase implement
   }
 
   ngOnInit(): void {
-    this.crashEvent.bicyclistCount.subscribe({
-      next: (v) => {
+    // @ts-ignore
+    this.crashEvent.fields[this.controlModel.key].subscribe({
+      next: (v: any) => {
         this.setInitValIf(v);
         this.controlModel.value = v;
         // console.log(`Updated to ${v}`);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(`Error: ${this.controlModel.key} value was not set`);
       }
     });
