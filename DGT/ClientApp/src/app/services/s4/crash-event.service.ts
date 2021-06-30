@@ -16,35 +16,12 @@ export class CrashEventService {
 
   public crashEvent$: Observable<CrashEvent>;
 
-  // public crashDate = new Subject<Date>();
-  // public onStreet = new Subject<string>();
-  // public intersectingStreet = new Subject<string>();
-  // public offsetDistance = new Subject<number>();
-  // public offsetDirection = new Subject<string>();
-  // public city = new Subject<string>();
-  // public county = new Subject<string>();
-  // public onPublicRoads = new Subject<string>();
-  // public dotProperty = new Subject<string>();
-  // public siteLocation = new Subject<number>();
-  // public sideOfRoad = new Subject<string>();
-  // public crashLane = new Subject<string>();
-  // public crashInjury = new Subject<number>();
-  // public roadwaySystemId = new Subject<number>();
-  // public numberOfLanes = new Subject<number>();
-  // public ownership = new Subject<string>();
-  // public routeSignage = new Subject<string>();
-  // public postedSpeedLimit = new Subject<string>();
-  // public functionalClass = new Subject<string>();
-  // public bicyclistCount = new Subject<number>();
-  // public pedestrianCount = new Subject<number>();
-  // public comments = new Subject<string>();
-
   public fields = {
     crashDate: new Subject<Date>(),
     onStreet: new Subject<string>(),
     intersectingStreet: new Subject<string>(),
-    coffsetDistance: new Subject<number>(),
-    coffsetDirection: new Subject<string>(),
+    offsetDistance: new Subject<number>(),
+    offsetDirection: new Subject<string>(),
     city: new Subject<string>(),
     county: new Subject<string>(),
     onPublicRoads: new Subject<string>(),
@@ -61,12 +38,15 @@ export class CrashEventService {
     functionalClass: new Subject<string>(),
     bicyclistCount: new Subject<number>(),
     pedestrianCount: new Subject<number>(),
-    comments: new Subject<string>()
+    // comments: new Subject<string>()
   };
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
     this._getRecord(10001);
-    this.crashEvent$ = of(this._data);
+    this._subscribe();
+
+    this.crashEvent$ = new Subject<CrashEvent>();
+    console.log(this);
   }
 
   private _getRecord(hsmvReportNumber: number): void {
@@ -76,6 +56,7 @@ export class CrashEventService {
       }
       this._data = response;
       this._initSubjects();
+      this.crashEvent$ = of(this._data);
     });
   }
 
@@ -85,10 +66,8 @@ export class CrashEventService {
 
   private _subscribe(): void {
     for (const key in this.fields) {
-      // @ts-ignore
       this.fields[key].subscribe({
         next: (val: any) => {
-          // @ts-ignore
           this._data[key] = val;
         },
         error: (err: any) => {
@@ -100,32 +79,8 @@ export class CrashEventService {
 
   private _initSubjects(): void {
     for (const key in this.fields) {
-      // @ts-ignore
       this.fields[key].next(this._data[key]);
     }
-
-    // this.crashLane.next(this._data.crashLane);
-    // this.onStreet.next(this._data.onStreet);
-    // this.intersectingStreet.next(this._data.intersectingStreet);
-    // this.offsetDirection.next(this._data.offsetDirection);
-    // this.offsetDistance.next(this._data.offsetDistance);
-    // this.city.next(this._data.city);
-    // this.county.next(this._data.county);
-    // this.onPublicRoads.next(this._data.onPublicRoads);
-    // this.dotProperty.next(this._data.fdotPropertyCode);
-    // this.siteLocation.next(this._data.siteLocation);
-    // this.sideOfRoad.next(this._data.sideOfRoad);
-    // this.crashLane.next(this._data.crashLane);
-    // this.crashInjury.next(this._data.crashSeverity);
-    // this.roadwaySystemId.next(this._data.roadwaySystemId);
-    // this.numberOfLanes.next(this._data.numberOfLanes);
-    // this.ownership.next(this._data.ownership);
-    // this.routeSignage.next(this._data.routeSignage);
-    // this.postedSpeedLimit.next(this._data.postedSpeedLimit);
-    // this.functionalClass.next(this._data.functionalClass);
-    // this.bicyclistCount.next(this._data.bicyclistCount);
-    // this.pedestrianCount.next(this._data.pedestrianCount);
-    // this.comments.next('');
   }
 
 }

@@ -1,6 +1,6 @@
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 import {FormControl} from "@angular/forms";
-import {CrashEventService} from "../../../../../services/s4/crash-event.service";
+import {CrashEventService} from "app/services/s4/crash-event.service";
 
 export abstract class CrashEventRecordFieldBase {
   public controlModel: FieldControlBase<any>;
@@ -13,7 +13,6 @@ export abstract class CrashEventRecordFieldBase {
   }
 
   protected subscribe(crashEventService: CrashEventService): void {
-    // @ts-ignore
     crashEventService.fields[this.controlModel.key].subscribe({
       next: (v: any) => {
         this.setInitValIf(v);
