@@ -4,18 +4,27 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {OnInit} from "@angular/core";
 
-export abstract class CrashEventRecordFieldBase implements OnInit {
+export abstract class CrashEventRecordFieldBase {
   public controlModel: FieldControlBase<any>;
   public control: FormControl;
   public crashEvent: CrashEventService;
   public controlModelService: FormControlModelService
 
+  /**
+   *
+   * @param val
+   * @protected
+   */
   protected setInitValIf<T>(val: T): void {
     if (!this.controlModel.initialValue) {
       this.controlModel.initialValue = val;
     }
   }
 
+  /**
+   *
+   * @protected
+   */
   protected async subscribeSelf(): Promise<any> {
     await this.crashEvent.crashEventIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
@@ -36,6 +45,11 @@ export abstract class CrashEventRecordFieldBase implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param $event
+   * @protected
+   */
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
     let val: string | number | Date | undefined = $event.target.value;
@@ -55,8 +69,6 @@ export abstract class CrashEventRecordFieldBase implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
 }
 
 export interface OnValueChanged {
