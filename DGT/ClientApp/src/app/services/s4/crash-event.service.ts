@@ -1,10 +1,9 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject, Subscription} from 'rxjs';
+import { Observable, of, Subject} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
 import { EditorQueueService } from 'app/services/s4/editor-queue.service';
-import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root', // EditorModule
@@ -49,6 +48,10 @@ export class CrashEventService {
     console.log(this);
   }
 
+  public getCurrentRecord(): CrashEvent {
+    return this._data;
+  }
+
   private _getRecord(hsmvReportNumber: number): void {
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(response => {
       if (!this._cache) {
@@ -65,12 +68,12 @@ export class CrashEventService {
   }
 
   private _subscribe(): void {
-    for (const key in this.fields) {
+    for (let key in this.fields) {
       this.fields[key].subscribe({
-        next: (val: any) => {
+        next: (val) => {
           this._data[key] = val;
         },
-        error: (err: any) => {
+        error: (err) => {
           this._handleError(err);
         }
       });
@@ -78,7 +81,7 @@ export class CrashEventService {
   }
 
   private _initSubjects(): void {
-    for (const key in this.fields) {
+    for (let key in this.fields) {
       this.fields[key].next(this._data[key]);
     }
   }

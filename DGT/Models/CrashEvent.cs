@@ -22,7 +22,7 @@ namespace DGT.Models
 
           public string OffsetDirection { get; set; }
 
-          public int CrashSeverity { get; set; }
+          public int CrashInjury { get; set; }
 
           public int RoadwaySystemId { get; set; }
 
@@ -48,6 +48,8 @@ namespace DGT.Models
 
           public bool OnPublicRoads { get; set; }
 
+          public bool FdotProperty { get; set; }
+          
           public string FdotPropertyCode { get; set; }
 
           public string SideOfRoad { get; set; }

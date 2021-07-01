@@ -16,7 +16,7 @@ namespace DGT.Controllers
                 City = "Gainesville",
                 County = "Alachua",
                 CrashDate = new DateTime(2020, 12, 30),
-                CrashSeverity = 2,
+                CrashInjury = 2,
                 FormType = 'L',
                 HsmvReportNumber = hsmvReportNumber,
                 IntersectingStreet = "Archer Rd.",

@@ -25,7 +25,7 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    const val = $event.target.value;
+    const val: number = +$event.target.value;
     this.crashEvent.fields[this.controlModel.key].next(val);
   }
 

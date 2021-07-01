@@ -9,11 +9,11 @@ export interface CrashEventOptions {
   crashDate: Date;
   county: string;
   city: string;
-  onStreetName: string;
-  intersectingStreetName: string;
+  onStreet: string;
+  intersectingStreet: string;
   offsetDistance: number;
   offsetDirection: string;
-  crashSeverity: number;
+  crashInjury: number;
   roadwaySystemId: number;
   formType: string;
   bicyclistCount?: number | undefined;

@@ -34,7 +34,7 @@ export class CrashEvent {
   offsetDirection: string;
 
   // Crash Severity – the maximum injury severity for any driver, passenger or non-motorist involved
-  crashSeverity: number;
+  crashInjury: number;
 
   // Road System Identifier – the primary road system identifier:
   roadwaySystemId: number;
@@ -109,11 +109,11 @@ export class CrashEvent {
     this.crashDate = opts.crashDate;
     this.county = opts.county;
     this.city = opts.city;
-    this.onStreet = opts.onStreetName;
-    this.intersectingStreet = opts.intersectingStreetName;
+    this.onStreet = opts.onStreet;
+    this.intersectingStreet = opts.intersectingStreet;
     this.offsetDistance = opts.offsetDistance;
     this.offsetDirection = opts.offsetDirection;
-    this.crashSeverity = opts.crashSeverity;
+    this.crashInjury = opts.crashInjury;
     this.roadwaySystemId = opts.roadwaySystemId;
     this.formType = opts.formType;
     this.bicyclistCount = opts.bicyclistCount || undefined;
