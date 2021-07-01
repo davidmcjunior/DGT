@@ -50,7 +50,7 @@ export class CrashEventService {
    * @param ce
    * @private
    */
-  private async _init(ce: CrashEvent): Promise<boolean> {
+  private async _init(ce: CrashEvent): Promise<any> {
     this._fields = new Map<string, BehaviorSubject<Date | string | number>>();
     this._data = this._cache = ce;
 
@@ -66,8 +66,6 @@ export class CrashEventService {
     });
 
     this.crashEvent$ = of(ce);
-
-    return true;
   }
 
   /**

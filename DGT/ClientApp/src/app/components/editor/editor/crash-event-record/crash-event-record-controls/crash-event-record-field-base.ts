@@ -35,7 +35,7 @@ export abstract class CrashEventRecordFieldBase {
     });
   }
 
-  protected handleValue($event: Event): void {
+  protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
     let val: string | number | Date | undefined = $event.target.value;
     const type = this.controlModel.type;

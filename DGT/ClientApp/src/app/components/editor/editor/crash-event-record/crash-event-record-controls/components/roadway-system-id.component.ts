@@ -25,7 +25,7 @@ export class RoadwaySystemIdComponent extends CrashEventRecordFieldBase implemen
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.handleValue($event);
+    this.handleValueChange($event);
   }
 
   ngAfterViewInit(): void {

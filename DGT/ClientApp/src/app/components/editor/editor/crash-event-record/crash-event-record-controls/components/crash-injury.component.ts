@@ -25,7 +25,7 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.handleValue($event);
+    this.handleValueChange($event);
   }
 
   ngAfterViewInit(): void {
