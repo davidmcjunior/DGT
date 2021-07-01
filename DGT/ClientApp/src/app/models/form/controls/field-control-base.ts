@@ -17,6 +17,8 @@ export abstract class FieldControlBase<T> {
   public order: number | undefined;
   public controlType: string;
   public type: string;
+  public min: number = 0;
+  public max: number = 1000;
   public readonly: boolean;
   public keyValueOptions = false;
   public options: {key: string | number, value: string}[];
