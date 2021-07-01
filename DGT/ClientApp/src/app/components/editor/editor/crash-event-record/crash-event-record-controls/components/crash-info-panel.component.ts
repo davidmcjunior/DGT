@@ -20,30 +20,35 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.crashEvent.crashDate.subscribe({
-    //   next: (v) => this.date = v
-    // });
-    // this.crashEvent.city.subscribe({
-    //   next: (v) => this.city = v
-    // });
-    // this.crashEvent.county.subscribe({
-    //   next: (v) => this.county = v
-    // });
-    // this.crashEvent.onStreet.subscribe({
-    //   next: (v) => this.onStreet = v
-    // });
-    // this.crashEvent.intersectingStreet.subscribe({
-    //   next: (v) => this.intersectingStreet = v
-    // });
-    // this.crashEvent.offsetDistance.subscribe({
-    //   next: (v) => this.offsetDistance = v
-    // });
-    // this.crashEvent.offsetDirection.subscribe({
-    //   next: (v) => this.direction = v
-    // });
+
   }
 
   ngAfterViewInit(): void {
+
+  }
+
+  private _initFields(): void {
+    this.crashEvent['crashDate'].subscribe({
+      next: (v) => this.date = v
+    });
+    this.crashEvent['city'].subscribe({
+      next: (v) => this.city = v
+    });
+    this.crashEvent['county'].subscribe({
+      next: (v) => this.county = v
+    });
+    this.crashEvent['onStreet'].subscribe({
+      next: (v) => this.onStreet = v
+    });
+    this.crashEvent['intersectingStreet'].subscribe({
+      next: (v) => this.intersectingStreet = v
+    });
+    this.crashEvent['offsetDistance'].subscribe({
+      next: (v) => this.offsetDistance = v
+    });
+    this.crashEvent['offsetDirection'].subscribe({
+      next: (v) => this.direction = v
+    });
   }
 
 }

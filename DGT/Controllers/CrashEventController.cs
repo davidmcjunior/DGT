@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DGT.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,9 @@ namespace DGT.Controllers
         [HttpGet("api/v1/crash-event/{hsmvReportNumber}")]
         public Task<CrashEvent> Get(int hsmvReportNumber)
         {
-            return Task.FromResult(new CrashEvent
-            {
+            CancellationTokenSource source = new CancellationTokenSource();
+            
+            CrashEvent ce = new CrashEvent {
                 City = "Gainesville",
                 County = "Alachua",
                 CrashDate = new DateTime(2020, 12, 30),
@@ -30,6 +32,12 @@ namespace DGT.Controllers
                 CrashLane = "V",
                 Ownership = "Florida Dept of W and M",
                 RouteSignage = "No Fishing"
+            };
+            
+            return Task.Run(async delegate
+            {
+                await Task.Delay(1000);
+                return ce;
             });
         }
     }

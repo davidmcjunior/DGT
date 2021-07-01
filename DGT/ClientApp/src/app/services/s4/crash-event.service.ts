@@ -1,5 +1,5 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
-import { Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
@@ -14,6 +14,7 @@ export class CrashEventService {
   private _cache: CrashEvent;
 
   public crashEvent$: Observable<CrashEvent>;
+  public isLoaded = new BehaviorSubject<boolean>(false);
 
   public fields = {
     crashDate: new Subject<Date>(),
@@ -37,14 +38,15 @@ export class CrashEventService {
     functionalClass: new Subject<string>(),
     bicyclistCount: new Subject<number>(),
     pedestrianCount: new Subject<number>(),
-    // comments: new Subject<string>()
   };
 
   constructor(private http: HttpClient, private workQueueService: EditorQueueService) {
-    this._getRecord(10001);
-    this._subscribe();
+    this._getRecord(10001).then(() => {
+      this._subscribe();
+    }).then(() => {
+      this.crashEvent$ = new Subject<CrashEvent>();
+    });
 
-    this.crashEvent$ = new Subject<CrashEvent>();
     console.log(this);
   }
 
@@ -52,8 +54,8 @@ export class CrashEventService {
     return this._data;
   }
 
-  private _getRecord(hsmvReportNumber: number): void {
-    this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(response => {
+  private async _getRecord(hsmvReportNumber: number): Promise<void> {
+    await this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(response => {
       if (!this._cache) {
         this._cache = response;
       }
