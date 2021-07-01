@@ -20,7 +20,7 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {

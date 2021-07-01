@@ -20,7 +20,7 @@ export class PedestrianCountComponent extends CrashEventRecordFieldBase implemen
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {

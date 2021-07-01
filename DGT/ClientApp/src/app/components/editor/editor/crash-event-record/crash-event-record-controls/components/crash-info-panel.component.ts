@@ -28,25 +28,25 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   }
 
   private _initFields(): void {
-    // this.crashEvent['crashDate'].subscribe({
+    // this.crashEvent['crashDate'].subscribeSelf({
     //   next: (v) => this.date = v
     // });
-    // this.crashEvent['city'].subscribe({
+    // this.crashEvent['city'].subscribeSelf({
     //   next: (v) => this.city = v
     // });
-    // this.crashEvent['county'].subscribe({
+    // this.crashEvent['county'].subscribeSelf({
     //   next: (v) => this.county = v
     // });
-    // this.crashEvent['onStreet'].subscribe({
+    // this.crashEvent['onStreet'].subscribeSelf({
     //   next: (v) => this.onStreet = v
     // });
-    // this.crashEvent['intersectingStreet'].subscribe({
+    // this.crashEvent['intersectingStreet'].subscribeSelf({
     //   next: (v) => this.intersectingStreet = v
     // });
-    // this.crashEvent['offsetDistance'].subscribe({
+    // this.crashEvent['offsetDistance'].subscribeSelf({
     //   next: (v) => this.offsetDistance = v
     // });
-    // this.crashEvent['offsetDirection'].subscribe({
+    // this.crashEvent['offsetDirection'].subscribeSelf({
     //   next: (v) => this.direction = v
     // });
   }

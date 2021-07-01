@@ -20,7 +20,7 @@ export class NumberOfLanesComponent extends CrashEventRecordFieldBase implements
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {

@@ -20,7 +20,7 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase implement
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {

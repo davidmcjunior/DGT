@@ -1,9 +1,10 @@
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 import {FormControl} from "@angular/forms";
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {FormControlModelService} from "../../../../../services/forms/crash-event/form-control-model.service";
+import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
+import {OnInit} from "@angular/core";
 
-export abstract class CrashEventRecordFieldBase {
+export abstract class CrashEventRecordFieldBase implements OnInit {
   public controlModel: FieldControlBase<any>;
   public control: FormControl;
   public crashEvent: CrashEventService;
@@ -15,10 +16,10 @@ export abstract class CrashEventRecordFieldBase {
     }
   }
 
-  protected async subscribe(crashEventService: CrashEventService): Promise<any> {
+  protected async subscribeSelf(): Promise<any> {
     await this.crashEvent.crashEventIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
-        const field = crashEventService.getField(this.controlModel.key);
+        const field = this.crashEvent.getField(this.controlModel.key);
 
         if (field) {
           field.subscribe({
@@ -52,6 +53,9 @@ export abstract class CrashEventRecordFieldBase {
     if (field) {
       field.next(val);
     }
+  }
+
+  ngOnInit(): void {
   }
 }
 

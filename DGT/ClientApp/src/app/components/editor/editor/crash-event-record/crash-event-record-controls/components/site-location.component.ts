@@ -20,7 +20,7 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {

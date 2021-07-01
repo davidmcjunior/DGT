@@ -20,7 +20,7 @@ export class OwnershipComponent extends CrashEventRecordFieldBase implements Aft
   }
 
   ngOnInit(): void {
-    this.subscribe(this.crashEvent);
+    this.subscribeSelf();
   }
 
   onValueChanged($event: Event): void {
