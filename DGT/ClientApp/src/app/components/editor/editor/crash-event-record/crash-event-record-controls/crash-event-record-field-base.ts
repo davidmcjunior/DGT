@@ -1,13 +1,13 @@
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 import {FormControl} from "@angular/forms";
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {FormControlFactory} from "../../../../../models/form/form-control-factory";
+import {FormControlModelService} from "../../../../../services/forms/crash-event/form-control-model.service";
 
 export abstract class CrashEventRecordFieldBase {
   public controlModel: FieldControlBase<any>;
   public control: FormControl;
   public crashEvent: CrashEventService;
-  public controlFactory: FormControlFactory;
+  public controlModelService: FormControlModelService
 
   protected setInitValIf<T>(val: T): void {
     if (!this.controlModel.initialValue) {
@@ -15,14 +15,22 @@ export abstract class CrashEventRecordFieldBase {
     }
   }
 
-  protected subscribe(crashEventService: CrashEventService): void {
-    crashEventService.fields[this.controlModel.key].subscribe({
-      next: (v: any) => {
-        this.setInitValIf(v);
-        this.controlModel.value = v;
-      },
-      error: (err: any) => {
-        console.log(`Error: ${this.controlModel.key} value was not set`, err);
+  protected async subscribe(crashEventService: CrashEventService): Promise<any> {
+    await this.crashEvent.crashEventIsLoaded$.subscribe((isLoaded) => {
+      if (isLoaded) {
+        const field = crashEventService.getField(this.controlModel.key);
+
+        if (field) {
+          field.subscribe({
+            next: (v: any) => {
+              this.setInitValIf(v);
+              this.controlModel.value = v;
+            },
+            error: (err: any) => {
+              console.log(`Error: ${this.controlModel.key} value was not set`, err);
+            }
+          });
+        }
       }
     });
   }
@@ -31,6 +39,7 @@ export abstract class CrashEventRecordFieldBase {
     // @ts-ignore - bad warning here from tslint?
     let val: string | number | Date | undefined = $event.target.value;
     const type = this.controlModel.type;
+    const field = this.crashEvent.getField(this.controlModel.key);
 
     if (!val) {
       return;
@@ -40,7 +49,9 @@ export abstract class CrashEventRecordFieldBase {
       val = +val;
     }
 
-    this.crashEvent.fields[this.controlModel.key].next(val);
+    if (field) {
+      field.next(val);
+    }
   }
 }
 

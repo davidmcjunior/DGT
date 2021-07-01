@@ -36,7 +36,7 @@ namespace DGT.Controllers
             
             return Task.Run(async delegate
             {
-                await Task.Delay(1000);
+                await Task.Delay(10000);
                 return ce;
             });
         }

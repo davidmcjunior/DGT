@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
@@ -13,10 +13,10 @@ export class PedestrianCountComponent extends CrashEventRecordFieldBase implemen
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlFactory: FormControlFactory
+    public controlModelService: FormControlModelService
   ) {
     super();
-    this.controlModel = this.controlFactory.getControl('pedestrianCount');
+    this.controlModel = this.controlModelService.getControl('pedestrianCount');
   }
 
   ngOnInit(): void {
@@ -25,8 +25,7 @@ export class PedestrianCountComponent extends CrashEventRecordFieldBase implemen
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    const val: number = +$event.target.value;
-    this.crashEvent.fields[this.controlModel.key].next(val);
+    this.handleValue($event);
   }
 
   ngAfterViewInit(): void {

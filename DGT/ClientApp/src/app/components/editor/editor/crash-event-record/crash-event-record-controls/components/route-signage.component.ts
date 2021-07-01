@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
-import {FormControlFactory} from "app/models/form/form-control-factory";
+import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 
@@ -13,10 +13,10 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase implements 
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlFactory: FormControlFactory
+    public controlModelService: FormControlModelService
   ) {
     super();
-    this.controlModel = this.controlFactory.getControl('routeSignage');
+    this.controlModel = this.controlModelService.getControl('routeSignage');
   }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase implements 
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.crashEvent.fields[this.controlModel.key].next($event.target.value);
+    this.crashEvent.getField(this.controlModel.key).next($event.target.value);
   }
 
   ngAfterViewInit(): void {

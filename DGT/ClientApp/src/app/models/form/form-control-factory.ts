@@ -33,6 +33,30 @@ import { CommentsControl } from 'app/models/form/controls/crash-report/comments.
 })
 export class FormControlFactory {
 
+  private fieldKeys = [
+    'crashDate',
+    'onStreet',
+    'intersectingStreet',
+    'offsetDistance',
+    'offsetDirection',
+    'city',
+    'county',
+    'onPublicRoads',
+    'dotProperty',
+    'siteLocation',
+    'sideOfRoad',
+    'crashLane',
+    'crashInjury',
+    'roadwaySystemId',
+    'numberOfLanes',
+    'ownership',
+    'routeSignage',
+    'postedSpeedLimit',
+    'functionalClass',
+    'bicyclistCount',
+    'pedestrianCount',
+  ];
+
   public getControl(key: string, value: any = ''): FieldControlBase<any> {
     let control: FieldControlBase<any>;
 
@@ -136,5 +160,9 @@ export class FormControlFactory {
     // @ts-ignore
     return control;
 
+  }
+
+  public getFieldKeys(): string[] {
+    return this.fieldKeys;
   }
 }
