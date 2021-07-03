@@ -7,7 +7,8 @@
     <input *ngSwitchCase="'number'" [id]="controlModel.key" class="common-input" [min]="controlModel.min" [max]="controlModel.max" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
     <input *ngSwitchCase="'date'" [id]="controlModel.key" class="common-input" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
     <select [id]="controlModel.key" *ngSwitchCase="'select'" class="common-input" (change)="onValueChanged($event)">
-      <option *ngFor="let opt of controlModel.options" [value]="opt.key">
+      <option></option>
+      <option *ngFor="let opt of controlModel.options" [value]="opt.key" [selected]="controlModel.value">
         {{controlModel.keyValueOptions ? opt.key + ': ' + opt.value : opt.value}}
       </option>
     </select>

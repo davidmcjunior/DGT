@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {CrashEventService} from "../../../../services/s4/crash-event.service";
+import {CrashEventService} from "app/services/s4/crash-event.service";
+import {EditorQueueService} from "app/services/s4/editor-queue.service";
 
 @Component({
   selector: 'dgt-buttons-bar',
@@ -8,9 +8,7 @@ import {CrashEventService} from "../../../../services/s4/crash-event.service";
   styleUrls: ['./buttons-bar.component.scss']
 })
 export class ButtonsBarComponent implements OnInit {
-
-
-  constructor(private crashEvent: CrashEventService) {
+  constructor(private crashEvent: CrashEventService, private queue: EditorQueueService) {
   }
 
   ngOnInit(): void {
@@ -20,6 +18,10 @@ export class ButtonsBarComponent implements OnInit {
 
   giveUp(): void {
     console.log(this.crashEvent.getCurrentRecord());
+  }
+
+  skip(): void {
+    this.crashEvent.nextRecord(this.queue.getNextReportId());
   }
 
 }

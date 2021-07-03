@@ -7,9 +7,16 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class EditorQueueService {
+  private _index = 0;
+
   constructor(private http: HttpClient) { }
 
   public getQueue(): Observable<any> {
     return of([102, 103, 105, 106]);
+  }
+
+  public getNextReportId() {
+    console.log(this._index += 100);
+    return this._index += 100;
   }
 }

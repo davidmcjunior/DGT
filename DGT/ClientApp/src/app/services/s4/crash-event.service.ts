@@ -1,10 +1,10 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
 import { EditorQueueService } from 'app/services/s4/editor-queue.service';
-import {FormControlModelService} from "../forms/crash-event/form-control-model.service";
+import { FormControlModelService } from "../forms/crash-event/form-control-model.service";
 
 @Injectable({
   providedIn: 'root', // EditorModule
@@ -16,18 +16,26 @@ export class CrashEventService {
   private _fields: Map<string, BehaviorSubject<Date | string | number>>;
   private _fieldKeys: string[];
 
-  public crashEvent$: Observable<CrashEvent>;
-  public crashEventIsLoaded$ = new BehaviorSubject<boolean>(false);
+  public record$: Observable<CrashEvent>;
+  public recordIsLoaded$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private formControlService: FormControlModelService, private workQueueService: EditorQueueService) {
-    const hsmvRecordNumber = 10101; // from Queue service
+  /**
+   *
+   * @param http
+   * @param formControlService
+   * @param queue
+   */
+  constructor(private http: HttpClient, private formControlService: FormControlModelService, private queue: EditorQueueService) {
     this._fieldKeys = this.formControlService.getFieldKeys();
+    this.nextRecord(this.queue.getNextReportId());
+  }
 
-    this._getRecord(hsmvRecordNumber).subscribe(async response => {
-      this._init(response).then(() =>{
-        this.crashEventIsLoaded$.next(true);
-      });
-    });
+  /**
+   *
+   * @param hsmvReportNumber: int
+   */
+  public nextRecord(hsmvReportNumber): void {
+    this._loadRecord(hsmvReportNumber);
   }
 
   /**
@@ -47,10 +55,23 @@ export class CrashEventService {
 
   /**
    *
+   * @param hsmvReportNumber
+   * @private
+   */
+  private _loadRecord(hsmvReportNumber: number): void {
+    this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
+      this._initData(response).then(() => {
+        this.recordIsLoaded$.next(true);
+      });
+    });
+  }
+
+  /**
+   *
    * @param ce
    * @private
    */
-  private async _init(ce: CrashEvent): Promise<any> {
+  private async _initData(ce: CrashEvent): Promise<any> {
     this._fields = new Map<string, BehaviorSubject<Date | string | number>>();
     this._data = this._cache = ce;
 
@@ -65,16 +86,7 @@ export class CrashEventService {
       this._fields.set(key, field$);
     });
 
-    this.crashEvent$ = of(ce);
-  }
-
-  /**
-   *
-   * @param hsmvReportNumber
-   * @private
-   */
-  private _getRecord(hsmvReportNumber: number): Observable<CrashEvent> {
-    return this.http.get<CrashEvent>(this._url + hsmvReportNumber);
+    this.record$ = of(ce);
   }
 
   /**

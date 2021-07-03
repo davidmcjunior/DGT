@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CrashEventRecordModule } from "./editor/crash-event-record/crash-event-record.module";
 import {BicyclistCountControl} from "../../models/form/controls/crash-report/bicyclist-count.control";
 import {CityControl} from "../../models/form/controls/crash-report/city.control";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -30,16 +31,17 @@ import {CityControl} from "../../models/form/controls/crash-report/city.control"
     GiveUpDialogComponent,
     SearchComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    EditorRoutingModule,
-    AutocompleteLibModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    CrashEventRecordModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        EditorRoutingModule,
+        AutocompleteLibModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        CrashEventRecordModule,
+        SharedModule
+    ],
   providers: [
     BicyclistCountControl,
     CityControl
