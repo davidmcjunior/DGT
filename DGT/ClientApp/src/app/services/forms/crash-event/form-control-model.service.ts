@@ -9,10 +9,17 @@ import { FieldControlBase } from 'app/models/form/controls/field-control-base';
 export class FormControlModelService {
   public constructor(private fieldFactory: FormControlFactory) { }
 
+  /**
+   *
+   * @param key
+   */
   public getControl(key: string): FieldControlBase<any> {
     return this.fieldFactory.getControl(key);
   }
 
+  /**
+   *
+   */
   public getFieldKeys(): string[] {
     return this.fieldFactory.getFieldKeys();
   }

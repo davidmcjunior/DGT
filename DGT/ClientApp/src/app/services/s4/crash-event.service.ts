@@ -5,6 +5,7 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
 import { EditorQueueService } from 'app/services/s4/editor-queue.service';
 import { FormControlModelService } from "../forms/crash-event/form-control-model.service";
+import {CrashEventRecordFieldBase} from "../../components/editor/editor/crash-event-record/crash-event-record-controls/crash-event-record-field-base";
 
 @Injectable({
   providedIn: 'root', // EditorModule
@@ -34,8 +35,10 @@ export class CrashEventService {
    *
    * @param hsmvReportNumber: int
    */
-  public nextRecord(hsmvReportNumber): void {
+  public nextRecord(hsmvReportNumber): this {
     this._loadRecord(hsmvReportNumber);
+
+    return this;
   }
 
   /**
@@ -87,6 +90,31 @@ export class CrashEventService {
     });
 
     this.record$ = of(ce);
+  }
+
+  /**
+   *
+   * @param component
+   */
+  public subscribeComponent(component: CrashEventRecordFieldBase): this {
+    this.recordIsLoaded$.subscribe((isLoaded) => {
+      if (isLoaded) {
+        const field = this.getField(component.getFieldKey());
+
+        if (field) {
+          field.subscribe({
+            next: (v) => {
+              component.setInitValIf(v).setValue(v);
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
+      }
+    });
+
+    return this;
   }
 
   /**

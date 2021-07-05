@@ -1,11 +1,11 @@
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
-import {FormControl} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 
 export abstract class CrashEventRecordFieldBase {
   public controlModel: FieldControlBase<any>;
-  public control: FormControl;
+  public form: FormGroup;
   public crashEvent: CrashEventService;
   public controlModelService: FormControlModelService
 
@@ -14,34 +14,43 @@ export abstract class CrashEventRecordFieldBase {
    * @param val
    * @protected
    */
-  protected setInitValIf<T>(val: T): void {
+  public setInitValIf<T>(val: T): this {
     if (!this.controlModel.initialValue) {
       this.controlModel.initialValue = val;
     }
+
+    return this;
+  }
+
+  /**
+   *
+   * @param val
+   */
+  public setValue<T>(val: T): this {
+    if (val) {
+      this.controlModel.value = val;
+    }
+
+    return this;
+  }
+
+  /**
+   *
+   */
+  public getFieldKey(): string {
+    return this.controlModel.key;
   }
 
   /**
    *
    * @protected
    */
-  protected async subscribeSelf(): Promise<any> {
-    await this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
-      if (isLoaded) {
-        const field = this.crashEvent.getField(this.controlModel.key);
-
-        if (field) {
-          field.subscribe({
-            next: (v: any) => {
-              this.setInitValIf(v);
-              this.controlModel.value = v;
-            },
-            error: (err: any) => {
-              console.log(`Error: ${this.controlModel.key} value was not set`, err);
-            }
-          });
-        }
-      }
+  protected initNgForm(fb: FormBuilder): this {
+    this.form = fb.group({
+      [this.controlModel.key]: fb.control(this.controlModel.value)
     });
+
+    return this;
   }
 
   /**

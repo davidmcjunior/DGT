@@ -5,7 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './loading-overlay.component.html',
 })
 export class LoadingOverlayComponent implements OnInit {
-  @Input('visible') visible: boolean;
+  @Input('visible') visible: boolean = true;
 
   public show(): void {
     this.visible = true;

@@ -3,6 +3,7 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'dgt-functional-class',
@@ -13,14 +14,16 @@ export class FunctionalClassComponent extends CrashEventRecordFieldBase implemen
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlModelService: FormControlModelService
+    public controlModelService: FormControlModelService,
+    private formBuilder: FormBuilder
   ) {
     super();
     this.controlModel = this.controlModelService.getControl('functionalClass');
   }
 
   ngOnInit(): void {
-    this.subscribeSelf();
+    this.initNgForm(this.formBuilder);
+    this.crashEvent.subscribeComponent(this);
   }
 
   onValueChanged($event: Event): void {

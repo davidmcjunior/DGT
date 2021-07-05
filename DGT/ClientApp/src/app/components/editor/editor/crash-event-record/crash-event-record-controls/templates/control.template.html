@@ -2,7 +2,7 @@
   <div class="label-container">
     <label [attr.for]="controlModel.key" class="common-label font-bold text-gray-500">{{controlModel.label}}</label>
   </div>
-  <div class="full-width-input" [ngSwitch]="controlModel.controlType">
+  <div class="full-width-input" [ngSwitch]="controlModel.controlType" >
     <input *ngSwitchCase="'text'" [id]="controlModel.key" class="common-input" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
     <input *ngSwitchCase="'number'" [id]="controlModel.key" class="common-input" [min]="controlModel.min" [max]="controlModel.max" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
     <input *ngSwitchCase="'date'" [id]="controlModel.key" class="common-input" [value]="controlModel.value" [type]="controlModel.type" (change)="onValueChanged($event)">
