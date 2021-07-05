@@ -14,15 +14,15 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlModelService: FormControlModelService,
-    private formBuilder: FormBuilder
+    protected controlModelService: FormControlModelService,
+    protected formBuilder: FormBuilder
   ) {
     super();
     this.controlModel = this.controlModelService.getControl('siteLocation');
   }
 
   ngOnInit(): void {
-    this.initNgForm(this.formBuilder);
+    this.initNgForm();
     this.crashEvent.subscribeComponent(this);
   }
 

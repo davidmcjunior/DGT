@@ -14,15 +14,15 @@ export class OnPublicRoadsComponent extends CrashEventRecordFieldBase implements
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlModelService: FormControlModelService,
-    private formBuilder: FormBuilder
+    protected controlModelService: FormControlModelService,
+    protected formBuilder: FormBuilder
   ) {
     super();
     this.controlModel = this.controlModelService.getControl('onPublicRoads');
   }
 
   ngOnInit(): void {
-    this.initNgForm(this.formBuilder);
+    this.initNgForm();
     this.crashEvent.subscribeComponent(this);
   }
 

@@ -14,15 +14,15 @@ export class PostedSpeedLimitComponent extends CrashEventRecordFieldBase impleme
 
   constructor(
     public crashEvent: CrashEventService,
-    public controlModelService: FormControlModelService,
-    private formBuilder: FormBuilder
+    protected controlModelService: FormControlModelService,
+    protected formBuilder: FormBuilder
   ) {
     super();
     this.controlModel = this.controlModelService.getControl('postedSpeedLimit');
   }
 
   ngOnInit(): void {
-    this.initNgForm(this.formBuilder);
+    this.initNgForm();
     this.crashEvent.subscribeComponent(this);
   }
 

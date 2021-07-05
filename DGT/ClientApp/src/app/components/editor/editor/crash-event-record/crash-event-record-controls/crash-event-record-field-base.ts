@@ -7,7 +7,8 @@ export abstract class CrashEventRecordFieldBase {
   public controlModel: FieldControlBase<any>;
   public form: FormGroup;
   public crashEvent: CrashEventService;
-  public controlModelService: FormControlModelService
+  protected formBuilder: FormBuilder;
+  protected controlModelService: FormControlModelService
 
   /**
    *
@@ -45,9 +46,9 @@ export abstract class CrashEventRecordFieldBase {
    *
    * @protected
    */
-  protected initNgForm(fb: FormBuilder): this {
-    this.form = fb.group({
-      [this.controlModel.key]: fb.control(this.controlModel.value)
+  protected initNgForm(): this {
+    this.form = this.formBuilder.group({
+      [this.controlModel.key]: this.formBuilder.control(this.controlModel.value)
     });
 
     return this;
