@@ -2,13 +2,20 @@ import {FieldControlBase} from "app/models/form/controls/field-control-base";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
+import {BehaviorSubject} from "rxjs";
 
 export abstract class CrashEventRecordFieldBase {
+  protected formBuilder: FormBuilder;
+  protected controlModelService: FormControlModelService
+  protected field$: BehaviorSubject<any>;
+
   public controlModel: FieldControlBase<any>;
   public form: FormGroup;
   public crashEvent: CrashEventService;
-  protected formBuilder: FormBuilder;
-  protected controlModelService: FormControlModelService
+
+  public constructor(controlName: string) {
+    this.controlModel = this.controlModelService.getControl(controlName);
+  }
 
   /**
    *
@@ -56,24 +63,41 @@ export abstract class CrashEventRecordFieldBase {
 
   /**
    *
+   * @param ces
+   * @param fieldName
+   * @param value
+   * @protected
+   */
+  protected async pushValue(ces: CrashEventService, fieldName: string, value: string | number | Date): Promise<boolean> {
+    const field = ces.getFieldSubject(fieldName);
+
+    if (field && value) {
+      field.next(value);
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   *
+   * @param value
+   * @param type
+   * @protected
+   */
+  protected cleanValue(value: string | number | Date, type: string = 'string'): string | number | Date {
+    return value;
+  }
+
+  /**
+   *
    * @param $event
    * @protected
    */
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
-    let val: string | number | Date | undefined = $event.target.value;
-    const type = this.controlModel.type;
-    const field = this.crashEvent.getField(this.controlModel.key);
-
-    if (val) {
-      if (type === 'number') {
-        val = +val;
-      }
-
-      if (field) {
-        field.next(val);
-      }
-    }
+    const value = this.cleanValue($event.target.value, this.controlModel.type)
+    this.pushValue(this.crashEvent, this.controlModel.key, value).then(r => {});
   }
 
 }

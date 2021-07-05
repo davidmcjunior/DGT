@@ -36,7 +36,7 @@ export class CrashEventService {
    * @param hsmvReportNumber: int
    */
   public nextRecord(hsmvReportNumber): this {
-    this._loadRecord(hsmvReportNumber);
+    this._loadRecord(hsmvReportNumber).then(r => {});
 
     return this;
   }
@@ -45,7 +45,7 @@ export class CrashEventService {
    *
    * @param key
    */
-  public getField(key: string): BehaviorSubject<Date | string | number> | undefined {
+  public getFieldSubject(key: string): BehaviorSubject<Date | string | number> | undefined {
     return this._fields.get(key);
   }
 
@@ -61,7 +61,7 @@ export class CrashEventService {
    * @param hsmvReportNumber
    * @private
    */
-  private _loadRecord(hsmvReportNumber: number): void {
+  private async _loadRecord(hsmvReportNumber: number): Promise<any> {
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);
@@ -96,10 +96,10 @@ export class CrashEventService {
    *
    * @param component
    */
-  public subscribeComponent(component: CrashEventRecordFieldBase): this {
+  public async subscribeComponent(component: CrashEventRecordFieldBase): Promise<this> {
     this.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
-        const field = this.getField(component.getFieldKey());
+        const field = this.getFieldSubject(component.getFieldKey());
 
         if (field) {
           field.subscribe({

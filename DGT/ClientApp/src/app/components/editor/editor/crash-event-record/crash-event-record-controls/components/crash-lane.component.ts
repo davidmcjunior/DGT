@@ -17,18 +17,17 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase implements Aft
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('crashLane');
+    super('crashLane');
   }
 
   ngOnInit(): void {
     this.initNgForm();
-    this.crashEvent.subscribeComponent(this);
+    this.crashEvent.subscribeComponent(this).then(r => {});
   }
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.crashEvent.getField(this.controlModel.key).next($event.target.value);
+    this.crashEvent.getFieldSubject(this.controlModel.key).next($event.target.value);
   }
 
   ngAfterViewInit(): void {
