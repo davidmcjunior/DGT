@@ -4,6 +4,7 @@ import {FormControlModelService} from "app/services/forms/crash-event/form-contr
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
 import {FormBuilder} from "@angular/forms";
+import {CR} from "@angular/compiler/src/i18n/serializers/xml_helper";
 
 @Component({
   selector: 'dgt-number-of-lanes',
@@ -17,8 +18,12 @@ export class NumberOfLanesComponent extends CrashEventRecordFieldBase implements
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('numberOfLanes');
+    super(
+      'numberOfLanes',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

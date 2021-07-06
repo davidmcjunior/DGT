@@ -17,8 +17,12 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('dotProperty');
+    super(
+      'dotProperty',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

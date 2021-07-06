@@ -5,15 +5,17 @@ import {FormControlModelService} from "app/services/forms/crash-event/form-contr
 import {BehaviorSubject} from "rxjs";
 
 export abstract class CrashEventRecordFieldBase {
-  protected formBuilder: FormBuilder;
-  protected controlModelService: FormControlModelService
   protected field$: BehaviorSubject<any>;
 
   public controlModel: FieldControlBase<any>;
   public form: FormGroup;
-  public crashEvent: CrashEventService;
 
-  public constructor(controlName: string) {
+  public constructor(
+    controlName: string,
+    public crashEvent: CrashEventService,
+    protected controlModelService: FormControlModelService,
+    protected formBuilder: FormBuilder
+  ) {
     this.controlModel = this.controlModelService.getControl(controlName);
   }
 

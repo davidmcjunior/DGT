@@ -17,8 +17,12 @@ export class SiteLocationComponent extends CrashEventRecordFieldBase implements 
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('siteLocation');
+    super(
+      'siteLocation',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

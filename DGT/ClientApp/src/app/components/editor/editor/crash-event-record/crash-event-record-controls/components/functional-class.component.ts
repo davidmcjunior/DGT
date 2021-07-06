@@ -17,8 +17,12 @@ export class FunctionalClassComponent extends CrashEventRecordFieldBase implemen
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('functionalClass');
+    super(
+      'functionalClass',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

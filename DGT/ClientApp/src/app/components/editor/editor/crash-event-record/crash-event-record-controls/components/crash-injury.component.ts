@@ -17,8 +17,12 @@ export class CrashInjuryComponent extends CrashEventRecordFieldBase implements A
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('crashInjury');
+    super(
+      'crashInjury',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

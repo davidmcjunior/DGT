@@ -17,8 +17,12 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase implements 
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('routeSignage');
+    super(
+      'routeSignage',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

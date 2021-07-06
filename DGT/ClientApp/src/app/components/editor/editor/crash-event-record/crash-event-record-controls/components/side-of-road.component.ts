@@ -17,8 +17,12 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase implements Af
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('sideOfRoad');
+    super(
+      'sideOfRoad',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

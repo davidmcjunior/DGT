@@ -17,7 +17,11 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase implements Aft
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super('crashLane');
+    super('crashLane',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

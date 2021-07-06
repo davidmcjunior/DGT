@@ -17,8 +17,12 @@ export class RoadwaySystemIdComponent extends CrashEventRecordFieldBase implemen
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('roadwaySystemId');
+    super(
+      'roadwaySystemId',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

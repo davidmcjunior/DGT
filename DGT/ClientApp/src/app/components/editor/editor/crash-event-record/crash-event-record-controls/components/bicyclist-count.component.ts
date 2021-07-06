@@ -17,8 +17,12 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase implement
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('bicyclistCount');
+    super(
+      'bicyclistCount',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {

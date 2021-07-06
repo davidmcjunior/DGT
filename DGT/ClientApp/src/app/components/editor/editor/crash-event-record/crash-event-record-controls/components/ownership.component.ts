@@ -17,8 +17,12 @@ export class OwnershipComponent extends CrashEventRecordFieldBase implements Aft
     protected controlModelService: FormControlModelService,
     protected formBuilder: FormBuilder
   ) {
-    super();
-    this.controlModel = this.controlModelService.getControl('ownership');
+    super(
+      'ownership',
+      crashEvent,
+      controlModelService,
+      formBuilder
+    );
   }
 
   ngOnInit(): void {
