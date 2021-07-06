@@ -16,6 +16,7 @@ import { PostedSpeedLimitComponent } from "./crash-event-record-controls/compone
 import { RouteSignageComponent } from "./crash-event-record-controls/components/route-signage.component";
 import { CrashEventRecordComponent } from "./crash-event-record.component";
 import {CommonModule} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const classList = [
   CrashEventRecordComponent,
@@ -40,7 +41,8 @@ const classList = [
   declarations: classList,
   exports: classList,
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class CrashEventRecordModule {}

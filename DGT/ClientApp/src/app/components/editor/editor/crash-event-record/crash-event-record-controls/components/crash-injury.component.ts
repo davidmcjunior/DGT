@@ -3,7 +3,7 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {CrashEventRecordFieldBase, OnValueChanged} from "../crash-event-record-field-base";
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'dgt-crash-injury',
@@ -11,6 +11,7 @@ import {FormBuilder} from "@angular/forms";
 })
 export class CrashInjuryComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
   @Input('control') controlModel: FieldControlBase<number>;
+  @Input() form!: FormGroup;
 
   constructor(
     public crashEvent: CrashEventService,

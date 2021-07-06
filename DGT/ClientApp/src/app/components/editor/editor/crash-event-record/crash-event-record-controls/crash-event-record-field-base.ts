@@ -1,5 +1,5 @@
 import {FieldControlBase} from "app/models/form/controls/field-control-base";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {BehaviorSubject} from "rxjs";
@@ -9,6 +9,7 @@ export abstract class CrashEventRecordFieldBase {
 
   public controlModel: FieldControlBase<any>;
   public form: FormGroup;
+  public formControl: FormControl;
 
   public constructor(
     controlName: string,
@@ -57,7 +58,7 @@ export abstract class CrashEventRecordFieldBase {
    */
   protected initNgForm(): this {
     this.form = this.formBuilder.group({
-      [this.controlModel.key]: this.formBuilder.control(this.controlModel.value)
+      [this.getFieldKey()]: this.formBuilder.control(this.controlModel.value)
     });
 
     return this;
