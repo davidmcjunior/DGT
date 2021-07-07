@@ -28,12 +28,15 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase implements Af
 
   ngOnInit(): void {
     this.initNgForm();
-    this.crashEvent.subscribeComponent(this);
+
+    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+      this.setValue(v);
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.crashEvent.getFieldSubject(this.controlModel.key).next($event.target.value);
+    this.handleValueChange($event);
   }
 
   ngAfterViewInit(): void {

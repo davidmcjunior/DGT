@@ -48,10 +48,8 @@ namespace DGT.Models
 
           public bool OnPublicRoads { get; set; }
 
-          public bool FdotProperty { get; set; }
+          public bool DotProperty { get; set; }
           
-          public string FdotPropertyCode { get; set; }
-
           public string SideOfRoad { get; set; }
 
           public string CrashLane { get; set; }

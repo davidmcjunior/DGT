@@ -1,14 +1,10 @@
-import { SelectControl } from 'app/models/form/controls/select-control';
 import {Injectable} from "@angular/core";
+import {BooleanSelectControl} from "../boolean-select-control";
 
 @Injectable({
   providedIn: 'any'
 })
-export class OnPublicRoadsControl extends SelectControl<string> {
+export class OnPublicRoadsControl extends BooleanSelectControl {
   key     = 'onPublicRoads';
   label   = 'On Public Roads';
-  options = [
-    {key: 'yes',  value: 'Yes'},
-    {key: 'no',  value: 'No'}
-  ];
 }

@@ -72,8 +72,7 @@ export class CrashEvent {
   // Location Only Code
   onPublicRoads: string | undefined;
 
-  // FDOT Property Code – indicates if any properties damaged are owned by FDOT
-  fdotPropertyCode: string | undefined;
+  dotProperty: boolean | undefined;
 
   // Side of Road
   sideOfRoad: string | undefined;
@@ -128,7 +127,6 @@ export class CrashEvent {
     this.siteLocation = opts.siteLocation || undefined;
     this.onPublicRoads = opts.offNetwork || undefined;
     this.functionalClass = opts.functionalClass || undefined;
-    this.fdotPropertyCode = opts.fdotPropertyCode || undefined;
     this.sideOfRoad = opts.sideOfRoad || undefined;
     this.crashLane = opts.crashLane || undefined;
     this.narrative = opts.narrative || undefined;

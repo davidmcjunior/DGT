@@ -27,12 +27,15 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase implements Aft
 
   ngOnInit(): void {
     this.initNgForm();
-    this.crashEvent.subscribeComponent(this).then(r => {});
+
+    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+      this.setValue(v);
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.crashEvent.getFieldSubject(this.controlModel.key).next($event.target.value);
+    this.handleValueChange($event);
   }
 
   ngAfterViewInit(): void {

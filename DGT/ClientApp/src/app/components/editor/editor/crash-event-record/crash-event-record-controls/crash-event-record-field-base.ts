@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
 export abstract class CrashEventRecordFieldBase {
   protected field$: BehaviorSubject<any>;
 
+  public value: any;
   public controlModel: FieldControlBase<any>;
   public form: FormGroup;
   public formControl: FormControl;
@@ -39,7 +40,7 @@ export abstract class CrashEventRecordFieldBase {
    */
   public setValue<T>(val: T): this {
     if (val) {
-      this.controlModel.value = val;
+      this.controlModel.value = this.value = val;
     }
 
     return this;
@@ -58,7 +59,7 @@ export abstract class CrashEventRecordFieldBase {
    */
   protected initNgForm(): this {
     this.form = this.formBuilder.group({
-      [this.getFieldKey()]: this.formBuilder.control(this.controlModel.value)
+      [this.getFieldKey()]: this.formBuilder.control(this.value)
     });
 
     return this;
@@ -71,7 +72,7 @@ export abstract class CrashEventRecordFieldBase {
    * @param value
    * @protected
    */
-  protected async pushValue(ces: CrashEventService, fieldName: string, value: string | number | Date): Promise<boolean> {
+  protected async pushValue(ces: CrashEventService, fieldName: string, value: any): Promise<boolean> {
     const field = ces.getFieldSubject(fieldName);
 
     if (field && value) {
@@ -88,7 +89,13 @@ export abstract class CrashEventRecordFieldBase {
    * @param type
    * @protected
    */
-  protected cleanValue(value: string | number | Date, type: string = 'string'): string | number | Date {
+  protected cleanValue(value: string | number | boolean | Date, type: string = 'string'): string | number | Date | boolean {
+    switch (type) {
+      // case 'boolean':
+      //   return <boolean>value;
+      case 'number':
+        return +value;
+    }
     return value;
   }
 
@@ -99,9 +106,9 @@ export abstract class CrashEventRecordFieldBase {
    */
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
-    const value = this.cleanValue($event.target.value, this.controlModel.type)
-    console.log(value);
-    this.pushValue(this.crashEvent, this.controlModel.key, value).then(r => {});
+    const value = this.cleanValue($event.target.value, this.controlModel.type);
+
+    this.pushValue(this.crashEvent, this.getFieldKey(), value).then(r => {});
   }
 
 }

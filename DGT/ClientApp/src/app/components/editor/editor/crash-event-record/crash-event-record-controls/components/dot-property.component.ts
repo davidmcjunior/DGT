@@ -28,12 +28,22 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
 
   ngOnInit(): void {
     this.initNgForm();
-    this.crashEvent.subscribeComponent(this);
+
+    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+        this.setValue(v);
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToField(this, 'onPublicRoads', (v) => {
+      if (v === false) {
+        this.setValue(false);
+      }
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {
     // @ts-ignore
-    this.crashEvent.getFieldSubject(this.controlModel.key).next($event.target.value);
+    this.handleValueChange($event);
+
   }
 
   ngAfterViewInit(): void {

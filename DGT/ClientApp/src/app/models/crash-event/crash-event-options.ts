@@ -29,7 +29,6 @@ export interface CrashEventOptions {
   postedSpeedLimit?: string | undefined;
   functionalClass?: string | undefined;
   routeSignage?: string | undefined;
-  fdotPropertyCode?: string | undefined;
   sideOfRoad?: string | undefined;
   crashLane?: string | undefined;
   narrative?: CrashNarrative | undefined;

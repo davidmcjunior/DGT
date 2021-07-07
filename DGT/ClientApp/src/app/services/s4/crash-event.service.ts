@@ -14,7 +14,7 @@ export class CrashEventService {
   private _url = environment.s4.crashEventService.url;
   private _data: CrashEvent;
   private _cache: CrashEvent;
-  private _fields: Map<string, BehaviorSubject<Date | string | number>>;
+  private _fields: Map<string, BehaviorSubject<any>>;
   private _fieldKeys: string[];
 
   public record$: Observable<CrashEvent>;
@@ -77,11 +77,11 @@ export class CrashEventService {
    * @private
    */
   private async _initData(ce: CrashEvent): Promise<any> {
-    this._fields = new Map<string, BehaviorSubject<Date | string | number>>();
+    this._fields = new Map<string, BehaviorSubject<any>>();
     this._data = this._cache = ce;
 
     this._fieldKeys.forEach(key => {
-      const field$ = new BehaviorSubject<Date | string | number>(this._data[key]);
+      const field$ = new BehaviorSubject<any>(this._data[key]);
 
       field$.subscribe({
         next: (val) => this._data[key] = val,
@@ -107,6 +107,27 @@ export class CrashEventService {
           field.subscribe({
             next: (v) => {
               component.setInitValIf(v).setValue(v);
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
+      }
+    });
+
+    return this;
+  }
+
+  public async subscribeComponentToField(component: CrashEventRecordFieldBase, fieldName: string, func: Function): Promise<this> {
+    this.recordIsLoaded$.subscribe((isLoaded) => {
+      if (isLoaded) {
+        const field = this.getFieldSubject(fieldName);
+
+        if (field) {
+          field.subscribe({
+            next: (v) => {
+              func(v);
             },
             error: (err) => {
               console.log(err);
