@@ -20,7 +20,11 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
+      if (isLoaded) {
+        this._initFields();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -28,21 +32,18 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   }
 
   private _initFields(): void {
-    // this.crashEvent['crashDate'].subscribeSelf({
-    //   next: (v) => this.date = v
-    // });
-    // this.crashEvent['city'].subscribeSelf({
-    //   next: (v) => this.city = v
-    // });
-    // this.crashEvent['county'].subscribeSelf({
-    //   next: (v) => this.county = v
-    // });
-    // this.crashEvent['onStreet'].subscribeSelf({
-    //   next: (v) => this.onStreet = v
-    // });
-    // this.crashEvent['intersectingStreet'].subscribeSelf({
-    //   next: (v) => this.intersectingStreet = v
-    // });
+    this.crashEvent.getFieldSubject('city')?.subscribe({
+      next: (v) => { this.city = v; }
+    });
+    this.crashEvent.getFieldSubject('county')?.subscribe({
+      next: (v) => { this.county = v; }
+    });
+    this.crashEvent.getFieldSubject('onStreet')?.subscribe({
+      next: (v) => this.onStreet = v
+    });
+    this.crashEvent.getFieldSubject('intersectingStreet')?.subscribe({
+      next: (v) => this.intersectingStreet = v
+    });
     // this.crashEvent['offsetDistance'].subscribeSelf({
     //   next: (v) => this.offsetDistance = v
     // });

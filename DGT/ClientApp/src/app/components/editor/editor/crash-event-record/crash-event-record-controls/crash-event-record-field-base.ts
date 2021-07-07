@@ -100,6 +100,7 @@ export abstract class CrashEventRecordFieldBase {
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
     const value = this.cleanValue($event.target.value, this.controlModel.type)
+    console.log(value);
     this.pushValue(this.crashEvent, this.controlModel.key, value).then(r => {});
   }
 

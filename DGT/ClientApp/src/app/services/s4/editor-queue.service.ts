@@ -12,11 +12,10 @@ export class EditorQueueService {
   constructor(private http: HttpClient) { }
 
   public getQueue(): Observable<any> {
-    return of([102, 103, 105, 106]);
+    return of([100, 200, 300, 400]);
   }
 
   public getNextReportId() {
-    console.log(this._index += 100);
     return this._index += 100;
   }
 }

@@ -45,7 +45,7 @@ export class CrashEventService {
    *
    * @param key
    */
-  public getFieldSubject(key: string): BehaviorSubject<Date | string | number> | undefined {
+  public getFieldSubject(key: string): BehaviorSubject<any> | undefined {
     return this._fields.get(key);
   }
 

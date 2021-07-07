@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {EditorQueueService} from "app/services/s4/editor-queue.service";
 
@@ -8,6 +8,8 @@ import {EditorQueueService} from "app/services/s4/editor-queue.service";
   styleUrls: ['./buttons-bar.component.scss']
 })
 export class ButtonsBarComponent implements OnInit {
+  @Output('loadRecord') loadRecord = new EventEmitter<any>();
+
   constructor(private crashEvent: CrashEventService, private queue: EditorQueueService) {
   }
 
@@ -21,6 +23,7 @@ export class ButtonsBarComponent implements OnInit {
   }
 
   skip(): void {
+    this.loadRecord.emit();
     this.crashEvent.nextRecord(this.queue.getNextReportId());
   }
 

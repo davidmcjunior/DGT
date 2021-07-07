@@ -10,7 +10,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   templateUrl: '../templates/control.template.html',
 })
 export class CrashInjuryComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
-  @Input('control') controlModel: FieldControlBase<number>;
+  @Input() controlModel: FieldControlBase<number>;
   @Input() form!: FormGroup;
 
   constructor(
