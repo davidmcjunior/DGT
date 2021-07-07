@@ -10,7 +10,7 @@ import {CR} from "@angular/compiler/src/i18n/serializers/xml_helper";
   selector: 'dgt-number-of-lanes',
   templateUrl: '../templates/control.template.html',
 })
-export class NumberOfLanesComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class NumberOfLanesComponent extends CrashEventRecordFieldBase<number> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<number>;
   @Input() form: FormGroup;
 

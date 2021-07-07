@@ -97,29 +97,10 @@ export class CrashEventService {
   /**
    *
    * @param component
+   * @param fieldName
+   * @param callback
    */
-  public async subscribeComponent(component: CrashEventRecordFieldBase): Promise<this> {
-    this.recordIsLoaded$.subscribe((isLoaded) => {
-      if (isLoaded) {
-        const field = this.getFieldSubject(component.getFieldKey());
-
-        if (field) {
-          field.subscribe({
-            next: (v) => {
-              component.setInitValIf(v).setValue(v);
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          });
-        }
-      }
-    });
-
-    return this;
-  }
-
-  public async subscribeComponentToField(component: CrashEventRecordFieldBase, fieldName: string, func: Function): Promise<this> {
+  public async subscribeComponentToField(component: CrashEventRecordFieldBase<any>, fieldName: string, callback: Function): Promise<this> {
     this.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
         const field = this.getFieldSubject(fieldName);
@@ -127,7 +108,7 @@ export class CrashEventService {
         if (field) {
           field.subscribe({
             next: (v) => {
-              func(v);
+              callback(v);
             },
             error: (err) => {
               console.log(err);

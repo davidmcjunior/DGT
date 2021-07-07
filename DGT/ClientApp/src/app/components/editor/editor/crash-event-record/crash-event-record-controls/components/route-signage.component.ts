@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-route-signage',
   templateUrl: '../templates/control.template.html',
 })
-export class RouteSignageComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class RouteSignageComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
 

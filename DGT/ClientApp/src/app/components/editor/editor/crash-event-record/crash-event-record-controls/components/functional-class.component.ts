@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-functional-class',
   templateUrl: '../templates/control.template.html',
 })
-export class FunctionalClassComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class FunctionalClassComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
 

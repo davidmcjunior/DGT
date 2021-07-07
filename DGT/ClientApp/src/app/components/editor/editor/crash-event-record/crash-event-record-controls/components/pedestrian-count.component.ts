@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-pedestrian-count',
   templateUrl: '../templates/control.template.html',
 })
-export class PedestrianCountComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class PedestrianCountComponent extends CrashEventRecordFieldBase<number> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<number>;
   @Input() form: FormGroup;
 

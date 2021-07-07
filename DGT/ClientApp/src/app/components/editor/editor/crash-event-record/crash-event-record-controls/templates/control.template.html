@@ -14,7 +14,7 @@
         </option>
       </select>
       <select [id]="controlModel.key" *ngSwitchCase="'boolean-select'" class="common-input" (change)="onValueChanged($event)">
-        <option *ngFor="let opt of [{value: 'Yes', key: true}, {value: 'No', key: false}]" [value]="opt.key" [selected]="opt.key == value">{{opt.value}}</option>
+        <option *ngFor="let opt of [{value: 'Yes', key: true}, {value: 'No', key: false}]" [value]="opt.key" [selected]="">{{opt.value}}</option>
       </select>
     </div>
     <div class="label-container">

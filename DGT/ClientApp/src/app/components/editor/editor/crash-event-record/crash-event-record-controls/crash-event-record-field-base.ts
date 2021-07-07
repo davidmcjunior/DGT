@@ -4,11 +4,14 @@ import {CrashEventService} from "app/services/s4/crash-event.service";
 import {FormControlModelService} from "app/services/forms/crash-event/form-control-model.service";
 import {BehaviorSubject} from "rxjs";
 
-export abstract class CrashEventRecordFieldBase {
+export abstract class CrashEventRecordFieldBase<T> {
   protected field$: BehaviorSubject<any>;
 
+  // If this is changed to type T, template value comparisons fail... Nrrrgggh
   public value: any;
   public controlModel: FieldControlBase<any>;
+
+  // These are not currently used, and can probably be removed...
   public form: FormGroup;
   public formControl: FormControl;
 
@@ -19,6 +22,14 @@ export abstract class CrashEventRecordFieldBase {
     protected formBuilder: FormBuilder
   ) {
     this.controlModel = this.controlModelService.getControl(controlName);
+  }
+
+  /**
+   * For use in templates...
+   * @param val
+   */
+  public equalsValue(val: T): boolean {
+    return this.value == val;
   }
 
   /**
@@ -38,7 +49,7 @@ export abstract class CrashEventRecordFieldBase {
    *
    * @param val
    */
-  public setValue<T>(val: T): this {
+  public setValue(val: T): this {
     if (val) {
       this.controlModel.value = this.value = val;
     }

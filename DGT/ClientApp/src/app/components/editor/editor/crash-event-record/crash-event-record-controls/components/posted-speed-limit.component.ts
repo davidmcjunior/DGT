@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-posted-speed-limit',
   templateUrl: '../templates/control.template.html',
 })
-export class PostedSpeedLimitComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class PostedSpeedLimitComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
 

@@ -9,8 +9,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-on-public-roads',
   templateUrl: '../templates/control.template.html',
 })
-export class OnPublicRoadsComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
-  @Input() controlModel: FieldControlBase<string>;
+export class OnPublicRoadsComponent extends CrashEventRecordFieldBase<boolean> implements AfterViewInit, OnInit, OnValueChanged {
+  @Input() controlModel: FieldControlBase<boolean>;
   @Input() form: FormGroup;
 
   constructor(

@@ -9,8 +9,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-dot-property',
   templateUrl: '../templates/control.template.html',
 })
-export class DotPropertyComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
-  @Input() controlModel: FieldControlBase<string>;
+export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> implements AfterViewInit, OnInit, OnValueChanged {
+  @Input() controlModel: FieldControlBase<boolean>;
   @Input() form: FormGroup;
 
   constructor(
@@ -26,6 +26,9 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
     );
   }
 
+  /**
+   *
+   */
   ngOnInit(): void {
     this.initNgForm();
 
@@ -34,12 +37,25 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase implements A
     }).then( /* partay */);
 
     this.crashEvent.subscribeComponentToField(this, 'onPublicRoads', (v) => {
-      if (v === false) {
+      console.log('dotproperty sub to onpublicroads: ', v);
+      if (!v) {
+        this.setValue(false);
+      }
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToField(this, 'siteLocation', (v) => {
+      if (v in [9, 10, 11]) {
         this.setValue(false);
       }
     }).then( /* partay */);
   }
 
+
+
+  /**
+   *
+   * @param $event
+   */
   onValueChanged($event: Event): void {
     // @ts-ignore
     this.handleValueChange($event);

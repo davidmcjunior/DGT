@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-side-of-road',
   templateUrl: '../templates/control.template.html',
 })
-export class SideOfRoadComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class SideOfRoadComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
 

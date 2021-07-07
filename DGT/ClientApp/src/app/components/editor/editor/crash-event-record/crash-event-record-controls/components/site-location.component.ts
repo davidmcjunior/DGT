@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
   selector: 'dgt-site-location',
   templateUrl: '../templates/control.template.html',
 })
-export class SiteLocationComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class SiteLocationComponent extends CrashEventRecordFieldBase<number> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<number>;
   @Input() form: FormGroup;
 

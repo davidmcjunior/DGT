@@ -9,7 +9,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular
   selector: 'dgt-crash-lane',
   templateUrl: '../templates/control.template.html',
 })
-export class CrashLaneComponent extends CrashEventRecordFieldBase implements AfterViewInit, OnInit, OnValueChanged {
+export class CrashLaneComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
 
