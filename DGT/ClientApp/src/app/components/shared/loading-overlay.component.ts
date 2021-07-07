@@ -15,6 +15,10 @@ export class LoadingOverlayComponent implements OnInit {
     this.visible = false;
   }
 
+  public toggle(): void {
+    this.visible = !this.visible;
+  }
+
   ngOnInit(): void {
   }
 

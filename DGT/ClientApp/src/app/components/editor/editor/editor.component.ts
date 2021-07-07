@@ -1,6 +1,7 @@
 import {Component, ViewChild, ElementRef, Input, OnInit, AfterViewInit} from '@angular/core';
 import { CrashEventService } from 'app/services/s4/crash-event.service';
 import {LoadingOverlayComponent} from "../../shared/loading-overlay.component";
+import {ButtonsBarComponent} from "./buttons-bar/buttons-bar.component";
 
 @Component({
   selector: 'dgt-editor',
@@ -8,6 +9,7 @@ import {LoadingOverlayComponent} from "../../shared/loading-overlay.component";
 })
 export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild(LoadingOverlayComponent) loadingOverlay: LoadingOverlayComponent;
+  @ViewChild(ButtonsBarComponent) buttonBar: ButtonsBarComponent;
 
   constructor(private crashEvent: CrashEventService) {
   }
@@ -19,10 +21,10 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
         this.loadingOverlay.hide();
+      } else {
+        this.loadingOverlay.show();
       }
     });
-
-    this.loadingOverlay.show();
   }
 
 }

@@ -62,6 +62,8 @@ export class CrashEventService {
    * @private
    */
   private async _loadRecord(hsmvReportNumber: number): Promise<any> {
+    this.recordIsLoaded$.next(false);
+
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);

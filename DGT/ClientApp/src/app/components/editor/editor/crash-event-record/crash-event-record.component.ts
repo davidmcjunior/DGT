@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SiteLocationComponent} from "./crash-event-record-controls/components/site-location.component";
 import {BicyclistCountComponent} from "./crash-event-record-controls/components/bicyclist-count.component";
 import {CrashInfoPanelComponent} from "./crash-event-record-controls/components/crash-info-panel.component";
@@ -20,6 +20,8 @@ import {SideOfRoadComponent} from "./crash-event-record-controls/components/side
   templateUrl: './crash-event-record.component.html'
 })
 export class CrashEventRecordComponent implements OnInit {
+  @Output('loadRecord') loadRecord = new EventEmitter<any>();
+
   @ViewChild(SiteLocationComponent) siteLocation: SiteLocationComponent;
   @ViewChild(BicyclistCountComponent) bicycleCount: BicyclistCountComponent;
   @ViewChild(CrashInfoPanelComponent) crashInfoPanel: CrashInfoPanelComponent;
