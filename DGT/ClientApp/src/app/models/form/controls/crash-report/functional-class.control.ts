@@ -1,15 +1,10 @@
-import { SelectControl } from 'app/models/form/controls/select-control';
 import {Injectable} from "@angular/core";
+import {TextBoxControl} from "../text-box-control";
 
 @Injectable({
   providedIn: 'any'
 })
-export class FunctionalClassControl extends SelectControl<string> {
+export class FunctionalClassControl extends TextBoxControl {
   key   = 'functionalClass';
   label = 'Functional Class';
-
-  options = [
-    {key: 'yes',  value: 'Yes'},
-    {key: 'no',  value: 'No'}
-  ];
 }

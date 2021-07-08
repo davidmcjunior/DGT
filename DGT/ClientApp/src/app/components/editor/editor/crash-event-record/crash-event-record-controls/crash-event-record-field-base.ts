@@ -101,12 +101,12 @@ export abstract class CrashEventRecordFieldBase<T> {
    * @protected
    */
   protected cleanValue(value: string | number | boolean | Date, type: string = 'string'): string | number | Date | boolean {
-    switch (type) {
+    // switch (type) {
       // case 'boolean':
       //   return <boolean>value;
-      case 'number':
-        return +value;
-    }
+    //   case 'number':
+    //     return +value;
+    // }
     return value;
   }
 
@@ -118,7 +118,7 @@ export abstract class CrashEventRecordFieldBase<T> {
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
     const value = this.cleanValue($event.target.value, this.controlModel.type);
-
+    console.log(value);
     this.pushValue(this.crashEvent, this.getFieldKey(), value).then(r => {});
   }
 

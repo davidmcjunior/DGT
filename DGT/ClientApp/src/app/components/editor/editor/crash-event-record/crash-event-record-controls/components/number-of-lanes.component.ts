@@ -33,6 +33,12 @@ export class NumberOfLanesComponent extends CrashEventRecordFieldBase<number> im
     this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToField(this, 'sideOfRoad', (v) => {
+      if (v == 'U') {
+        this.setValue(6);
+      }
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {

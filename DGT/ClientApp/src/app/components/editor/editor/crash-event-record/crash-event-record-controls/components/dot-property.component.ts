@@ -37,7 +37,6 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> imp
     }).then( /* partay */);
 
     this.crashEvent.subscribeComponentToField(this, 'onPublicRoads', (v) => {
-      console.log('dotproperty sub to onpublicroads: ', v);
       if (!v) {
         this.setValue(false);
       }

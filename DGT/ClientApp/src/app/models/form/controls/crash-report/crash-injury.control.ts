@@ -1,6 +1,4 @@
 import { SelectControl } from 'app/models/form/controls/select-control';
-import { IFormUpdater, IFormUpdates } from 'app/models/interfaces/form-updater';
-import { FormGroup } from '@angular/forms';
 import {Injectable} from "@angular/core";
 
 @Injectable({
@@ -20,16 +18,5 @@ export class CrashInjuryControl extends SelectControl<number> {
   label           = 'Crash Injury';
   options         = CrashInjuryControl.Codes;
   keyValueOptions = true;
-
-  public updateForm = (newValue: number, form: FormGroup): void => {
-    const updates = new IFormUpdates();
-
-    // If in a parking lot...
-    if ([5].includes(newValue)) {
-      updates.comments = '/// Injury severity changed.';
-    }
-
-    form.patchValue(updates);
-  }
 
 }
