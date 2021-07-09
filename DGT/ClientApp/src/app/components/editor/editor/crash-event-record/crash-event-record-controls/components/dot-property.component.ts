@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<boolean>;
   @Input() form: FormGroup;
+  @Input() show = true;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -32,17 +33,17 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> imp
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
         this.setValue(v);
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToField(this, 'onPublicRoads', (v) => {
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
       if (!v) {
         this.setValue(false);
       }
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToField(this, 'siteLocation', (v) => {
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'siteLocation', (v) => {
       if (v in [9, 10, 11]) {
         this.setValue(false);
       }

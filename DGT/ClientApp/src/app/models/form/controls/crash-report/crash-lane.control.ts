@@ -28,4 +28,7 @@ export class CrashLaneControl extends SelectControl<string> {
   label   = 'Crash Lane';
   options = CrashLaneControl.Codes;
   keyValueOptions = true;
+
+  // initial view state...
+  visible = false;
 }

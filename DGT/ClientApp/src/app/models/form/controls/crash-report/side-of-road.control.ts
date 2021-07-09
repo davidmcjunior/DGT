@@ -21,4 +21,7 @@ export class SideOfRoadControl extends SelectControl<string> {
   label           = 'Side of Road';
   options         = SideOfRoadControl.Codes;
   keyValueOptions = true;
+
+  // initial view state...
+  visible = false;
 }

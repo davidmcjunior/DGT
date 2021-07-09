@@ -7,5 +7,7 @@ import {Injectable} from "@angular/core";
 export class NumberOfLanesControl extends NumberControl {
   key   = 'numberOfLanes';
   label = 'Num. of Lanes';
-  type  = 'number';
+
+  // initial view state...
+  visible = false;
 }

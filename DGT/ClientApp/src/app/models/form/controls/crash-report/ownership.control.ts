@@ -7,4 +7,7 @@ import {Injectable} from "@angular/core";
 export class OwnershipControl extends TextBoxControl {
   key   = 'ownership';
   label = 'Ownership';
+
+  // initial view state...
+  visible = false;
 }

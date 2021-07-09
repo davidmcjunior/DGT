@@ -100,7 +100,7 @@ export class CrashEventService {
    * @param fieldName
    * @param callback
    */
-  public async subscribeComponentToField(component: CrashEventRecordFieldBase<any>, fieldName: string, callback: Function): Promise<this> {
+  public async subscribeComponentToFieldSubject(component: CrashEventRecordFieldBase<any>, fieldName: string, callback: Function): Promise<this> {
     this.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
         const field = this.getFieldSubject(fieldName);

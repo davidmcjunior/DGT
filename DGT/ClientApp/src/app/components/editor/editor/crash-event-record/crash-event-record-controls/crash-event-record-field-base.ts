@@ -50,9 +50,7 @@ export abstract class CrashEventRecordFieldBase<T> {
    * @param val
    */
   public setValue(val: T): this {
-    if (val) {
-      this.controlModel.value = this.value = val;
-    }
+    this.controlModel.value = this.value = val;
 
     return this;
   }
@@ -75,6 +73,22 @@ export abstract class CrashEventRecordFieldBase<T> {
 
     return this;
   }
+
+  // /**
+  //  *
+  //  * @protected
+  //  */
+  // protected hide(): void {
+  //   this.controlModel.visible = false;
+  // }
+  //
+  // /**
+  //  *
+  //  * @protected
+  //  */
+  // protected show(): void {
+  //   this.controlModel.visible = true;
+  // }
 
   /**
    *
@@ -118,7 +132,7 @@ export abstract class CrashEventRecordFieldBase<T> {
   protected handleValueChange($event: Event): void {
     // @ts-ignore - bad warning here from tslint?
     const value = this.cleanValue($event.target.value, this.controlModel.type);
-    console.log(value);
+
     this.pushValue(this.crashEvent, this.getFieldKey(), value).then(r => {});
   }
 

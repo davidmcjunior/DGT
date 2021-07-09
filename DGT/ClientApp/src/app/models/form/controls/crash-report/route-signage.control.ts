@@ -7,4 +7,7 @@ import {TextBoxControl} from "../text-box-control";
 export class RouteSignageControl extends TextBoxControl {
   key   = 'routeSignage';
   label = 'Route Signage';
+
+  // initial view state...
+  visible = false;
 }

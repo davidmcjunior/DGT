@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 export class OnPublicRoadsComponent extends CrashEventRecordFieldBase<boolean> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<boolean>;
   @Input() form: FormGroup;
+  @Input() show = true;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -22,14 +23,14 @@ export class OnPublicRoadsComponent extends CrashEventRecordFieldBase<boolean> i
       'onPublicRoads',
       crashEvent,
       controlModelService,
-      formBuilder)
-    ;
+      formBuilder
+    );
   }
 
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
   }

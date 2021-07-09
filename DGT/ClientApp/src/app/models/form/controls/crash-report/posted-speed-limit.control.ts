@@ -12,4 +12,7 @@ export class PostedSpeedLimitControl extends TextBoxControl {
 
   key   = 'postedSpeedLimit';
   label = 'Posted Speed Limit';
+
+  // initial view state...
+  visible = false;
 }

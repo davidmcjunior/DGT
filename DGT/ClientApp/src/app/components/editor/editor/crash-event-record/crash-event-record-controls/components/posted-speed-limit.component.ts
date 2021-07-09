@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 export class PostedSpeedLimitComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
+  @Input() show = true;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -29,7 +30,7 @@ export class PostedSpeedLimitComponent extends CrashEventRecordFieldBase<string>
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.subscribeComponentToField(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
   }

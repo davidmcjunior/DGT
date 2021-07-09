@@ -5,6 +5,6 @@ import {BooleanSelectControl} from "../boolean-select-control";
   providedIn: 'any'
 })
 export class DotPropertyControl extends BooleanSelectControl {
-  key     = 'dotProperty';
-  label   = 'DOT Property';
+  key   = 'dotProperty';
+  label = 'DOT Property';
 }

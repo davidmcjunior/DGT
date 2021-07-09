@@ -29,7 +29,7 @@ namespace DGT.Controllers
                 OnStreet = "SW 13th St.",
                 RoadwaySystemId = 1,
                 StreetAddressNumber = "231",
-                OnPublicRoads = true,
+                OnPublicRoads = false,
                 SideOfRoad = "P",
                 CrashLane = "V",
                 Ownership = "Florida Dept of W and M",
