@@ -5,7 +5,7 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
 import { EditorQueueService } from 'app/services/s4/editor-queue.service';
 import { FormControlModelService } from "../forms/crash-event/form-control-model.service";
-import {CrashEventRecordFieldBase} from "../../components/editor/editor/crash-event-record/crash-event-record-controls/crash-event-record-field-base";
+import {CrashEventRecordFieldBase} from "app/components/editor/editor/crash-event-record/crash-event-record-controls/crash-event-record-field-base";
 
 @Injectable({
   providedIn: 'root', // EditorModule
@@ -47,6 +47,14 @@ export class CrashEventService {
    */
   public getFieldSubject(key: string): BehaviorSubject<any> | undefined {
     return this._fields.get(key);
+  }
+
+  /**
+   *
+   * @param key
+   */
+  public getFieldValue(key: string): any {
+    return this._fields.get(key)?.value;
   }
 
   /**
@@ -108,6 +116,7 @@ export class CrashEventService {
         if (field) {
           field.subscribe({
             next: (v) => {
+              console.log(fieldName, v);
               callback(v);
             },
             error: (err) => {
@@ -119,6 +128,13 @@ export class CrashEventService {
     });
 
     return this;
+  }
+
+  private _initCrossFieldSubscriptions(): void {
+    const fields = [
+      'onPublicRoads',
+      'crashInjury'
+    ];
   }
 
   /**

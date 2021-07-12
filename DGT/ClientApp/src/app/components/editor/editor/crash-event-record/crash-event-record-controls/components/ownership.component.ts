@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 export class OwnershipComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
-  @Input() show = true;
+  @Input() show = false;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -32,6 +32,18 @@ export class OwnershipComponent extends CrashEventRecordFieldBase<string> implem
 
     this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
+      const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
+
+      this.show = (v == 'false') && (crashInjuryVal == '5');
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'crashInjury', (v) => {
+      const onPublicRoadsVal = this.crashEvent.getFieldValue('onPublicRoads');
+
+      this.show = (v == '5') && (onPublicRoadsVal == 'false');
     }).then( /* partay */);
   }
 

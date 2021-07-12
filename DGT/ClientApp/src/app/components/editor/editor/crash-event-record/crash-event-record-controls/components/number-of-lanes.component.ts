@@ -13,7 +13,9 @@ import {CR} from "@angular/compiler/src/i18n/serializers/xml_helper";
 export class NumberOfLanesComponent extends CrashEventRecordFieldBase<number> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<number>;
   @Input() form: FormGroup;
-  @Input() show = true;
+  @Input() show = false;
+
+  private onPublicRoads: boolean;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -35,10 +37,16 @@ export class NumberOfLanesComponent extends CrashEventRecordFieldBase<number> im
       this.setValue(v);
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'sideOfRoad', (v) => {
-      if (v == 'U') {
-        this.setValue(6);
-      }
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
+        const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
+
+        this.show = (v == 'false') && (crashInjuryVal == '5');
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'crashInjury', (v) => {
+      const onPublicRoadsVal = this.crashEvent.getFieldValue('onPublicRoads');
+
+      this.show = (v == '5') && (onPublicRoadsVal == 'false');
     }).then( /* partay */);
   }
 

@@ -8,6 +8,7 @@ export abstract class CrashEventRecordFieldBase<T> {
   protected field$: BehaviorSubject<any>;
 
   // If this is changed to type T, template value comparisons fail... Nrrrgggh
+  public show: boolean;
   public value: any;
   public controlModel: FieldControlBase<any>;
 
@@ -22,6 +23,7 @@ export abstract class CrashEventRecordFieldBase<T> {
     protected formBuilder: FormBuilder
   ) {
     this.controlModel = this.controlModelService.getControl(controlName);
+    // this.show = this.controlModel.visible;
   }
 
   /**

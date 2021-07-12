@@ -33,6 +33,18 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase<number> i
     this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
+      const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
+
+      this.show = (v == 'false') && (crashInjuryVal == '5');
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'crashInjury', (v) => {
+      const onPublicRoadsVal = this.crashEvent.getFieldValue('onPublicRoads');
+
+      this.show = (v == '5') && (onPublicRoadsVal == 'false');
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {

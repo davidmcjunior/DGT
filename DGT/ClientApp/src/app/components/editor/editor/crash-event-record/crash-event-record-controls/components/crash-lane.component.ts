@@ -12,7 +12,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular
 export class CrashLaneComponent extends CrashEventRecordFieldBase<string> implements AfterViewInit, OnInit, OnValueChanged {
   @Input() controlModel: FieldControlBase<string>;
   @Input() form: FormGroup;
-  @Input() show = true;
+  @Input() show = false;
 
   constructor(
     public crashEvent: CrashEventService,
@@ -35,10 +35,7 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase<string> implem
     }).then( /* partay */);
 
     this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
-      console.log('in crash-lane handler: ', v);
-      if (!v) {
-        this.show = true;
-      }
+      this.show = v != 'true';
     }).then( /* partay */);
   }
 

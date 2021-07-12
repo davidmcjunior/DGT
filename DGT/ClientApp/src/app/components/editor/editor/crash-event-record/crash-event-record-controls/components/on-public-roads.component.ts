@@ -33,6 +33,18 @@ export class OnPublicRoadsComponent extends CrashEventRecordFieldBase<boolean> i
     this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'siteLocation', (v) => {
+      if (v == 9) {
+        this.setValue(false);
+      }
+    }).then( /* partay */);
+
+    this.crashEvent.subscribeComponentToFieldSubject(this, 'sideOnRoad', (v) => {
+      if (v == 'U') {
+        this.setValue(!this.value);
+      }
+    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {
