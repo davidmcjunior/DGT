@@ -30,6 +30,10 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase<string> imp
   ngOnInit(): void {
     this.initNgForm();
 
+    this.crashEvent.crashIsPublic$.subscribe((v) => {
+      this.show = v;
+    });
+
     this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
@@ -38,12 +42,6 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase<string> imp
       const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
 
       this.show = (v == 'false') && (crashInjuryVal == '5');
-    }).then( /* partay */);
-
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'crashInjury', (v) => {
-      const onPublicRoadsVal = this.crashEvent.getFieldValue('onPublicRoads');
-
-      this.show = (v == '5') && (onPublicRoadsVal == 'false');
     }).then( /* partay */);
   }
 

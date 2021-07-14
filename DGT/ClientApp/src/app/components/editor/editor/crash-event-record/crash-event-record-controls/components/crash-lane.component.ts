@@ -35,7 +35,7 @@ export class CrashLaneComponent extends CrashEventRecordFieldBase<string> implem
     }).then( /* partay */);
 
     this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
-      this.show = v != 'true';
+      this.show = v != 'false';
     }).then( /* partay */);
   }
 

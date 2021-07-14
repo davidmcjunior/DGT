@@ -76,22 +76,6 @@ export abstract class CrashEventRecordFieldBase<T> {
     return this;
   }
 
-  // /**
-  //  *
-  //  * @protected
-  //  */
-  // protected hide(): void {
-  //   this.controlModel.visible = false;
-  // }
-  //
-  // /**
-  //  *
-  //  * @protected
-  //  */
-  // protected show(): void {
-  //   this.controlModel.visible = true;
-  // }
-
   /**
    *
    * @param ces

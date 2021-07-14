@@ -19,6 +19,7 @@ export class CrashEventService {
 
   public record$: Observable<CrashEvent>;
   public recordIsLoaded$ = new BehaviorSubject<boolean>(false);
+  public crashIsPublic$ = new BehaviorSubject<boolean>(false);
 
   /**
    *
@@ -75,6 +76,7 @@ export class CrashEventService {
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);
+        this._initInterFieldSubscriptions();
       });
     });
   }
@@ -99,6 +101,7 @@ export class CrashEventService {
       this._fields.set(key, field$);
     });
 
+    this._initInterFieldSubscriptions();
     this.record$ = of(ce);
   }
 
@@ -130,11 +133,28 @@ export class CrashEventService {
     return this;
   }
 
-  private _initCrossFieldSubscriptions(): void {
-    const fields = [
-      'onPublicRoads',
-      'crashInjury'
-    ];
+  private _initInterFieldSubscriptions(): void {
+    const onPublicRoads$ = this._fields.get('onPublicRoads');
+    const siteLocation$  = this._fields.get('siteLocation');
+    const crashInjury$   = this._fields.get('crashInjury');
+    const sideOfRoad$    = this._fields.get('sideOfRoad');
+    const crashLane$     = this._fields.get('crashLane');
+
+    onPublicRoads$?.subscribe((v) => {
+      this.crashIsPublic$.next((v == 'true') && (crashInjury$?.value == '5'));
+    });
+
+    crashInjury$?.subscribe((v) => {
+      this.crashIsPublic$.next((v == '5') && (onPublicRoads$?.value == 'true'));
+    });
+
+    onPublicRoads$?.subscribe((v) => {
+      if (v == 'false') {
+        sideOfRoad$?.next('P');
+        crashLane$?.next('P');
+      }
+    });
+
   }
 
   /**
