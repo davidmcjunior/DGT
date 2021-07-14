@@ -42,12 +42,6 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> imp
         this.setValue(false);
       }
     }).then( /* partay */);
-
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'siteLocation', (v) => {
-      if (v in [9, 10, 11]) {
-        this.setValue(false);
-      }
-    }).then( /* partay */);
   }
 
 

@@ -162,9 +162,17 @@ export class CrashEventService {
     });
 
     onPublicRoads$?.subscribe((v) => {
-      if (v == 'false') {
+      if (v == 'false' || !v) {
         sideOfRoad$?.next('P');
         crashLane$?.next('P');
+      }
+    });
+
+    siteLocation$?.subscribe((v) => {
+      if (['9', '10', '11', 9, 10, 11].includes(v)) {
+        onPublicRoads$?.next('false');
+      } else {
+        onPublicRoads$?.next('true');
       }
     });
 

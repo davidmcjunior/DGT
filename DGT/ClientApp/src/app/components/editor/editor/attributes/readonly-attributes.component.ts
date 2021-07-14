@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { CrashEvent } from 'app/models/crash-event/crash-event';
 
 @Component({
   selector: 'dgt-readonly-attributes',
-  templateUrl: './readonly-attributes.component.html',
-  styleUrls: ['./readonly-attributes.component.scss']
+  templateUrl: './readonly-attributes.component.html'
 })
 export class ReadonlyAttributesComponent implements OnInit {
   // @Input() currentRecord: CrashEvent;

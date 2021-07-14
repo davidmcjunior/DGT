@@ -8,11 +8,7 @@ import { Editor } from 'app/models/users/editor';
 export interface Geocoding {
   hsmvReportNumber: number;
 
-  // Map Point X – x-coordinate of the crash point (initial point of impact)
-  mapPointX: number;
-
-  // Map Point Y – y-coordinate of the crash point (initial point of impact)
-  mapPointY: number;
+  mapPoints: [{x:number, y:number}];
 
   // Create Date – date on which the record was created
   createDate: Date | undefined;
