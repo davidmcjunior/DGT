@@ -34,9 +34,9 @@ export class SideOfRoadComponent extends CrashEventRecordFieldBase<string> imple
       this.setValue(v);
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
-      this.show = v != 'false';
-    }).then( /* partay */);
+    this.crashEvent.locationOnlyFieldsAreEnabled$.subscribe((v) => {
+      this.show = v;
+    });
   }
 
   onValueChanged($event: Event): void {

@@ -30,7 +30,7 @@ export class RouteSignageComponent extends CrashEventRecordFieldBase<string> imp
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.crashIsPublic$.subscribe((v) => {
+    this.crashEvent.publicCrashFieldsAreEnabled$.subscribe((v) => {
       this.show = v;
     });
 

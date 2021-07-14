@@ -17,9 +17,15 @@ export class CrashEventService {
   private _fields: Map<string, BehaviorSubject<any>>;
   private _fieldKeys: string[];
 
+  // Get an observable representation of the data...
   public record$: Observable<CrashEvent>;
+
+  // Halt initialization of anything that's dependant on the behavior subject fields being fully up...
   public recordIsLoaded$ = new BehaviorSubject<boolean>(false);
-  public crashIsPublic$ = new BehaviorSubject<boolean>(false);
+
+  // Subscribe components to these boolean flag streams to control visibility...
+  public publicCrashFieldsAreEnabled$ = new BehaviorSubject<boolean>(false);
+  public locationOnlyFieldsAreEnabled$ = new BehaviorSubject<boolean>(false);
 
   /**
    *
@@ -119,7 +125,6 @@ export class CrashEventService {
         if (field) {
           field.subscribe({
             next: (v) => {
-              console.log(fieldName, v);
               callback(v);
             },
             error: (err) => {
@@ -141,11 +146,15 @@ export class CrashEventService {
     const crashLane$     = this._fields.get('crashLane');
 
     onPublicRoads$?.subscribe((v) => {
-      this.crashIsPublic$.next((v == 'true') && (crashInjury$?.value == '5'));
+      this.publicCrashFieldsAreEnabled$.next((v == 'true') && (crashInjury$?.value == '5'));
+    });
+
+    onPublicRoads$?.subscribe((v) => {
+      this.locationOnlyFieldsAreEnabled$.next(v == 'true');
     });
 
     crashInjury$?.subscribe((v) => {
-      this.crashIsPublic$.next((v == '5') && (onPublicRoads$?.value == 'true'));
+      this.publicCrashFieldsAreEnabled$.next((v == '5') && (onPublicRoads$?.value == 'true'));
     });
 
     onPublicRoads$?.subscribe((v) => {

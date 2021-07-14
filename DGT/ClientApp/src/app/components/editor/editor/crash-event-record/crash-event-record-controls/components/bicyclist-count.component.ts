@@ -30,7 +30,7 @@ export class BicyclistCountComponent extends CrashEventRecordFieldBase<number> i
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.crashIsPublic$.subscribe((v) => {
+    this.crashEvent.publicCrashFieldsAreEnabled$.subscribe((v) => {
       this.show = v;
     });
 
