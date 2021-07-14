@@ -14,6 +14,7 @@
     </select>
     <select [id]="controlModel.key" *ngSwitchCase="'boolean-select'" class="common-input" (change)="onValueChanged($event)">
       <option class="text-gray-700">(no value)</option>
+      <!-- The following crappy key/value naming inversion sucks... Sorry -->
       <option *ngFor="let opt of [{value: 'Yes', key: true}, {value: 'No', key: false}]" [value]="opt.key" [selected]="opt.key == value">{{opt.value}}</option>
     </select>
   </div>

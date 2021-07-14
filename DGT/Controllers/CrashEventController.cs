@@ -75,7 +75,7 @@ namespace DGT.Controllers
                 SideOfRoad = "P",
                 CrashLane = "V",
                 Ownership = "Your momma",
-                RouteSignage = "No littering"
+                RouteSignage = "No littering",
             };
             
             CrashEvent ce4 = new CrashEvent {

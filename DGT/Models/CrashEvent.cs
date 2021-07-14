@@ -59,6 +59,6 @@ namespace DGT.Models
           public string RouteSignage { get; set; }
 
           public string Narrative { get; set; }
-
+          
     }
 }
