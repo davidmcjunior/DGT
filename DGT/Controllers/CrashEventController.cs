@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using DGT.Models;
@@ -33,7 +34,17 @@ namespace DGT.Controllers
                 SideOfRoad = "P",
                 CrashLane = "V",
                 Ownership = "Florida Dept of W and M",
-                RouteSignage = "No Fishing"
+                RouteSignage = "No Fishing",
+                Geocoding = new Geocoding
+                {
+                    HsmvReportNumber = 100,
+                    MapPoints = new List<Geocoding.MapPoint>
+                    {
+                        new Geocoding.MapPoint{ X = -82.310889913845303, Y = 29.649140056990618 },
+                        new Geocoding.MapPoint{ X = -82.310889913845301, Y = 29.649140056990612 },
+                        new Geocoding.MapPoint{ X = -82.310889913845306, Y = 29.649140056990614 }
+                    }
+                }
             };
             
             CrashEvent ce2 = new CrashEvent {
@@ -54,7 +65,17 @@ namespace DGT.Controllers
                 SideOfRoad = "P",
                 CrashLane = "V",
                 Ownership = "FDOT",
-                RouteSignage = "No Fishing"
+                RouteSignage = "No Fishing",
+                Geocoding = new Geocoding
+                {
+                    HsmvReportNumber = 200,
+                    MapPoints = new List<Geocoding.MapPoint>
+                    {
+                        new Geocoding.MapPoint{ X = -82.310889913845303, Y = 29.649140056990618 },
+                        new Geocoding.MapPoint{ X = -82.310889913845301, Y = 29.649140056990612 },
+                        new Geocoding.MapPoint{ X = -82.310889913845306, Y = 29.649140056990614 }
+                    }
+                }
             };
             
             CrashEvent ce3 = new CrashEvent {
@@ -76,6 +97,16 @@ namespace DGT.Controllers
                 CrashLane = "V",
                 Ownership = "Your momma",
                 RouteSignage = "No littering",
+                Geocoding = new Geocoding
+                {
+                    HsmvReportNumber = 300,
+                    MapPoints = new List<Geocoding.MapPoint>
+                    {
+                        new Geocoding.MapPoint{ X = -82.310889913845303, Y = 29.649140056990618 },
+                        new Geocoding.MapPoint{ X = -82.310889913845301, Y = 29.649140056990612 },
+                        new Geocoding.MapPoint{ X = -82.310889913845306, Y = 29.649140056990614 }
+                    }
+                }                
             };
             
             CrashEvent ce4 = new CrashEvent {
@@ -95,7 +126,17 @@ namespace DGT.Controllers
                 SideOfRoad = "P",
                 CrashLane = "V",
                 Ownership = "Your momma",
-                RouteSignage = "No littering"
+                RouteSignage = "No littering",
+                Geocoding = new Geocoding
+                {
+                    HsmvReportNumber = 300,
+                    MapPoints = new List<Geocoding.MapPoint>
+                    {
+                        new Geocoding.MapPoint{ X = -82.310889913845303, Y = 29.649140056990618 },
+                        new Geocoding.MapPoint{ X = -82.310889913845301, Y = 29.649140056990612 },
+                        new Geocoding.MapPoint{ X = -82.310889913845306, Y = 29.649140056990614 }
+                    }
+                }
             };
             
             return Task.Run(async delegate

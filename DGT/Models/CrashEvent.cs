@@ -59,6 +59,7 @@ namespace DGT.Models
           public string RouteSignage { get; set; }
 
           public string Narrative { get; set; }
-          
+
+          public Geocoding Geocoding { get; set; }
     }
 }

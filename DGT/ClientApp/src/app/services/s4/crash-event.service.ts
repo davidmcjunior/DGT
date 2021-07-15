@@ -84,6 +84,8 @@ export class CrashEventService {
     this.recordIsLoaded$.next(false);
 
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
+      console.log(response);
+
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);
         this._initInterFieldSubscriptions();
