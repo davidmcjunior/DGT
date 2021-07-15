@@ -25,7 +25,7 @@ export class SiteLocationControl extends SelectControl<number> {
     {key: 77, value: 'All other (explained in narrative)'}
   ];
   key             = 'siteLocation';
-  label           = 'Site Location';
+  label           = 'Site MapPoint';
   options         = SiteLocationControl.Codes;
   keyValueOptions = true;
 

@@ -33,11 +33,11 @@ export class DotPropertyComponent extends CrashEventRecordFieldBase<boolean> imp
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeToFieldSubject(this.getFieldKey(), (v) => {
         this.setValue(v);
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
+    this.crashEvent.subscribeToFieldSubject('onPublicRoads', (v) => {
       if (!v) {
         this.setValue(false);
       }

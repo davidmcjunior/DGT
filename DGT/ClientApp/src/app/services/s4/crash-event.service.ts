@@ -84,8 +84,6 @@ export class CrashEventService {
     this.recordIsLoaded$.next(false);
 
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
-      console.log(response);
-
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);
         this._initInterFieldSubscriptions();
@@ -119,11 +117,10 @@ export class CrashEventService {
 
   /**
    *
-   * @param component
    * @param fieldName
    * @param callback
    */
-  public async subscribeComponentToFieldSubject(component: CrashEventRecordFieldBase<any>, fieldName: string, callback: Function): Promise<this> {
+  public async subscribeToFieldSubject(fieldName: string, callback: Function): Promise<this> {
     this.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded) {
         const field = this.getFieldSubject(fieldName);

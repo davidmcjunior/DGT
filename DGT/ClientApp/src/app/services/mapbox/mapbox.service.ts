@@ -1,56 +1,72 @@
-import { inject, Injectable } from '@angular/core';
+import {inject, Injectable, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { IMapService } from 'app/models/interfaces/mapservice.interface';
 // @ts-ignore
 import * as mapboxgl from 'mapbox-gl';
-import { Location } from 'app/models/geolocation/location';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { MapPoint } from 'app/models/geolocation/map-point';
+import {CrashEventService} from "../s4/crash-event.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MapboxService implements IMapService {
-  map: mapboxgl.Map;
-  map$: BehaviorSubject<mapboxgl.Map>;
+export class MapboxService implements OnInit {
+  _map: mapboxgl.Map;
+  _mapPoints: MapPoint[];
 
-  marker: mapboxgl.Marker;
-  lat = 27.964157;
-  lng = -82.452606; // Tampa
-  zoom = 13;
+  // _marker: mapboxgl.Marker;
+  // _lat = 27.964157;
+  // _lng = -82.452606; // Tampa
+  _zoom = 13;
 
-  constructor() {
+  constructor(private crashEvent: CrashEventService) {
   }
 
-  public initMap(): void {
-    mapboxgl.accessToken = environment.mapbox.accessToken;
-    const center = [this.lng, this.lat];
+  ngOnInit(): void {
+    this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
+      if (isLoaded) {
+        this.crashEvent.getFieldSubject('geocoding')?.subscribe((geocoding) => {
+          this.initMap(geocoding.mapPoints);
+        });
+      }
+    });
+  }
 
-    this.map = new mapboxgl.Map({
+  public async initMap(mapPoints: MapPoint[]): Promise<any> {
+    mapboxgl.accessToken = environment.mapbox.accessToken;
+
+    this._map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11', // environment.mapbox.style,
-      zoom: this.zoom,
-      center: center
+      zoom: this._zoom,
+      center: mapPoints[1]
     });
 
-    this.map.addControl(new mapboxgl.NavigationControl());
-    this.map$ = new BehaviorSubject<mapboxgl.Map>(this.map);
-  }
-
-  public flyTo(loc: Location): void {
-    const center = [loc.x, loc.y];
-
-    this.map.flyTo({
-      center: center,
-      zoom: this.zoom
+    mapPoints.forEach((point) => {
+      new mapboxgl.Marker()
+        .setLngLat(point)
+        .addTo(this._map);
     });
 
-    this.markMap(center);
+    this._map.addControl(new mapboxgl.NavigationControl());
   }
 
-  markMap(center: number[]): void {
-    this.marker = new mapboxgl.Marker()
+  public flyTo(loc: MapPoint): void {
+    this._map.flyTo({
+      center: loc,
+      zoom: this._zoom
+    });
+
+    this.markMap(loc);
+  }
+
+  markMap(center: MapPoint): void {
+    const marker = new mapboxgl.Marker()
       .setLngLat(center)
-      .addTo(this.map);
+      .addTo(this._map);
+  }
+
+  private plotMarkers(points: [{x:number, y:number}]): void {
+
   }
 
 }

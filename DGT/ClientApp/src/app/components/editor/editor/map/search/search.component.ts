@@ -4,7 +4,7 @@ import { ArcGisSuggestionService as SuggestionService } from 'app/services/arcgi
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
-import { Location } from 'app/models/geolocation/location';
+import { MapPoint } from 'app/models/geolocation/map-point';
 import { MatOptionSelectionChange } from '@angular/material/core';
 
 

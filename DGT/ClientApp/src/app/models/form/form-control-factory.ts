@@ -55,6 +55,7 @@ export class FormControlFactory {
     'functionalClass',
     'bicyclistCount',
     'pedestrianCount',
+    'geocoding'
   ];
 
   public getControl(key: string, value: any = ''): FieldControlBase<any> {

@@ -34,11 +34,11 @@ export class FunctionalClassComponent extends CrashEventRecordFieldBase<string> 
       this.show = v;
     });
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeToFieldSubject(this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, 'onPublicRoads', (v) => {
+    this.crashEvent.subscribeToFieldSubject('onPublicRoads', (v) => {
       const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
 
       this.show = (v == 'false') && (crashInjuryVal == '5');

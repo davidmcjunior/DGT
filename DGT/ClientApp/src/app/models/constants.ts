@@ -23,7 +23,7 @@ export const YES_NO = [
 ];
 
 // Match Status Code
-// F – Final, point placed by law enforcement in the field using S4 Location Service tool
+// F – Final, point placed by law enforcement in the field using S4 MapPoint Service tool
 // M – Matched, matching location found by the automatic batch geocoder
 // T – Tied, one or more matching locations found, one selected at random
 // U – Unmatched
@@ -120,7 +120,7 @@ export const BATCH_GEOCODER_MATCH_RESULT_CODES = [
   {key: 2, value: 'For Review'},
   {key: 3, value: 'Confident'},
   {key: 4, value: 'Interactive - placed by human editor using S4 Geocoding tool'},
-  {key: 5, value: 'Interactive - placed by law enforcement in the field using S4 Location Service tool'},
+  {key: 5, value: 'Interactive - placed by law enforcement in the field using S4 MapPoint Service tool'},
 ];
 
 export const BATCH_GEOCODE_FAIL_MATCH_REASON_CODES = [
@@ -128,9 +128,9 @@ export const BATCH_GEOCODE_FAIL_MATCH_REASON_CODES = [
   {key: 1, value: 'Street Not Found'},
   {key: 2, value: 'Intersection Not Found'},
   {key: 3, value: 'Invalid House Address'},
-  {key: 4, value: 'Location is Ambiguous'},
+  {key: 4, value: 'MapPoint is Ambiguous'},
   {key: 5, value: 'Incorrectly Geocoded'},
-  {key: 6, value: 'Invalid Site Location'},
+  {key: 6, value: 'Invalid Site MapPoint'},
 ];
 
 export const ROAD_SYSTEM_IDS = [

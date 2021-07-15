@@ -4,10 +4,11 @@
 // relationships to the nearest roadway segment, nearest intersection, and offset
 // distance and direction from the nearest intersection.
 import { Editor } from 'app/models/users/editor';
+import {MapPoint} from "../geolocation/map-point";
 
 export interface Geocoding {
   hsmvReportNumber: number;
-  mapPoints: [{x:number, y:number}];
+  mapPoints: MapPoint[];
   createDate?: Date | undefined;
   lastUpdateDate?: Date | undefined;
   etlGeoLocationStatus?: string;

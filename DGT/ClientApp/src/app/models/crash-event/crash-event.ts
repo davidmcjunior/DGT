@@ -36,7 +36,7 @@ export interface CrashEvent {
   narrative: CrashNarrative | undefined;
   diagram: CrashDiagram | undefined;
 
-  originalGeocoding: Geocoding | undefined;
+  geocoding: Geocoding | undefined;
 
   editedGeocodings?: EditedGeocoding[];
 }

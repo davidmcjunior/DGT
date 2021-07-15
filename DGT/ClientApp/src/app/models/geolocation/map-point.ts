@@ -1,4 +1,4 @@
-export interface Location {
+export interface MapPoint {
   x: number;
   y: number;
 }

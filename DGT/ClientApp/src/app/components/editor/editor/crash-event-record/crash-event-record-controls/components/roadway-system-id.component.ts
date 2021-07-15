@@ -30,7 +30,7 @@ export class RoadwaySystemIdComponent extends CrashEventRecordFieldBase<number> 
   ngOnInit(): void {
     this.initNgForm();
 
-    this.crashEvent.subscribeComponentToFieldSubject(this, this.getFieldKey(), (v) => {
+    this.crashEvent.subscribeToFieldSubject(this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
   }
