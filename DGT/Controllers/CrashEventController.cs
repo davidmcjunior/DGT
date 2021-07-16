@@ -40,9 +40,9 @@ namespace DGT.Controllers
                     HsmvReportNumber = 100,
                     MapPoints = new List<Geocoding.MapPoint>
                     {
-                        new Geocoding.MapPoint{ X = -82.310889913845303, Y = 29.649140056990618 },
-                        new Geocoding.MapPoint{ X = -82.310889913845301, Y = 29.649140056990612 },
-                        new Geocoding.MapPoint{ X = -82.310889913845306, Y = 29.649140056990614 }
+                        new Geocoding.MapPoint{ X = -82.31088991384530, Y = 29.659140056990618 },
+                        new Geocoding.MapPoint{ X = -82.31088991384531, Y = 29.649150056990612 },
+                        new Geocoding.MapPoint{ X = -82.31088991384530, Y = 29.649140056990614 }
                     }
                 }
             };

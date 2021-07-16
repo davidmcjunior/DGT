@@ -11,6 +11,7 @@ import {environment} from "environments/environment";
 })
 export class MapComponent implements AfterViewInit {
   private _map: mapbox.Map;
+  private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
 
   /**
    *
@@ -47,10 +48,10 @@ export class MapComponent implements AfterViewInit {
         points.forEach((point) => {
           new mapbox.Marker()
             .setLngLat([point.x, point.y])
-            .addTo(this._map);
+            .addTo(this._map)
         });
       }).then(() => {
-        this._map.addControl(new mapbox.NavigationControl());
+        this._map.addControl(new mapbox.NavigationControl(), 'bottom-right');
       });
   }
 
@@ -63,9 +64,9 @@ export class MapComponent implements AfterViewInit {
 
     return new mapbox.Map({
       zoom: z,
-      center: [x, y],
+      center: <mapbox.LngLatLike>[x, y],
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11' // environment.mapbox.style,
+      style: environment.mapbox.style,
     });
   }
 
