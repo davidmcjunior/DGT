@@ -24,7 +24,7 @@ export class ButtonsBarComponent implements OnInit {
 
   skip(): void {
     this.loadRecord.emit();
-    this.crashEvent.nextRecord(this.queue.getNextReportId());
+    this.crashEvent.next(this.queue.next());
   }
 
 }

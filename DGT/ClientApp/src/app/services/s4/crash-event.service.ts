@@ -39,15 +39,15 @@ export class CrashEventService {
    */
   constructor(private http: HttpClient, private formControlService: FormControlModelService, private queue: EditorQueueService) {
     this._fieldKeys = this.formControlService.getFieldKeys();
-    this.nextRecord(this.queue.getNextReportId());
+    this.next(this.queue.next());
   }
 
   /**
    *
    * @param hsmvReportNumber: int
    */
-  public nextRecord(hsmvReportNumber): this {
-    this._loadRecord(hsmvReportNumber).then(r => {});
+  public next(hsmvReportNumber): this {
+    this._loadNext(hsmvReportNumber).then(r => {});
 
     return this;
   }
@@ -80,7 +80,7 @@ export class CrashEventService {
    * @param hsmvReportNumber
    * @private
    */
-  private async _loadRecord(hsmvReportNumber: number): Promise<any> {
+  private async _loadNext(hsmvReportNumber: number): Promise<any> {
     this.recordIsLoaded$.next(false);
 
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {

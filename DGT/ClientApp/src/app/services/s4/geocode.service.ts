@@ -6,7 +6,7 @@ import {BehaviorSubject, Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class ReverseGeocodeService implements OnInit {
+export class GeocodeService implements OnInit {
   public mode$: BehaviorSubject<string>;
   public geocoding$: BehaviorSubject<any>;
 
@@ -15,13 +15,12 @@ export class ReverseGeocodeService implements OnInit {
     this.geocoding$ = new BehaviorSubject<any>(undefined);
   }
 
-  public getGeocoding(lat: number, lng: number): any {
+  public next(lat: number, lng: number): any {
     const configs = environment.s4.reverseGeocodeService;
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
     this.http.get<any>(url).subscribe(v => {
       this.geocoding$.next(v);
-      console.log(v);
     });
   }
 

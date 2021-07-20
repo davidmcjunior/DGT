@@ -4,7 +4,7 @@ import * as mapbox from 'mapbox-gl';
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {Geocoding} from "app/models/crash-event/geocoding";
 import {environment} from "environments/environment";
-import {ReverseGeocodeService} from "app/services/s4/reverse-geocode.service";
+import {GeocodeService} from "app/services/s4/geocode.service";
 
 @Component({
   selector: 'dgt-map',
@@ -21,7 +21,7 @@ export class MapComponent implements AfterViewInit {
    */
   constructor(
     private _crashEvent: CrashEventService,
-    private _reverseGeocoder: ReverseGeocodeService
+    private _reverseGeocoder: GeocodeService
   ) { }
 
   /**
@@ -92,7 +92,7 @@ export class MapComponent implements AfterViewInit {
     const lat = point['lat'];
     const lng = point['lng'];
 
-    this._reverseGeocoder.getGeocoding(lat, lng);
+    this._reverseGeocoder.next(lat, lng);
   }
 
 }

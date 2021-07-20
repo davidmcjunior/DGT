@@ -15,7 +15,7 @@ export class EditorQueueService {
     return of([100, 200, 300, 400]);
   }
 
-  public getNextReportId() {
+  public next() {
     return this._index += 100;
   }
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ReverseGeocodeService} from "app/services/s4/reverse-geocode.service";
+import {GeocodeService} from "app/services/s4/geocode.service";
 
 @Component({
   selector: 'dgt-mode-buttons',
@@ -8,7 +8,7 @@ import {ReverseGeocodeService} from "app/services/s4/reverse-geocode.service";
 export class ModeButtonsComponent implements OnInit {
   @Output('modeChanged') modeChanged = new EventEmitter<any>();
 
-  constructor(private reverseGeocoder: ReverseGeocodeService) { }
+  constructor(private reverseGeocoder: GeocodeService) { }
 
   ngOnInit(): void {
 
