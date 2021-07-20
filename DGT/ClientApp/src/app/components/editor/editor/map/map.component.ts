@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 // @ts-ignore
 import * as mapbox from 'mapbox-gl';
 import {CrashEventService} from "app/services/s4/crash-event.service";
@@ -14,14 +14,16 @@ export class MapComponent implements AfterViewInit {
   private _map: mapbox.Map;
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
 
+  @ViewChild('map') mapElement: ElementRef;
+
   /**
    *
    * @param _crashEvent
-   * @param _reverseGeocoder
+   * @param _geocoder
    */
   constructor(
     private _crashEvent: CrashEventService,
-    private _reverseGeocoder: GeocodeService
+    private _geocoder: GeocodeService
   ) { }
 
   /**
@@ -32,6 +34,10 @@ export class MapComponent implements AfterViewInit {
       this._initMap(v);
     }).then((v) => {
       console.log('Map initialized. ');
+    });
+
+    this._geocoder.mode$.subscribe((v) => {
+      this._setCursor(v);
     });
   }
 
@@ -44,7 +50,7 @@ export class MapComponent implements AfterViewInit {
     const points = geocoding.mapPoints;
     const center = points[1];
 
-    this._createMapObject(center.x, center.y, 13)
+    this._createMapObject(center.x, center.y, 17)
       .then((map) => {
 
         // map.on('load', function () {});
@@ -92,7 +98,20 @@ export class MapComponent implements AfterViewInit {
     const lat = point['lat'];
     const lng = point['lng'];
 
-    this._reverseGeocoder.next(lat, lng);
+    this._geocoder.next(lat, lng);
+    const segId = this._geocoder.getNearestSegmentId();
+
+    try {
+      this._map.setFilter('streets-selected', ['in', ['id'], ['literal', [segId]]]);
+      this._map.setLayoutProperty('streets-selected', 'visibility', 'visible');
+
+    } catch (e) {
+
+    }
+  }
+
+  private _setCursor(mode: string): void {
+    this.mapElement.nativeElement.className += ' ' + mode;
   }
 
 }

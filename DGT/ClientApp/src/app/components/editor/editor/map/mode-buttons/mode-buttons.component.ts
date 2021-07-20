@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import {GeocodeService} from "app/services/s4/geocode.service";
 
 @Component({
@@ -7,6 +7,7 @@ import {GeocodeService} from "app/services/s4/geocode.service";
 })
 export class ModeButtonsComponent implements OnInit {
   @Output('modeChanged') modeChanged = new EventEmitter<any>();
+  @ViewChild('btnContainer') btnContainer: HTMLElement;
 
   constructor(private reverseGeocoder: GeocodeService) { }
 

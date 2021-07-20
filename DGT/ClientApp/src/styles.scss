@@ -119,15 +119,19 @@ span.etl-status-indicator {
 }
 
 .map-container {
-  @apply w-full h-full p-2;
+  //@apply h-full;
 }
 
 .map-frame {
+  //@apply h-full;
+}
+
+.mapboxgl-canvas-container {
   @apply h-full;
 }
 
 #map {
-  @apply h-full z-0;
+  //@apply min-h-full;
 }
 
 .location-suggestions-control {
