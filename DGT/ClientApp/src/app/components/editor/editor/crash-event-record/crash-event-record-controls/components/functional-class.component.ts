@@ -37,12 +37,6 @@ export class FunctionalClassComponent extends CrashEventRecordFieldBase<string> 
     this.crashEvent.subscribeToFieldSubject(this.getFieldKey(), (v) => {
       this.setValue(v);
     }).then( /* partay */);
-
-    this.crashEvent.subscribeToFieldSubject('onPublicRoads', (v) => {
-      const crashInjuryVal = this.crashEvent.getFieldValue('crashInjury');
-
-      this.show = (v == 'false') && (crashInjuryVal == '5');
-    }).then( /* partay */);
   }
 
   onValueChanged($event: Event): void {

@@ -1,22 +1,37 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReverseGeocodeService {
-  constructor(private http: HttpClient) { }
+export class ReverseGeocodeService implements OnInit {
+  public mode$: BehaviorSubject<string>;
+  public geocoding$: BehaviorSubject<any>;
 
-  public getAttributes(lat: number = 25.857596, lng: number = -80.27810, mode: string = 'SEGMENT'): any {
-    let response: any;
+  constructor(private http: HttpClient) {
+    this.mode$ = new BehaviorSubject<string>('INTERSECTION');
+    this.geocoding$ = new BehaviorSubject<any>(undefined);
+  }
+
+  public getGeocoding(lat: number, lng: number): any {
     const configs = environment.s4.reverseGeocodeService;
-    const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${mode}`);
+    const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
     this.http.get<any>(url).subscribe(v => {
-      response = v;
+      this.geocoding$.next(v);
+      console.log(v);
     });
-
-    return response;
   }
+
+  public getNearestSegmentId(): number {
+    return this.geocoding$.getValue().Location.NearestSegmentId;
+  }
+
+  ngOnInit(): void {
+    // this.mode$ = new BehaviorSubject<string>('INTERSECTION');
+    // this.geocoding$ = new Subject<any>();
+  }
+
 }

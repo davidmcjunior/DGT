@@ -142,4 +142,24 @@ span.etl-status-indicator {
   @apply ml-4;
 }
 
+.mode-button-container {
+  // @apply;
+}
+
+button.mode {
+  @apply pl-8 pt-8 h-8 w-8 bg-gray-300;
+}
+
+button.off-roadway {
+}
+
+button.ramp {
+}
+
+button.intersection {
+}
+
+button.segment {
+}
+
 @import "~tailwindcss/utilities.css";

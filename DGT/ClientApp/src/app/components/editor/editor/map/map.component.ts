@@ -4,6 +4,7 @@ import * as mapbox from 'mapbox-gl';
 import {CrashEventService} from "app/services/s4/crash-event.service";
 import {Geocoding} from "app/models/crash-event/geocoding";
 import {environment} from "environments/environment";
+import {ReverseGeocodeService} from "app/services/s4/reverse-geocode.service";
 
 @Component({
   selector: 'dgt-map',
@@ -16,9 +17,11 @@ export class MapComponent implements AfterViewInit {
   /**
    *
    * @param _crashEvent
+   * @param _reverseGeocoder
    */
   constructor(
-    private _crashEvent: CrashEventService
+    private _crashEvent: CrashEventService,
+    private _reverseGeocoder: ReverseGeocodeService
   ) { }
 
   /**
@@ -43,15 +46,25 @@ export class MapComponent implements AfterViewInit {
 
     this._createMapObject(center.x, center.y, 13)
       .then((map) => {
-        this._map = map;
+
+        // map.on('load', function () {});
 
         points.forEach((point) => {
           new mapbox.Marker()
             .setLngLat([point.x, point.y])
-            .addTo(this._map)
+            .addTo(map)
         });
+
+        this._map = map;
       }).then(() => {
         this._map.addControl(new mapbox.NavigationControl(), 'bottom-right');
+        this._map.on('click', (e) => {
+          this.onMapClick(e);
+          // new mapbox.Popup()
+          //   .setLngLat(e.lngLat)
+          //   .setHTML('point:  <br/>' + e.lngLat)
+          //   .addTo(this._map);
+        });
       });
   }
 
@@ -70,7 +83,16 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  onMapClick($event: Event): void {
+  onMapClick(e: any): void {
+    if (!e.hasOwnProperty('lngLat')) {
+      return;
+    }
 
+    const point = e.lngLat;
+    const lat = point['lat'];
+    const lng = point['lng'];
+
+    this._reverseGeocoder.getGeocoding(lat, lng);
   }
+
 }

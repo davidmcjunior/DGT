@@ -18,6 +18,7 @@ import { CrashEventRecordModule } from "./editor/crash-event-record/crash-event-
 import {BicyclistCountControl} from "../../models/form/controls/crash-report/bicyclist-count.control";
 import {CityControl} from "../../models/form/controls/crash-report/city.control";
 import {SharedModule} from "../shared/shared.module";
+import { ModeButtonsComponent } from './editor/map/mode-buttons/mode-buttons.component';
 
 
 @NgModule({
@@ -30,18 +31,19 @@ import {SharedModule} from "../shared/shared.module";
     TimePipe,
     GiveUpDialogComponent,
     SearchComponent,
+    ModeButtonsComponent,
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        EditorRoutingModule,
-        AutocompleteLibModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule,
-        CrashEventRecordModule,
-        SharedModule
-    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    EditorRoutingModule,
+    AutocompleteLibModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CrashEventRecordModule,
+    SharedModule
+  ],
   providers: [
     BicyclistCountControl,
     CityControl
