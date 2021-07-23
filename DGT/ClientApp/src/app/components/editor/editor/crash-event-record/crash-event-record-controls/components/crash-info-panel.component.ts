@@ -44,12 +44,12 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
     this.crashEvent.getFieldSubject('intersectingStreet')?.subscribe({
       next: (v) => this.intersectingStreet = v
     });
-    // this.crashEvent['offsetDistance'].subscribeSelf({
-    //   next: (v) => this.offsetDistance = v
-    // });
-    // this.crashEvent['offsetDirection'].subscribeSelf({
-    //   next: (v) => this.direction = v
-    // });
+    this.crashEvent.getFieldSubject('offsetDistance')?.subscribe({
+      next: (v) => this.offsetDistance = v
+    });
+    this.crashEvent.getFieldSubject('offsetDirection')?.subscribe({
+      next: (v) => this.direction = v
+    });
   }
 
 }

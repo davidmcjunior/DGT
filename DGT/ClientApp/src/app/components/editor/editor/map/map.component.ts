@@ -64,8 +64,9 @@ export class MapComponent implements AfterViewInit {
         this._map = map;
       }).then(() => {
         this._map.addControl(new mapbox.NavigationControl(), 'bottom-right');
+
         this._map.on('click', (e) => {
-          this.onMapClick(e);
+          this._onMapClick(e);
           // new mapbox.Popup()
           //   .setLngLat(e.lngLat)
           //   .setHTML('point:  <br/>' + e.lngLat)
@@ -89,7 +90,7 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  onMapClick(e: any): void {
+  private _onMapClick(e: any): void {
     if (!e.hasOwnProperty('lngLat')) {
       return;
     }
@@ -106,12 +107,12 @@ export class MapComponent implements AfterViewInit {
       this._map.setLayoutProperty('streets-selected', 'visibility', 'visible');
 
     } catch (e) {
-
+      console.log(e);
     }
   }
 
   private _setCursor(mode: string): void {
-    this.mapElement.nativeElement.className += ' ' + mode;
+    // this.mapElement.nativeElement.className += ' ' + mode;
   }
 
 }

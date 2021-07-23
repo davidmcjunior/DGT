@@ -5,12 +5,12 @@ import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { environment } from 'environments/environment';
 import { EditorQueueService } from 'app/services/s4/editor-queue.service';
 import { FormControlModelService } from "../forms/crash-event/form-control-model.service";
-import {CrashEventRecordFieldBase} from "app/components/editor/editor/crash-event-record/crash-event-record-controls/crash-event-record-field-base";
+import {WatchableService} from "app/models/services/watchable-service";
 
 @Injectable({
   providedIn: 'root', // EditorModule
 })
-export class CrashEventService {
+export class CrashEventService extends WatchableService {
   private _url = environment.s4.crashEventService.url;
   // internal crash data object...
   private _data: CrashEvent;
@@ -38,6 +38,7 @@ export class CrashEventService {
    * @param queue
    */
   constructor(private http: HttpClient, private formControlService: FormControlModelService, private queue: EditorQueueService) {
+    super();
     this._fieldKeys = this.formControlService.getFieldKeys();
     this.next(this.queue.next());
   }

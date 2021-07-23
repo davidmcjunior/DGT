@@ -2,20 +2,23 @@ import {Injectable, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject} from "rxjs";
+import {WatchableService} from "app/models/services/watchable-service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class GeocodeService implements OnInit {
+export class GeocodeService extends WatchableService implements OnInit {
   public mode$: BehaviorSubject<string>;
   public geocoding$: BehaviorSubject<any>;
+
 
   /**
    *
    * @param _http
    */
   constructor(private _http: HttpClient) {
-    this.mode$ = new BehaviorSubject<string>('INTERSECTION');
+    super();
+    this.mode$ = new BehaviorSubject<string>('SEGMENT');
     this.geocoding$ = new BehaviorSubject<any>(undefined);
   }
 
@@ -28,9 +31,8 @@ export class GeocodeService implements OnInit {
     const configs = environment.s4.reverseGeocodeService;
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
-    console.log(url);
-
     this._http.get<any>(url).subscribe(v => {
+      console.log(v);
       this.geocoding$.next(v);
     });
   }
@@ -40,6 +42,20 @@ export class GeocodeService implements OnInit {
    */
   public getNearestSegmentId(): number {
     return this.geocoding$.getValue().Location.NearestSegmentId;
+  }
+
+  /**
+   *
+   */
+  public getNearestIntersectingStreetName(): string {
+    return this.geocoding$.getValue().Location.NearestIntersectingStreetName;
+  }
+
+  /**
+   *
+   */
+  public getNearestIntersectionName(): string {
+    return this.geocoding$.getValue().Location.NearestIntersectionName;
   }
 
   /**

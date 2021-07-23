@@ -25,6 +25,8 @@ import { CrashYearControl } from 'app/models/form/controls/crash-report/crash-ye
 import { BicyclistCountControl } from 'app/models/form/controls/crash-report/bicyclist-count.control';
 import { PedestrianCountControl } from 'app/models/form/controls/crash-report/pedestrian-count.control';
 import { CommentsControl } from 'app/models/form/controls/crash-report/comments.control';
+import {FarsFunctionalClass} from "./controls/crash-report/fars-functional-class";
+import {UsOrInterstateRoute} from "./controls/crash-report/us-or-interstate-route";
 
 
 
@@ -152,6 +154,14 @@ export class FormControlFactory {
 
       case 'comments':
         control = new CommentsControl(value);
+        break;
+
+      case 'farsFunctionalClass':
+        control = new FarsFunctionalClass(value);
+        break;
+
+      case 'usOrInterstateRoute':
+        control = new UsOrInterstateRoute(value);
         break;
 
       default:

@@ -21,6 +21,8 @@ export interface CrashEvent {
   user: S4User | undefined;
   editDate: Date | undefined;
   editStatus: Date | undefined;
+  originalLat?: number | undefined;
+  orifinalLng?: number | undefined;
   reviewDate: Date | undefined;
   reviewStatus: Date | undefined;
   siteLocation: number | undefined;
