@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   mapbox: {
     accessToken: 'pk.eyJ1Ijoic2lnbmFsZm91cmxhYiIsImEiOiJjazFzYTd6aXcwYTJtM2xvMGI2Y3dyN3JwIn0.OnpaWvdIZ2bmaEdvCspfPQ',
-    style: 'mapbox://styles/signalfourlab/ckliezwsl12wh17n22vy39ch4'
+    // style: 'mapbox://styles/signalfourlab/ckliezwsl12wh17n22vy39ch4'
+    style: 'mapbox://styles/mapbox/streets-v9'
   },
   arcGis: {
     suggestionService: {
