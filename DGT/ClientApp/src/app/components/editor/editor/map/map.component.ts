@@ -67,10 +67,6 @@ export class MapComponent implements AfterViewInit {
 
         this._map.on('click', (e) => {
           this._onMapClick(e);
-          // new mapbox.Popup()
-          //   .setLngLat(e.lngLat)
-          //   .setHTML('point:  <br/>' + e.lngLat)
-          //   .addTo(this._map);
         });
       });
   }

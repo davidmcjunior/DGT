@@ -14,6 +14,14 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
   @Input('city') city: string;
   @Input('county') county: string;
 
+  @Input('ogDate') ogDate: Date;
+  @Input('ogOnStreet') ogOnStreet: string;
+  @Input('ogIntersectingStreet') ogIntersectingStreet: string;
+  @Input('ogOffsetDistance') ogOffsetDistance: number;
+  @Input('ogDirection') ogDirection: string;
+  @Input('ogCity') ogCity: string;
+  @Input('ogCounty') ogCounty: string;
+
   constructor(
     public crashEvent: CrashEventService,
   ) {
@@ -50,6 +58,13 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
     this.crashEvent.getFieldSubject('offsetDirection')?.subscribe({
       next: (v) => this.direction = v
     });
+
+    this.ogCity = this.crashEvent.getFieldValue('city');
+    this.ogCounty = this.crashEvent.getFieldValue('county');
+    this.ogOnStreet = this.crashEvent.getFieldValue('onStreet');
+    this.ogIntersectingStreet = this.crashEvent.getFieldValue('intersectingStreet');
+    this.ogOffsetDistance = this.crashEvent.getFieldValue('offsetDistance');
+    this.ogDirection = this.crashEvent.getFieldValue('offsetDirection');
   }
 
 }
