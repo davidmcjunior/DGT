@@ -154,7 +154,7 @@ export class CrashEventService extends WatchableService {
     });
 
     onPublicRoads$?.subscribe((v) => {
-      this.locationOnlyFieldsAreEnabled$.next(v == true);
+      this.locationOnlyFieldsAreEnabled$.next(v == true || v == 'true');
     });
 
     crashInjury$?.subscribe((v) => {
