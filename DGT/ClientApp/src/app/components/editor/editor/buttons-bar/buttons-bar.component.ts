@@ -27,4 +27,9 @@ export class ButtonsBarComponent implements OnInit {
     this.crashEvent.next(this.queue.next());
   }
 
+  goBack(): void {
+    this.loadRecord.emit();
+    this.crashEvent.next(this.queue.prev());
+  }
+
 }

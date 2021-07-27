@@ -10,6 +10,7 @@ import {CrashEventService} from "./crash-event.service";
 })
 export class GeocodeService extends WatchableService implements OnInit {
   public mode$: BehaviorSubject<string>;
+  public modeActive$: BehaviorSubject<boolean>;
   public geocoding$: BehaviorSubject<any>;
 
 
@@ -22,6 +23,7 @@ export class GeocodeService extends WatchableService implements OnInit {
     super();
     this.mode$ = new BehaviorSubject<string>('SEGMENT');
     this.geocoding$ = new BehaviorSubject<any>(undefined);
+    this.modeActive$ = new BehaviorSubject<boolean>(false);
   }
 
   /**

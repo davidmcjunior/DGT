@@ -1,16 +1,17 @@
 <div class="info-panel mb-10 bg-gray-200 py-5 grid grid-cols-2">
   <div>
+<!--    <div></div>-->
     <div>
-      <span class="common-label font-bold text-gray-500 m-5">City: {{city}}</span>
+      <span class="common-label font-bold text-gray-500 m-5">City: {{city.toUpperCase()}}</span>
     </div>
     <div>
-      <span class="common-label font-bold text-gray-500 m-5">County: {{county}}</span>
+      <span class="common-label font-bold text-gray-500 m-5">County: {{county.toUpperCase()}}</span>
     </div>
     <div>
-      <span class="common-label font-bold text-gray-500 m-5">Street: {{onStreet}}</span>
+      <span class="common-label font-bold text-gray-500 m-5">Street: {{onStreet.toUpperCase()}}</span>
     </div>
     <div>
-      <span class="common-label font-bold text-gray-500 m-5">Intersecting Street: {{intersectingStreet}}</span>
+      <span class="common-label font-bold text-gray-500 m-5">Intersecting Street: {{intersectingStreet.toUpperCase()}}</span>
     </div>
     <div>
       <span class="common-label font-bold text-gray-500 m-5">Offset Distance: {{offsetDistance}} ft.</span>
@@ -20,6 +21,9 @@
     </div>
   </div>
   <div>
+<!--    <div>-->
+<!--      <span class="common-label font-italic text-gray-500 m-5">Original Values</span>-->
+<!--    </div>-->
     <div>
       <span class="common-label text-green-500 m-5">City: {{ogCity}}</span>
     </div>

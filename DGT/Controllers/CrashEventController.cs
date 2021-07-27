@@ -38,7 +38,7 @@ namespace DGT.Controllers
                 Geocoding = new Geocoding
                 {
                     HsmvReportNumber = 100,
-                    EtlGeoLocationStatus = "Computer Tie",
+                    EtlGeoLocationStatus = "Computer Confident",
                     MapPoints = new List<Geocoding.MapPoint>
                     {
                         new Geocoding.MapPoint{ X = -82.31088991384530, Y = 29.659140056990618 },

@@ -20,4 +20,12 @@ export class EditorQueueService extends WatchableService {
   public next() {
     return this._index += 100;
   }
+
+  public prev() {
+    if (this._index > 100) {
+      return this._index -= 100;
+    }
+
+    else return 100;
+  }
 }
