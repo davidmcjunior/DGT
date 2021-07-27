@@ -40,6 +40,10 @@ namespace DGT.Models
 
           public string EditStatus { get; set; }
 
+          public double OriginalLat { get; set; }
+
+          public double OriginalLng { get; set; }
+
           public DateTime ReviewDate { get; set; }
 
           public string ReviewStatus { get; set; }
