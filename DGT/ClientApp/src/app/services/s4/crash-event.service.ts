@@ -150,15 +150,15 @@ export class CrashEventService extends WatchableService {
     const crashLane$     = this._fields.get('crashLane');
 
     onPublicRoads$?.subscribe((v) => {
-      this.publicCrashFieldsAreEnabled$.next((v == 'true') && (crashInjury$?.value == '5'));
+      this.publicCrashFieldsAreEnabled$.next((v == true || v == 'true') && (crashInjury$?.value == '5' || crashInjury$?.value == 5));
     });
 
     onPublicRoads$?.subscribe((v) => {
-      this.locationOnlyFieldsAreEnabled$.next(v == 'true');
+      this.locationOnlyFieldsAreEnabled$.next(v == true);
     });
 
     crashInjury$?.subscribe((v) => {
-      this.publicCrashFieldsAreEnabled$.next((v == '5') && (onPublicRoads$?.value == 'true'));
+      this.publicCrashFieldsAreEnabled$.next((v == '5' || v == 5) && (onPublicRoads$?.value == true));
     });
 
     onPublicRoads$?.subscribe((v) => {
@@ -170,9 +170,9 @@ export class CrashEventService extends WatchableService {
 
     siteLocation$?.subscribe((v) => {
       if (['9', '10', '11', 9, 10, 11].includes(v)) {
-        onPublicRoads$?.next('false');
+        onPublicRoads$?.next(false);
       } else {
-        onPublicRoads$?.next('true');
+        onPublicRoads$?.next(true);
       }
     });
 
