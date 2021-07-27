@@ -11,7 +11,7 @@ export interface Geocoding {
   mapPoints: MapPoint[];
   createDate?: Date | undefined;
   lastUpdateDate?: Date | undefined;
-  etlGeoLocationStatus?: string;
+  etlGeoLocationStatus: string;
   relationShipToNetwork?: string;
   centerlineX?: number;
   centerlineY?: number;

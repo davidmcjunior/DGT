@@ -36,7 +36,8 @@ export class GeocodeService extends WatchableService implements OnInit {
     this._http.get<any>(url).subscribe(v => {
       console.log(v);
       this.geocoding$.next(v);
-      this.crashEvent.getFieldSubject('onStreet')?.next(v.Location.NearestIntersectionName);
+      this.crashEvent.getFieldSubject('onStreet')?.next(v.Location.StreetName);
+      this.crashEvent.getFieldSubject('intersectingStreet')?.next(v.Location.NearestIntersectingStreetName);
     });
   }
 

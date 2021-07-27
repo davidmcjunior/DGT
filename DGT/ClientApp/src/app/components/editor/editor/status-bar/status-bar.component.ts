@@ -8,6 +8,7 @@ import {EditorQueueService} from "../../../../services/s4/editor-queue.service";
 })
 export class StatusBarComponent implements OnInit {
   @Input('hsmvReportNumber') hsmvReportNumber: string = 'Hold on...';
+  @Input('etlCode') etlCode: string;
 
   constructor(private crashEvent: CrashEventService, private queue: EditorQueueService) {
   }
@@ -17,6 +18,9 @@ export class StatusBarComponent implements OnInit {
       if (isLoaded) {
         this.crashEvent.record$.subscribe(record => {
           this.hsmvReportNumber = `HSMV Report Number: ${record.hsmvReportNumber}`;
+          if (record.geocoding?.etlGeoLocationStatus) {
+            this.etlCode = record.geocoding?.etlGeoLocationStatus;
+          }
         });
       }
     });
