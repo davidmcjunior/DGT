@@ -159,7 +159,7 @@ export class MapComponent implements AfterViewInit {
       type: 'FeatureCollection'
     };
     if (crashEvent && crashEvent.geocoding) {
-      const etlStatusCode = crashEvent.geocoding.etlGeoLocationStatus ? ETL_STATUS[crashEvent.geocoding.etlGeoLocationStatus][0] : 3;
+      const etlStatusCode = crashEvent.geocoding.etlGeoLocationStatus ? ETL_STATUS[crashEvent.geocoding.etlGeoLocationStatus] : 3;
       featureCollection.features = crashEvent.geocoding.mapPoints.map((point: MapPoint) => {
         return {
           type: 'Feature',

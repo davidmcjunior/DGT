@@ -19,7 +19,7 @@ export class StatusBarComponent implements OnInit {
         this.crashEvent.record$.subscribe(record => {
           this.hsmvReportNumber = `HSMV Report Number: ${record.hsmvReportNumber}`;
           if (record.geocoding?.etlGeoLocationStatus) {
-            this.etlCode = record.geocoding?.etlGeoLocationStatus;
+            this.etlCode = record.geocoding?.etlGeoLocationStatus.toLowerCase().replace(' ', '-');
           }
         });
       }
