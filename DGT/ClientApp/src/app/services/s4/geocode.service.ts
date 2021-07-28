@@ -1,9 +1,11 @@
 import {Injectable, OnInit} from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {WatchableService} from "app/models/services/watchable-service";
 import {CrashEventService} from "./crash-event.service";
+import * as mapboxgl from 'mapbox-gl';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,19 +37,29 @@ export class GeocodeService extends WatchableService implements OnInit {
     const configs = environment.s4.reverseGeocodeService;
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
-    this._http.get<any>(url).subscribe(v => {
+    return this._http.get<any>(url).pipe(map( (v) => {
       console.log(v);
       this.geocoding$.next(v);
       this.crashEvent.getFieldSubject('onStreet')?.next(v.Location.StreetName);
       this.crashEvent.getFieldSubject('intersectingStreet')?.next(v.Location.NearestIntersectingStreetName);
-    });
+      return v;
+    }));
   }
 
   /**
    *
    */
-  public getNearestSegmentId(): number {
-    return this.geocoding$.getValue().Location.NearestSegmentId;
+  public getNearestSegmentId(point: mapboxgl.LngLat): Observable<number> {
+    const geocoding = this.geocoding$.value;
+    let currentSegment: number | undefined;
+    if(geocoding && geocoding.Location && geocoding.Location.NearestSegmentId){
+      currentSegment = geocoding.Location.NearestSegmentId;
+    }
+    return this.next(point.lat, point.lng).pipe(map((v: any) => {
+      const segId = v.Location.NearestSegmentId;
+      console.log(currentSegment, segId);
+      return segId;
+    }));
   }
 
   /**

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import * as mapbox from 'mapbox-gl';
 import { CrashEventService } from "app/services/s4/crash-event.service";
 import { Geocoding } from "app/models/crash-event/geocoding";
@@ -8,6 +8,7 @@ import { ETL_STATUS, MAP_BOUNDARY } from 'app/models/constants';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { MapPoint } from 'app/models/geolocation/map-point';
 import { Feature, FeatureCollection } from 'geojson';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'dgt-map',
@@ -16,8 +17,24 @@ import { Feature, FeatureCollection } from 'geojson';
 export class MapComponent implements AfterViewInit {
   private _map: mapbox.Map;
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
+  private _ghostMarker: mapbox.Marker;
+  private _marker: mapbox.Marker;
 
   @ViewChild('map') mapElement: ElementRef;
+
+  @HostListener('window:click', ['$event'])
+  handleMarkerPopupClick = (event: MouseEvent | any) => {
+    if (event.target.id === 'popup-reject') {
+      const lngLat = this._ghostMarker.getLngLat();
+      this._ghostMarker.remove();
+      this._marker.togglePopup().setLngLat(lngLat).setDraggable(true);
+    }
+    else if (event.target.id === 'popup-confirm') {
+      this._marker.togglePopup().setDraggable(true);
+      this._ghostMarker.remove();
+      this._highlightStreetSegment(this._marker.getLngLat())
+    }
+  }
 
   /**
    *
@@ -35,7 +52,7 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this._crashEvent.subscribeToFieldSubject('geocoding', (v) => {
       let event = this._crashEvent.getCurrentRecord();
-      this._initMap(event, v)
+      this._initMap(event)
     }).then((v) => {
       console.log('Map initialized. ');
     });
@@ -52,33 +69,11 @@ export class MapComponent implements AfterViewInit {
 
   /**
    *
-   * @param geocoding
+   * @param crashEvent
    * @private
    */
-//   private _initMap(geocoding: Geocoding): void {
-//     const points = geocoding.mapPoints;
-//     const center = points[1];
-//
-//     this._createMapObject(center.x, center.y, 17)
-//       .then((map) => {
-//
-//         // map.on('load', function () {});
-//
-//         points.forEach((point) => {
-//           new mapbox.Marker()
-//             .setLngLat([point.x, point.y])
-//             .addTo(map)
-//         });
-//
-//         this._map = map;
-//       }).then(() => {
-//         this._map.addControl(new mapbox.NavigationControl(), 'bottom-right');
-//
-//         this._map.on('click', (e) => {
-//           this._onMapClick(e);
-//         });
 
-  private async _initMap(crashEvent: CrashEvent, geocoding: Geocoding): Promise<void> {
+  private async _initMap(crashEvent: CrashEvent): Promise<void> {
     const map = this._createMapObject(17);
 
     map.on('load', async () => {
@@ -87,16 +82,11 @@ export class MapComponent implements AfterViewInit {
       await this._addLayers(map);
       this._fitToFeatures(map, features);
 
-      const points = geocoding.mapPoints;
-
-      points.forEach((point) => {
-        new mapbox.Marker()
-          .setLngLat([point.x, point.y])
-          .addTo(map)
-      });
-
       map.on('click', (e) => {
-        this._onMapClick(e);
+        if (!e.hasOwnProperty('lngLat')) {
+          return;
+        }
+        this._addDragableMarker(e.lngLat)
       });
 
       this._map = map;
@@ -107,6 +97,31 @@ export class MapComponent implements AfterViewInit {
   *
   * @private
   */
+  private _addDragableMarker(point: mapbox.LngLat) {
+    if (this._marker) { this._marker.remove(); }
+    if (this._ghostMarker) {this._ghostMarker.remove(); }
+
+    const marker = new mapbox.Marker({
+      draggable: true,
+      color: ETL_STATUS['officerMapped'][1]
+    }).setLngLat(new mapbox.LngLat(point.lng, point.lat))
+      .setPopup(this._addMarkerPopup())
+      .addTo(this._map)
+
+    marker.on('dragstart', (e) => {
+      // create ghost marker
+      this._ghostMarker = new mapbox.Marker({
+        color: 'rgba(5, 150, 105, 0.5)'
+      }).setLngLat(marker.getLngLat()).addTo(this._map)
+    });
+
+    marker.on('dragend', (e) => {
+      marker.togglePopup();
+      marker.setDraggable(false);
+    });
+    this._marker = marker;
+    this._highlightStreetSegment(point);
+  }
 
   private async _addLayers(map: mapbox.Map) {
     map.addLayer({
@@ -134,6 +149,19 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
+  private _addMarkerPopup(): mapbox.Popup {
+    return new mapbox.Popup({
+      closeButton: false,
+      closeOnMove: false,
+      closeOnClick: false
+    }).setHTML(
+      `<div style="display: flex; justify-content: space-between; align-items: center">
+        <span id="popup-reject" style="color: red; cursor: pointer">Reject</span>
+        <span style="margin:0 1rem">|</span>
+        <span id="popup-confirm" style="color: green; cursor: pointer">Confirm</span>
+      </div>`)
+  }
+
   private async _addSources(map: mapbox.Map, features: FeatureCollection) {
     map.addSource('crash-point-source', {
       type: 'geojson',
@@ -159,7 +187,7 @@ export class MapComponent implements AfterViewInit {
       type: 'FeatureCollection'
     };
     if (crashEvent && crashEvent.geocoding) {
-      const etlStatusCode = crashEvent.geocoding.etlGeoLocationStatus ? ETL_STATUS[crashEvent.geocoding.etlGeoLocationStatus] : 3;
+      const etlStatusCode = crashEvent.geocoding.etlGeoLocationStatus ? ETL_STATUS[crashEvent.geocoding.etlGeoLocationStatus] : 0;
       featureCollection.features = crashEvent.geocoding.mapPoints.map((point: MapPoint) => {
         return {
           type: 'Feature',
@@ -188,47 +216,40 @@ export class MapComponent implements AfterViewInit {
     return featureCollection;
   }
 
-  private _fitToFeatures(map:mapbox.Map, featureCollection: any) {
+  private _fitToFeatures(map: mapbox.Map, featureCollection: FeatureCollection) {
     let ne: any = MAP_BOUNDARY[0],
       sw: any = MAP_BOUNDARY[1];
-      const coordinates: number[][] = featureCollection.features.map((feature: any) => feature.geometry.coordinates);
-      coordinates.forEach((coordinate) => {
-        if (coordinate[0] > ne[0]) {
-          ne[0] = coordinate[0];
-        }
-        if (coordinate[0] < sw[0]) {
-          sw[0] = coordinate[0];
-        }
-        if (coordinate[1] > ne[1]) {
-          ne[1] = coordinate[1];
-        }
-        if (coordinate[1] < sw[1]) {
-          sw[1] = coordinate[1];
-        }
-      });
-      const bounds = new mapbox.LngLatBounds(sw, ne);
-      map.fitBounds(bounds, { padding: 50 });
+    const coordinates: number[][] = featureCollection.features
+      .map((feature: any) => feature.geometry.coordinates);
+
+    coordinates.forEach((coordinate) => {
+      if (coordinate[0] > ne[0]) {
+        ne[0] = coordinate[0];
+      }
+      if (coordinate[0] < sw[0]) {
+        sw[0] = coordinate[0];
+      }
+      if (coordinate[1] > ne[1]) {
+        ne[1] = coordinate[1];
+      }
+      if (coordinate[1] < sw[1]) {
+        sw[1] = coordinate[1];
+      }
+    });
+    const bounds = new mapbox.LngLatBounds(sw, ne);
+    map.fitBounds(bounds, { padding: 50 });
   }
 
-  private _onMapClick(e: any): void {
-    if (!e.hasOwnProperty('lngLat')) {
-      return;
-    }
-
-    const point = e.lngLat;
-    const lat = point['lat'];
-    const lng = point['lng'];
-
-    this._geocoder.next(lat, lng);
-    const segId = this._geocoder.getNearestSegmentId();
-
-    try {
-      this._map.setFilter('streets-selected', ['in', ['id'], ['literal', [segId]]]);
-      this._map.setLayoutProperty('streets-selected', 'visibility', 'visible');
-
-    } catch (e) {
-      console.log(e);
-    }
+  private _highlightStreetSegment(point: mapbox.LngLat) {
+    this._geocoder.getNearestSegmentId(point)
+      .subscribe((segId: number) => {
+        try {
+          this._map.setFilter('streets-selected', ['in', ['id'], ['literal', [segId]]]);
+          this._map.setLayoutProperty('streets-selected', 'visibility', 'visible');
+        } catch (e) {
+          console.log(e);
+        }
+      })
   }
 
   private _setCursor(mode: string): void {
@@ -237,6 +258,6 @@ export class MapComponent implements AfterViewInit {
 
   private _updateGeoJSONSource(data: FeatureCollection){
     let source = this._map.getSource('crash-point-source') as mapbox.GeoJSONSource;
-    if(source) { source.setData(data); }
+    if (source) { source.setData(data); }
   }
 }
