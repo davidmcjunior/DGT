@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class EditorQueueService extends WatchableService {
+  private _name = 'Dade Nonfatal'
   private _index = -1;
   private _queue = [
     // 100,
@@ -52,5 +53,9 @@ export class EditorQueueService extends WatchableService {
 
   public getSize(): number {
     return this._queue.length;
+  }
+
+  public getName(): string {
+    return this._name;
   }
 }

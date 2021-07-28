@@ -7,12 +7,14 @@ import {EditorQueueService} from "app/services/s4/editor-queue.service";
   templateUrl: './buttons-bar.component.html'
 })
 export class ButtonsBarComponent implements OnInit {
+  @Input('queueName') queueName;
   @Output('loadRecord') loadRecord = new EventEmitter<any>();
 
   constructor(private crashEvent: CrashEventService, private queue: EditorQueueService) {
   }
 
   ngOnInit(): void {
+    this.queueName = this.queue.getName();
   }
 
   onSubmit(): void {}
