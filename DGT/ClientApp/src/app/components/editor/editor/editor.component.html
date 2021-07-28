@@ -4,7 +4,7 @@
   </div>
   <div class="view h">
     <div class="pos-rel h100 w60">
-      <dgt-map *ngIf="isLoaded"></dgt-map>
+      <dgt-map [currentRecord]="currentRecord"></dgt-map>
     </div>
     <div id="crash-event-record-container" class="ml-1 w40">
       <dgt-crash-event-record></dgt-crash-event-record>

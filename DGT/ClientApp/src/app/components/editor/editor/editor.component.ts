@@ -1,4 +1,5 @@
 import {Component, ViewChild, ElementRef, Input, OnInit, AfterViewInit} from '@angular/core';
+import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { CrashEventService } from 'app/services/s4/crash-event.service';
 import {LoadingOverlayComponent} from "../../shared/loading-overlay.component";
 import {ButtonsBarComponent} from "./buttons-bar/buttons-bar.component";
@@ -10,7 +11,7 @@ import {ButtonsBarComponent} from "./buttons-bar/buttons-bar.component";
 export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild(LoadingOverlayComponent) loadingOverlay: LoadingOverlayComponent;
   @ViewChild(ButtonsBarComponent) buttonBar: ButtonsBarComponent;
-  public isLoaded = false;
+  currentRecord: CrashEvent | undefined;
   constructor(private crashEvent: CrashEventService) {
   }
 
@@ -19,11 +20,13 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
-      this.isLoaded = isLoaded; // prevent map component from initializing before record
       if (isLoaded === true) {
+      this.currentRecord = this.crashEvent.getCurrentRecord();
+
         this.loadingOverlay.hide();
       } else {
         this.loadingOverlay.show();
+        this.currentRecord = undefined;
       }
     });
   }

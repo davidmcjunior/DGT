@@ -1,20 +1,19 @@
-import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import * as mapbox from 'mapbox-gl';
 import { CrashEventService } from "app/services/s4/crash-event.service";
-import { Geocoding } from "app/models/crash-event/geocoding";
 import { environment } from "environments/environment";
 import { GeocodeService } from "app/services/s4/geocode.service";
 import { ETL_STATUS, MAP_BOUNDARY } from 'app/models/constants';
 import { CrashEvent } from 'app/models/crash-event/crash-event';
 import { MapPoint } from 'app/models/geolocation/map-point';
-import { Feature, FeatureCollection } from 'geojson';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { FeatureCollection } from 'geojson';
 
 @Component({
   selector: 'dgt-map',
   templateUrl: './map.component.html'
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnChanges {
+  @Input() currentRecord: CrashEvent | undefined;
   private _map: mapbox.Map;
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
   private _ghostMarker: mapbox.Marker;
@@ -50,16 +49,19 @@ export class MapComponent implements AfterViewInit {
    *
    */
   ngAfterViewInit(): void {
-    this._crashEvent.subscribeToFieldSubject('geocoding', (v) => {
-      let event = this._crashEvent.getCurrentRecord();
-      this._initMap(event)
-    }).then((v) => {
-      console.log('Map initialized. ');
-    });
-
-    this._geocoder.mode$.subscribe((v) => {
-      this._setCursor(v);
-    });
+    this._initMap()
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    const currentRecord = changes.currentRecord;
+    console.log(currentRecord);
+    if(currentRecord.currentValue === undefined && !currentRecord.isFirstChange) {
+      this._clearMap();
+      return;
+    }
+    if (currentRecord.currentValue !== undefined) {
+      console.log(currentRecord.currentValue);
+      this._loadCrashEvent();
+    }
   }
 
   get _coordinates(): number[][] {
@@ -90,18 +92,17 @@ export class MapComponent implements AfterViewInit {
    * @private
    */
 
-  private async _initMap(crashEvent: CrashEvent): Promise<void> {
+  private async _initMap(): Promise<void> {
     const map = this._createMapObject(17);
 
     map.on('load', async () => {
-      console.log(crashEvent);
-      this._featureCollection = this._createGeoJSONFeatures(crashEvent);
-      await this._addSources(map, this._featureCollection);
+      await this._addSources(map, this._getNewFeatureCollection());
       await this._addLayers(map);
-      this._fitToFeatures(map, this._coordinates);
+      map.fitBounds(MAP_BOUNDARY);
+
 
       map.on('click', (e) => {
-        if (!e.hasOwnProperty('lngLat') || this._geocoder.mode$.value === '') {
+        if (!e.hasOwnProperty('lngLat') || this._geocoder.mode$.value === '' || !this.currentRecord) {
           return;
         }
         this._addDragableMarker(e.lngLat)
@@ -185,7 +186,19 @@ export class MapComponent implements AfterViewInit {
       data: features
     })
   }
-
+  private _clearMap() {
+    this._geocoder.mode$.next('');
+    if(this._marker){ this._marker.remove();}
+    if(this._ghostMarker) {this._ghostMarker.remove(); }
+    if(this._map) {
+      const streetLayer = this._map.getLayer('streets-selected');
+      if(streetLayer){
+        this._map.setLayoutProperty('streets-selected', 'visibility', 'none');
+        this._map.setFilter('streets-selected', []);
+      }
+      this._updateGeoJSONSource(this._getNewFeatureCollection());
+    }
+  }
   private _createMapObject(z: number): mapbox.Map {
     return new mapbox.Map({
       accessToken: environment.mapbox.accessToken,
@@ -198,11 +211,8 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  private _createGeoJSONFeatures(crashEvent: CrashEvent) {
-    let featureCollection: any = {
-      features: [],
-      type: 'FeatureCollection'
-    };
+  private async _createGeoJSONFeatures(crashEvent: CrashEvent): Promise<FeatureCollection> {
+    let featureCollection: any = this._getNewFeatureCollection();
     if (crashEvent && crashEvent.geocoding) {
       let etlStatus = crashEvent.geocoding.etlGeoLocationStatus;
       const etlStatusCode = etlStatus ? ETL_STATUS[etlStatus][0] : 0;
@@ -256,6 +266,12 @@ export class MapComponent implements AfterViewInit {
     map.fitBounds(bounds, { padding: 50 });
   }
 
+  private _getNewFeatureCollection(): FeatureCollection {
+    return {
+      features: [],
+      type: 'FeatureCollection'
+    };
+  }
   private _highlightStreetSegment(point: mapbox.LngLat) {
     this._geocoder.getNearestSegmentId(point)
       .subscribe((segId: number) => {
@@ -266,6 +282,16 @@ export class MapComponent implements AfterViewInit {
           console.log(e);
         }
       })
+  }
+  private async _loadCrashEvent() {
+    console.log(this.currentRecord, this._map);
+    if(this._map && this.currentRecord) {
+      await this._createGeoJSONFeatures(this.currentRecord).then(featureCollection => {
+        this._featureCollection = featureCollection;
+        this._updateGeoJSONSource(featureCollection);
+        this._fitToFeatures(this._map, this._coordinates);
+      });
+    }
   }
 
   private _setCursor(mode: string): void {
