@@ -7,7 +7,7 @@ a.mapboxgl-ctrl-logo,
 
 .s4-legend {
     min-width: 156px;
-    width: $sidePanelWidth;
+    max-width: $sidePanelWidth;
     max-height: 256px;
     min-height: 128px;
 
