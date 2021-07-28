@@ -585,7 +585,7 @@ namespace DGT.Controllers
                 {
                     ceReturn = ce15;
                 }
-                await Task.Delay(2000);
+                await Task.Delay(1200);
                 return ceReturn;
             });
         }

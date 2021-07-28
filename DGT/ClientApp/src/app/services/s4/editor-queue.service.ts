@@ -8,10 +8,10 @@ import {WatchableService} from "app/models/services/watchable-service";
 export class EditorQueueService extends WatchableService {
   private _index = 0;
   private _queue = [
-    100,
-    200,
-    300,
-    400,
+    // 100,
+    // 200,
+    // 300,
+    // 400,
     88416900,
     24089254,
     88030750,
@@ -33,7 +33,6 @@ export class EditorQueueService extends WatchableService {
   }
 
   public next(): number {
-    return 100;
-    // return this._index < this._queue.length ? this._queue[this._index++] : this._queue[this._index];
+    return this._index < this._queue.length ? this._queue[this._index++] : this._queue[this._index];
   }
 }
