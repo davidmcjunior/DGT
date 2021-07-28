@@ -19,6 +19,8 @@ import {BicyclistCountControl} from "../../models/form/controls/crash-report/bic
 import {CityControl} from "../../models/form/controls/crash-report/city.control";
 import {SharedModule} from "../shared/shared.module";
 import { ModeButtonsComponent } from './editor/map/mode-buttons/mode-buttons.component';
+import { ControlOverlayComponent } from './editor/map/control-overlay/control-overlay.component';
+import { LegendComponent } from './editor/map/legend/legend.component';
 
 
 @NgModule({
@@ -32,17 +34,19 @@ import { ModeButtonsComponent } from './editor/map/mode-buttons/mode-buttons.com
     GiveUpDialogComponent,
     SearchComponent,
     ModeButtonsComponent,
+    ControlOverlayComponent,
+    LegendComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     EditorRoutingModule,
     AutocompleteLibModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
     CrashEventRecordModule,
-    SharedModule
   ],
   providers: [
     BicyclistCountControl,

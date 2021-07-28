@@ -1,5 +1,8 @@
 // CONSTANTS
 
+import * as mapboxgl from "mapbox-gl";
+import { TooltipSettings } from '@progress/kendo-angular-tooltip';
+
 // Relationship tNetwork – the relationship between a crash point and the roadway network
 // Intersection – crash occurred within an at-grade intersection
 // Road Segment – crash occurred on a roadway segment not within an intersection
@@ -164,3 +167,25 @@ export const NON_MOTORIST_DESCRIPTIONS = [
   {key: 6, value: 'Occupant of a Non-Motor Vehicle Transportation Device'},
   {key: 7, value: 'Unknown Type of Non-Motorist'}
 ];
+
+export const MAP_BOUNDARY: mapboxgl.LngLatBoundsLike = [
+  [-87.7913555870355,24.1833657804932],
+  [-79.759563547487,31.2458363737886]
+];
+
+
+export const TOOLTIP_SETTINGS = (): TooltipSettings => ({
+    closeTitle: 'close',
+    // Override default values of tooltips if wanted
+    callout: false
+});
+
+
+export const ETL_STATUS: { [key: string]: [number, string] } = {
+  officerMapped: [1, 'rgba(5, 150, 105, 1)'],
+  computerConfident: [2, 'rgba(52, 211, 153, 1)'],
+  computerTie: [3, 'rgba(245, 158, 11, 1)'],
+  computerApproximate: [4, 'rgba(252, 211, 77, 1)'],
+  latLongPlot: [5, 'rgba(147, 197, 253, 1)']
+}
+

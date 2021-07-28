@@ -1,0 +1,20 @@
+<div *ngIf="!isExpanded" kendoTooltip title="Open map legend" position="right">
+  <dgt-icon-btn icon="map-marked-alt" cssClass="box-shadow-flat bg std cursor-pointer" (trigger)="isExpanded = true">
+  </dgt-icon-btn>
+</div>
+<div *ngIf="isExpanded" class="s4-legend">
+  <div class="px-2 py-1 flex justify-content-between align-items-center box-shadow-flat">
+    <span class="fw700">Map Legend</span>
+    <dgt-icon-btn icon="times" cssClass="std cursor-pointer" (trigger)="isExpanded = false">
+    </dgt-icon-btn>
+
+  </div>
+  <div class="hw100 flex flex-column">
+    <div *ngFor="let item of legendItems" class="flex flex-row justify-content-start m-1 p-1">
+      <div class="ml-1"><span class="p-1 txt7 white-space-no-wrap">{{item.title}}</span></div>
+      <div class="centered mr-1">
+        <span class="circle {{item.color}} box-shadow-main" style="width: 15px; height: 15px"></span>
+      </div>
+    </div>
+  </div>
+</div>
