@@ -33,7 +33,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@signalfour/s4/src/styles/index.scss",
+              "./node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss",
               "./node_modules/leaflet/dist/leaflet.css"
             ],

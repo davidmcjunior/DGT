@@ -22,7 +22,7 @@ export interface CrashEvent {
   editDate: Date | undefined;
   editStatus: Date | undefined;
   originalLat?: number | undefined;
-  orifinalLng?: number | undefined;
+  originalLng?: number | undefined;
   reviewDate: Date | undefined;
   reviewStatus: Date | undefined;
   siteLocation: number | undefined;

@@ -1,0 +1,56 @@
+.grid-wrap {
+    width: 100%;
+    background: $bg;
+    border-radius: $border-radius;
+    pointer-events: auto;
+}
+
+.panel-width {
+    min-width: $sidePanelWidth !important;
+}
+
+.s4-panel,
+.s4-legend {
+    border-radius: $border-radius;
+}
+
+.s4-panel,
+.s4-legend,
+.grid-content,
+.bottom-bar {
+    background: $bg;
+    box-shadow: $box-shadow-main;
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+
+.s4-panel {
+    width: $sidePanelWidth;
+    min-width: $sidePanelWidth !important;
+    height: $sidePanelHeight;
+    margin: 5px;
+    overflow: hidden;
+
+    .panel-content {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+
+.view {
+    height: $height;
+    width: 100%;
+    display: flex;
+
+    &.v {
+        flex-direction: column;
+    }
+
+    &.h {
+        flex-direction: row;
+    }
+}

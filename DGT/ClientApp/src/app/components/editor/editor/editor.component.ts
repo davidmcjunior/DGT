@@ -10,7 +10,7 @@ import {ButtonsBarComponent} from "./buttons-bar/buttons-bar.component";
 export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild(LoadingOverlayComponent) loadingOverlay: LoadingOverlayComponent;
   @ViewChild(ButtonsBarComponent) buttonBar: ButtonsBarComponent;
-
+  public isLoaded = false;
   constructor(private crashEvent: CrashEventService) {
   }
 
@@ -19,7 +19,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
-      if (isLoaded) {
+      this.isLoaded = isLoaded; // prevent map component from initializing before record
+      if (isLoaded === true) {
         this.loadingOverlay.hide();
       } else {
         this.loadingOverlay.show();

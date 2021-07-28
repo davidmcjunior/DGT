@@ -5,6 +5,8 @@
 @import "~tailwindcss/components.css";
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import './app/styles/index.scss';
+
 
 h2.common-header {
   @apply block text-gray-700 text-lg;
@@ -58,7 +60,7 @@ div.attributes-group {
   @apply pt-2 mb-4;
 }
 
-button {
+button.pill {
   @apply w-28 h-8 bg-transparent text-xs text-gray-600 font-bold font-semibold px-4 border rounded-full shadow mx-2;
 }
 
@@ -126,17 +128,10 @@ span.etl-status-indicator {
   //@apply h-full;
 }
 
-.map-frame {
-  //@apply h-full;
-}
+// .mapboxgl-canvas-container {
+//   @apply h-full;
+// }
 
-.mapboxgl-canvas-container {
-  @apply h-full;
-}
-
-#map {
-  //@apply min-h-full;
-}
 
 .location-suggestions-control {
   @apply w-1/2 h-9 appearance-none block w-full bg-gray-50 text-gray-700 text-xs border border-gray-300 rounded py-2 pl-2 mt-6 ml-6 leading-tight;
@@ -150,24 +145,30 @@ span.etl-status-indicator {
   @apply ml-4;
 }
 
+
 .mode-button-container {
-  // @apply;
+  display: flex;
+  flex-direction: column;
+  .mode {
+    // width: 30px;
+    @include centered();
+    // margin: .25rem 0;
+    // padding: 0.5rem 1rem;
+    background:$bg;
+  }
 }
 
-button.mode {
-  @apply pl-8 pt-8 h-8 w-8 bg-gray-300;
+#map {
+  //@apply min-h-full;
+  width: 100%;
+  height: 100%;
 }
-
-button.off-roadway {
-}
-
-button.ramp {
-}
-
-button.intersection {
-}
-
-button.segment {
+.map-frame {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 @import "~tailwindcss/utilities.css";

@@ -1,0 +1,35 @@
+<div class="control-overlay pointer-events-none">
+
+  <div class="half top-half pos-rel">
+
+    <div class="quadrant tl flex flex-column  justify-content-start">
+      <dgt-mode-buttons></dgt-mode-buttons>
+    </div>
+    <div class="quadrant tr">
+
+    </div>
+  </div>
+
+  <div class="half bottom-half">
+    <div class="quadrant bl flex flex-column  justify-content-end">
+      <dgt-legend></dgt-legend>
+    </div>
+    <div class="quadrant br">
+      <div kendoTooltip position="left" class="flex flex-column ">
+        <dgt-icon-btn class="mb-1 box-shadow-flat" icon="florida" cssClass="bg std florida  cursor-pointer"
+          [customIcon]="true" (trigger)="onZoomToState()" data-toggle="tooltip" title="Zoom to State">
+        </dgt-icon-btn>
+        <dgt-icon-btn class="mb-1 box-shadow-flat" icon="expand-wide" cssClass="bg std cursor-pointer"
+           (trigger)="onZoomToCurrent()" data-toggle="tooltip" title="Zoom to Current">
+        </dgt-icon-btn>
+        <div class="flex flex-column  box-shadow-flat mb-1">
+          <dgt-icon-btn icon="plus" cssClass="bg std cursor-pointer" (trigger)="onZoomIn()" title="Zoom In">
+          </dgt-icon-btn>
+          <dgt-icon-btn icon="minus" cssClass="bg std cursor-pointer" (trigger)="onZoomOut()" title="Zoom Out">
+          </dgt-icon-btn>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

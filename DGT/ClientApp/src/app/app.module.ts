@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectValueDirective } from './directives/forms/select-value.directive';
+import { SharedModule } from './components/shared/shared.module';
 
 
 
@@ -15,6 +16,7 @@ import { SelectValueDirective } from './directives/forms/select-value.directive'
     ],
     imports: [
         BrowserModule,
+        SharedModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule

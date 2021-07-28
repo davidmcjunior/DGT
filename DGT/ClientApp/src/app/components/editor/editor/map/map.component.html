@@ -1,13 +1,10 @@
 <!--<dgt-search (locationChanged)="onLocationChanged($event)"></dgt-search>-->
-<!--<div class="map-container">-->
-  <div class="map-frame">
-    <input class="" id="search" />
-    <dgt-mode-buttons class="mode-buttons w50"></dgt-mode-buttons>
-    <div id="map">
+    <!-- <input class="" id="search" /> -->
+    <div>
+      <div #map id="map" class="map-frame"></div>
     </div>
-  </div>
-<!--</div>-->
-<style>
-.map-frame {
-}
-</style>
+    <dgt-control-overlay
+      (zoomIn)="onZoomIn()"
+      (zoomOut)="onZoomOut()"
+      (zoomToCurrent)="onZoomToCurrent()"
+      (zoomToState)="onZoomToState()"></dgt-control-overlay>
