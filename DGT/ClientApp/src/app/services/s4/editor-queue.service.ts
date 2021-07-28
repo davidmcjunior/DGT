@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {WatchableService} from "app/models/services/watchable-service";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorQueueService extends WatchableService {
-  private _index = 0;
+  private _name = 'Dade Nonfatal'
+  private _index = -1;
   private _queue = [
     // 100,
     // 200,
@@ -24,15 +26,36 @@ export class EditorQueueService extends WatchableService {
     88437237
   ];
 
+  public position$: BehaviorSubject<number>;
+
   constructor(private _http: HttpClient) {
     super();
+    this.position$ = new BehaviorSubject<number>(this._index);
+    this.serviceIsLoaded$.next(true);
   }
 
   public prev(): number {
-    return this._index > 0 ? this._queue[this._index--] : this._queue[this._index];
+    if (this._index > 0) {
+      this.position$.next(--this._index);
+    }
+
+    return this._queue[this._index];
   }
 
   public next(): number {
-    return this._index < this._queue.length ? this._queue[this._index++] : this._queue[this._index];
+    if (this._index < this._queue.length) {
+      console.log(this._index);
+      this.position$.next(++this._index);
+    }
+
+    return this._queue[this._index];
+  }
+
+  public getSize(): number {
+    return this._queue.length;
+  }
+
+  public getName(): string {
+    return this._name;
   }
 }
