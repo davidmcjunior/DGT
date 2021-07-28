@@ -19,7 +19,7 @@ export class MapComponent implements AfterViewInit {
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
   private _ghostMarker: mapbox.Marker;
   private _marker: mapbox.Marker;
-
+  private _featureCollection: FeatureCollection;
   @ViewChild('map') mapElement: ElementRef;
 
   @HostListener('window:click', ['$event'])
@@ -62,10 +62,27 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
+  get _coordinates(): number[][] {
+    return this._featureCollection.features
+    .map((feature: any) => feature.geometry.coordinates);
+  }
+
+  public onLocationChanged(e: any) {
+    // TODO
+  }
   public onZoomIn() { this._map.zoomIn(); }
   public onZoomOut() { this._map.zoomOut(); }
-  public onZoomToState() { this._map.fitBounds(MAP_BOUNDARY); }
-  public onZoomToCurrent() { /* TODO */ }
+  public onZoomToState() {this._map.fitBounds(MAP_BOUNDARY); }
+  public onZoomToCurrent() {
+    const coordinates:number[][] = [...this._coordinates];
+    if (this._marker) {
+      const lngLat:mapbox.LngLat = this._marker.getLngLat();
+      if(lngLat) {
+        coordinates.push([lngLat.lng, lngLat.lat])
+      }
+    }
+    this._fitToFeatures(this._map, coordinates);
+  }
 
   /**
    *
@@ -78,10 +95,10 @@ export class MapComponent implements AfterViewInit {
 
     map.on('load', async () => {
       console.log(crashEvent);
-      let features = this._createGeoJSONFeatures(crashEvent);
-      await this._addSources(map, features);
+      this._featureCollection = this._createGeoJSONFeatures(crashEvent);
+      await this._addSources(map, this._featureCollection);
       await this._addLayers(map);
-      this._fitToFeatures(map, features);
+      this._fitToFeatures(map, this._coordinates);
 
       map.on('click', (e) => {
         if (!e.hasOwnProperty('lngLat') || this._geocoder.mode$.value === '') {
@@ -217,11 +234,9 @@ export class MapComponent implements AfterViewInit {
     return featureCollection;
   }
 
-  private _fitToFeatures(map: mapbox.Map, featureCollection: FeatureCollection) {
-    let ne: any = MAP_BOUNDARY[0],
-      sw: any = MAP_BOUNDARY[1];
-    const coordinates: number[][] = featureCollection.features
-      .map((feature: any) => feature.geometry.coordinates);
+  private _fitToFeatures(map: mapbox.Map, coordinates: number[][]) {
+    let ne: any = [...MAP_BOUNDARY[0]],
+      sw: any = [...MAP_BOUNDARY[1]];
 
     coordinates.forEach((coordinate) => {
       if (coordinate[0] > ne[0]) {

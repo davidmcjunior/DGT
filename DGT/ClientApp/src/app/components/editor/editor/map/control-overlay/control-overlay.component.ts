@@ -6,6 +6,7 @@ import { Component, EventEmitter, Output } from "@angular/core";
 })
 
 export class ControlOverlayComponent {
+  @Output() locationChanged = new EventEmitter<any>();
   @Output() zoomIn = new EventEmitter<void>();
   @Output() zoomOut = new EventEmitter<void>();
   @Output() zoomToState = new EventEmitter<void>();

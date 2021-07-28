@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   input = new FormControl();
   classList = 'search';
 
-  @Input() currentRecord: CrashEvent;
+  // @Input() currentRecord: CrashEvent;
   @Output('locationChanged') locationChanged = new EventEmitter<any>();
 
   constructor(private service: SuggestionService) {

@@ -107,7 +107,9 @@ span.etl-status-indicator {
 .officer-mapped {
   @apply bg-green-700;
 }
-
+.clr-officer-mapped {
+  color: rgba(5, 150, 105, 1);
+}
 .computer-confident {
   @apply bg-green-400;
 }
@@ -140,10 +142,20 @@ span.etl-status-indicator {
 .location-suggestions-control:focus {
   @apply outline-none bg-gray-100 border-blue-300 border-2;
 }
-
-.search {
-  @apply ml-4;
+.dgt-search-input{
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  pointer-events: none;
+  .search-form {
+    width: 40%;
+    background: $bg;
+    margin: 0 auto;
+  }
 }
+// .search {
+//   @apply ml-4;
+// }
 
 
 .mode-button-container {

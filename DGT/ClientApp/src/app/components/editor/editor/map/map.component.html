@@ -4,6 +4,7 @@
       <div #map id="map" class="map-frame"></div>
     </div>
     <dgt-control-overlay
+      (locationChanged)="onLocationChanged($event)"
       (zoomIn)="onZoomIn()"
       (zoomOut)="onZoomOut()"
       (zoomToCurrent)="onZoomToCurrent()"
