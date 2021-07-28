@@ -116,8 +116,7 @@ export class MapComponent implements AfterViewInit {
     });
 
     marker.on('dragend', (e) => {
-      marker.togglePopup();
-      marker.setDraggable(false);
+      marker.togglePopup().setDraggable(false);
     });
     this._marker = marker;
     this._highlightStreetSegment(point);
