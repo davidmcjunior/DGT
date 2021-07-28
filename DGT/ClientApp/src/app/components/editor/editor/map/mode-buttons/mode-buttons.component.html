@@ -1,11 +1,70 @@
 <div class="mode-button-container">
-  <button (click)="onClick('SEGMENT')"  class="mode segment">
-    <img src="assets/map/mode-buttons/segment.png" style="background-repeat:no-repeat;" alt="segment">
+  <button (click)="onClick('SEGMENT')" class="mode segment" [class.active]="currentMode === 'SEGMENT'">
+    <div class="mode-icon">
+      <svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        <path id="segment"
+          d="M431.756,228.294l-30.581,-83.119l110.825,110.825l-110.825,110.825l30.581,-83.119l-431.756,0l-0,-55.412l431.756,-0Z" />
+      </svg>
+    </div>
+    <div class="ml-2 txt6 mode-label">Segment</div>
+
   </button>
-  <button (click)="onClick('RAMP')" style="background-image: url('assets/map/mode-buttons/ramp.png'); background-repeat:no-repeat;" class="mode ramp">
+  <button (click)="onClick('RAMP')" class="mode ramp" [class.active]="currentMode === 'RAMP'">
+    <div class="mode-icon">
+      <svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        <g id="ramp">
+          <path
+            d="M431.756,177.375l-30.581,-83.118l110.825,110.824l-110.825,110.825l30.581,-83.118l-431.756,-0l0,-55.413l431.756,0Z" />
+          <path
+            d="M348.65,352.895l37.004,-36.989l-24.764,101.837l-104.89,-17.587l53.358,-31.147c0,-0 -35.413,-134.334 -125.084,-136.221c-141.249,-2.974 -184.274,-0 -184.274,-0l27.955,-39.345c0,-0 195.652,-24.556 228.045,11.638c84.897,94.859 92.65,147.814 92.65,147.814Z" />
+        </g>
+      </svg>
+    </div>
+    <div class="ml-2 txt6 mode-label">Ramp</div>
+
   </button>
-  <button (click)="onClick('INTERSECTION')" style="background-image: url('assets/map/mode-buttons/intersection.png'); background-repeat:no-repeat;" class="mode intersection">
+  <button (click)="onClick('INTERSECTION')" class="mode intersection" [class.active]="currentMode === 'INTERSECTION'">
+    <div class="mode-icon">
+      <svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        <g id="intersection">
+          <path
+            d="M142.882,107.284l33.75,-73.042l0,142.39l-142.39,0l73.042,-33.75l-107.284,-107.284l35.598,-35.598l107.284,107.284Z" />
+          <path
+            d="M142.882,404.716l33.75,73.042l0,-142.39l-142.39,-0l73.042,33.75l-107.284,107.284l35.598,35.598l107.284,-107.284Z" />
+          <path
+            d="M369.118,404.716l-33.75,73.042l-0,-142.39l142.39,-0l-73.042,33.75l107.284,107.284l-35.598,35.598l-107.284,-107.284Z" />
+          <path
+            d="M404.716,142.882l73.042,33.75l-142.39,0l-0,-142.39l33.75,73.042l107.284,-107.284l35.598,35.598l-107.284,107.284Z" />
+        </g>
+      </svg>
+    </div>
+    <div class="ml-2 txt6 mode-label">Intersection</div>
+
   </button>
-  <button (click)="onClick('OFFROADWAY')" style="background-image: url('assets/map/mode-buttons/offroadway.png'); background-repeat:no-repeat;" class="mode off-roadway">
+
+  <button (click)="onClick('OFFROADWAY')" class="mode off-roadway" [class.active]="currentMode === 'OFFROADWAY'">
+    <div class="mode-icon">
+      <svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        <g id="offroadway">
+          <path
+            d="M433.015,37.504l-81.163,-37.504l158.223,0l-0,158.223l-37.504,-81.164l-119.213,119.213l-39.556,-39.555l119.213,-119.213Z" />
+          <path
+            d="M78.512,40.094l81.163,-37.504l-158.222,-0l-0,158.223l37.503,-81.164l119.213,119.213l39.556,-39.555l-119.213,-119.213Z" />
+          <path
+            d="M78.197,471.434l81.163,37.503l-158.223,0l0,-158.222l37.504,81.163l119.213,-119.213l39.556,39.556l-119.213,119.213Z" />
+          <path
+            d="M473.359,434.941l37.504,-81.164l-0,158.223l-158.223,-0l81.163,-37.504l-119.213,-119.213l39.556,-39.555l119.213,119.213Z" />
+        </g>
+      </svg>
+    </div>
+    <div class="ml-2 txt6 mode-label">Off Roadway</div>
   </button>
 </div>

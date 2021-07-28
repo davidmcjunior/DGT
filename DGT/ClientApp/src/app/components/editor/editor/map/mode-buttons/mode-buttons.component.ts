@@ -5,17 +5,13 @@ import {GeocodeService} from "app/services/s4/geocode.service";
   selector: 'dgt-mode-buttons',
   templateUrl: './mode-buttons.component.html'
 })
-export class ModeButtonsComponent implements OnInit {
-  @Output('modeChanged') modeChanged = new EventEmitter<any>();
-  @ViewChild('btnContainer') btnContainer: HTMLElement;
-
+export class ModeButtonsComponent {
   constructor(private reverseGeocoder: GeocodeService) { }
-
-  ngOnInit(): void {
-
-  }
-
+  get currentMode() {return this.reverseGeocoder.mode$.value; }
   onClick(mode: string): void {
+    if (mode === this.currentMode) {
+      mode = '';
+    }
     this.reverseGeocoder.mode$.next(mode);
   }
 }

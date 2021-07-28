@@ -150,11 +150,48 @@ span.etl-status-indicator {
   display: flex;
   flex-direction: column;
   .mode {
-    // width: 30px;
-    @include centered();
-    // margin: .25rem 0;
-    // padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin: .25rem 0;
+    padding: 0.5rem 1rem;
     background:$bg;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-flat;
+    .mode-icon{
+      width:1rem;
+      height: 1rem;
+      svg {
+        fill: $primary;
+        fill-opacity: $opacity-mid;
+      }
+    }
+    .mode-label{
+      font-weight: 600;
+      font-size: 1rem;
+      opacity: $opacity-mid;
+      color: $primary;
+    }
+    &:hover {
+      svg {
+        fill-opacity: $opacity-high;
+      }
+      .mode-label{
+        opacity: $opacity-high;
+      }
+    }
+    &.active {
+      background: $primary;
+      svg {
+        fill: $on-primary;
+        fill-opacity: $opacity-high;
+      }
+      .mode-label {
+        color: $on-primary;
+        opacity: $opacity-high;
+      }
+    }
   }
 }
 

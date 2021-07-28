@@ -83,7 +83,7 @@ export class MapComponent implements AfterViewInit {
       this._fitToFeatures(map, features);
 
       map.on('click', (e) => {
-        if (!e.hasOwnProperty('lngLat')) {
+        if (!e.hasOwnProperty('lngLat') || this._geocoder.mode$.value === '') {
           return;
         }
         this._addDragableMarker(e.lngLat)

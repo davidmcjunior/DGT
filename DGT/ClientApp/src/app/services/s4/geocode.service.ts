@@ -23,7 +23,7 @@ export class GeocodeService extends WatchableService implements OnInit {
    */
   constructor(private _http: HttpClient, private crashEvent: CrashEventService) {
     super();
-    this.mode$ = new BehaviorSubject<string>('SEGMENT');
+    this.mode$ = new BehaviorSubject<string>('');
     this.geocoding$ = new BehaviorSubject<any>(undefined);
     this.modeActive$ = new BehaviorSubject<boolean>(false);
   }
@@ -34,6 +34,7 @@ export class GeocodeService extends WatchableService implements OnInit {
    * @param lng
    */
   public next(lat: number, lng: number): any {
+    if (this.mode$.value === '') { return; }
     const configs = environment.s4.reverseGeocodeService;
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
