@@ -77,6 +77,7 @@ export class MapComponent implements AfterViewInit {
     const map = this._createMapObject(17);
 
     map.on('load', async () => {
+      console.log(crashEvent);
       let features = this._createGeoJSONFeatures(crashEvent);
       await this._addSources(map, features);
       await this._addLayers(map);
@@ -103,7 +104,7 @@ export class MapComponent implements AfterViewInit {
 
     const marker = new mapbox.Marker({
       draggable: true,
-      color: ETL_STATUS['officerMapped'][1]
+      color: ETL_STATUS['Officer Mapped'][1]
     }).setLngLat(new mapbox.LngLat(point.lng, point.lat))
       .setPopup(this._addMarkerPopup())
       .addTo(this._map)
@@ -137,11 +138,11 @@ export class MapComponent implements AfterViewInit {
           property: 'etlStatus',
           stops: [
             [0, '#000'],
-            ETL_STATUS['officerMapped'],
-            ETL_STATUS['computerConfident'],
-            ETL_STATUS['computerTie'],
-            ETL_STATUS['computerApproximate'],
-            ETL_STATUS['latLongPlot']
+            ETL_STATUS['Officer Mapped'],
+            ETL_STATUS['Computer Confident'],
+            ETL_STATUS['Computer Tie'],
+            ETL_STATUS['Computer Approximate'],
+            ETL_STATUS['Lat Long Plot']
           ]
         }
       }
@@ -186,7 +187,8 @@ export class MapComponent implements AfterViewInit {
       type: 'FeatureCollection'
     };
     if (crashEvent && crashEvent.geocoding) {
-      const etlStatusCode = crashEvent.geocoding.etlGeoLocationStatus ? ETL_STATUS[crashEvent.geocoding.etlGeoLocationStatus] : 0;
+      let etlStatus = crashEvent.geocoding.etlGeoLocationStatus;
+      const etlStatusCode = etlStatus ? ETL_STATUS[etlStatus][0] : 0;
       featureCollection.features = crashEvent.geocoding.mapPoints.map((point: MapPoint) => {
         return {
           type: 'Feature',

@@ -182,10 +182,9 @@ export const TOOLTIP_SETTINGS = (): TooltipSettings => ({
 
 
 export const ETL_STATUS: { [key: string]: [number, string] } = {
-  officerMapped: [1, 'rgba(5, 150, 105, 1)'],
-  computerConfident: [2, 'rgba(52, 211, 153, 1)'],
-  computerTie: [3, 'rgba(245, 158, 11, 1)'],
-  computerApproximate: [4, 'rgba(252, 211, 77, 1)'],
-  latLongPlot: [5, 'rgba(147, 197, 253, 1)']
+  'Officer Mapped': [1, 'rgba(5, 150, 105, 1)'],
+  'Computer Confident': [2, 'rgba(52, 211, 153, 1)'],
+  'Computer Tie': [3, 'rgba(245, 158, 11, 1)'],
+  'Computer Approximate': [4, 'rgba(252, 211, 77, 1)'],
+  'Lat Long Plot': [5, 'rgba(147, 197, 253, 1)']
 }
-
