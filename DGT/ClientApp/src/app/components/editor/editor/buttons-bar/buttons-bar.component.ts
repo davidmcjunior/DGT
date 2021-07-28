@@ -4,8 +4,7 @@ import {EditorQueueService} from "app/services/s4/editor-queue.service";
 
 @Component({
   selector: 'dgt-buttons-bar',
-  templateUrl: './buttons-bar.component.html',
-  styleUrls: ['./buttons-bar.component.scss']
+  templateUrl: './buttons-bar.component.html'
 })
 export class ButtonsBarComponent implements OnInit {
   @Output('loadRecord') loadRecord = new EventEmitter<any>();
@@ -19,7 +18,8 @@ export class ButtonsBarComponent implements OnInit {
   onSubmit(): void {}
 
   giveUp(): void {
-    console.log(this.crashEvent.getCurrentRecord());
+    this.loadRecord.emit();
+    this.crashEvent.next(this.queue.next());
   }
 
   skip(): void {
@@ -30,6 +30,11 @@ export class ButtonsBarComponent implements OnInit {
   goBack(): void {
     this.loadRecord.emit();
     this.crashEvent.next(this.queue.prev());
+  }
+
+  save(): void {
+    this.loadRecord.emit();
+    this.crashEvent.next(this.queue.next());
   }
 
 }
