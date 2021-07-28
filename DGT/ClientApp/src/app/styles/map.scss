@@ -1,0 +1,122 @@
+
+// * Removes map credits
+a.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+.s4-legend {
+    min-width: 156px;
+    width: $sidePanelWidth;
+    max-height: 256px;
+    min-height: 128px;
+
+}
+
+.control-overlay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+
+    .half {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &.top-half {
+            align-items: flex-start;
+
+        }
+
+        &.bottom-half {
+            align-items: flex-end;
+
+        }
+
+        .quadrant {
+            pointer-events: auto;
+        }
+    }
+}
+
+
+
+/**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.8);
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    overflow: auto;
+    border-radius: 3px;
+}
+
+#legend {
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 21px;
+    height: 150px;
+    margin-bottom: 40px;
+    width: 120px;
+
+}
+
+.legend-key {
+    display: inline-block;
+    border-radius: 20%;
+    opacity: 0.7;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+
+.feature-display-mode {
+    // .svg-heatmap,
+    // .point-svg,
+    // .cluster-svg {
+    //     stroke: $primary;
+    // }
+
+    // .cluster-svg,
+    // .point-svg {
+    //     fill: $primary;
+    // }
+
+
+    .point-svg,
+    .svg-fdm-auto {
+        fill: $primary;
+    }
+
+    .svg-heatmap {
+        stroke-width: 5px;
+    }
+
+    .active.s4-btn {
+        background: $secondary;
+
+        svg,
+        i {
+            color: $light;
+            fill: $light;
+            stroke: $light;
+        }
+
+        .svg-fdm-auto,
+        .point-svg {
+            fill: $light;
+        }
+    }
+
+}

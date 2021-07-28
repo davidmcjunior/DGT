@@ -1,0 +1,136 @@
+.layout-container {
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+    // top: 80px;
+    // bottom: 0;
+    height: $height !important;
+
+    kendo-splitter.center-panel {
+        margin: 5px;
+        height: $sidePanelHeight;
+    }
+
+
+    .left-panel,
+    .center-panel,
+    .right-panel {
+        top: 0;
+        position: absolute;
+        height: $sidePanelHeight;
+        transition: all 300ms $easing-in-out-sin;
+    }
+
+    .top-panel {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: unset;
+        margin: 0 !important;
+        padding: 1em;
+        overflow: visible;
+    }
+
+
+    .active-panel-none {
+        .left-panel {
+            left: -310px;
+        }
+
+        .right-panel {
+            right: -310px;
+        }
+
+        .center-panel {
+            left: 0;
+            width: $gridWidth;
+        }
+    }
+
+    .active-panel-left {
+        .left-panel {
+            left: 0;
+        }
+
+        .right-panel {
+            right: -310px;
+        }
+
+        .center-panel {
+            left: 310px;
+            width: $gridWidthOnePanel
+        }
+
+
+    }
+
+    .active-panel-right {
+        .left-panel {
+            left: -310px;
+        }
+
+        .right-panel {
+            right: 0
+        }
+
+        .center-panel {
+            left: 0;
+            width: $gridWidthOnePanel
+        }
+    }
+
+    .active-panel-both {
+        .left-panel {
+            left: 0;
+        }
+
+        .right-panel {
+            right: 0;
+        }
+
+        .center-panel {
+            left: 310px;
+            width: $gridWidthTwoPanel
+        }
+
+    }
+}
+
+.s4-grid {
+    .k-grid-norecords {
+        text-align: left;
+    }
+}
+
+.selector-icons{
+    .selector-icon {
+        i, svg{
+            cursor:pointer;
+            color: $txt-helper;
+        }
+        &.selected{
+            i,svg{
+                color:$txt-active;
+            }
+        }
+        &:hover{
+            i,svg{
+                color: $secondary;
+                opacity: $opacity-mid;
+            }
+        }
+        &.disabled{
+            i,svg, &:hover i, &:hover svg{
+                color:$txt-disabled;
+                opacity:$opacity-mid;
+            }
+        }
+    }
+}

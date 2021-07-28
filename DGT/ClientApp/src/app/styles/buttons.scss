@@ -1,0 +1,117 @@
+@import './mixins.scss';
+
+button:focus {
+    outline: none
+}
+
+// *Used by Icon Button* // *
+// ************ // **
+@mixin baseBtn() {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: all $dur100 $easing-std;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.s4-btn {
+    @include baseBtn();
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.std {
+        width: 30px;
+        height: 30px;
+        background: $surface;
+        @include lightenColorOnHover($secondary-d, 20%);
+        color: $primary-d !important;
+        stroke: $primary-d !important;
+        @include centered();
+
+        i,
+        svg,
+        span {
+            width: 20px;
+            height: 20px;
+            opacity: $opacity-high;
+        }
+    }
+
+    &.secondary-toggle {
+        color: $txt-helper;
+
+        &:hover {
+            color: $txt-active;
+        }
+
+        &.active {
+            background: $secondary;
+            color: $on-secondary !important;
+
+            &:hover {
+                color: $on-secondary;
+            }
+
+            @include lightenBgOnHover($secondary, 20%);
+        }
+    }
+
+    &.primary {
+        background: $primary !important;
+        color: $on-primary !important;
+        stroke: $on-primary !important;
+    }
+
+    &.secondary {
+        background: $secondary;
+        color: $on-secondary;
+    }
+
+    &.disabled,
+    &.disabled:hover {
+        color: $txt-disabled;
+        stroke: $txt-disabled;
+        opacity: $opacity-mid;
+        cursor: auto;
+    }
+}
+
+.icon-disabled .s4-btn {
+    pointer-events: none;
+
+    i,
+    svg,
+    span,
+    svg * {
+        color: $txt-disabled !important;
+        fill-opacity: $opacity-mid;
+        stroke-opacity: $opacity-mid;
+    }
+}
+
+// ** state of florida svg **//
+.florida {
+    stroke: $primary !important;
+    fill: $light-d !important;
+    stroke-width: 2px;
+
+    &:hover {
+        stroke: $secondary !important;
+        fill: $secondary !important;
+    }
+}
+
+
+.sideMenuButton {
+    width: 46px;
+    height: 46px;
+    text-decoration: none;
+    transition: all $dur200 $easing-std;
+
+}
