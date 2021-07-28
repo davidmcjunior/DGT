@@ -83,10 +83,12 @@ export class CrashEventService extends WatchableService {
    */
   private async _loadNext(hsmvReportNumber: number): Promise<any> {
     this.recordIsLoaded$.next(false);
+    this.serviceIsLoaded$.next(false);
 
     this.http.get<CrashEvent>(this._url + hsmvReportNumber).subscribe(async response => {
       this._initData(response).then(() => {
         this.recordIsLoaded$.next(true);
+        this.serviceIsLoaded$.next(true);
         this._initInterFieldSubscriptions();
       });
     });
