@@ -1,14 +1,12 @@
 <div class="control-overlay pointer-events-none">
 
   <div class="half top-half pos-rel">
-    <!-- <dgt-search class="dgt-search-input" (locationChanged)="locationChanged.emit($event)"></dgt-search> -->
+    <dgt-search class="dgt-search-input" (locationChanged)="locationChanged.emit($event)"></dgt-search>
 
     <div class="quadrant tl flex flex-column  justify-content-start">
       <dgt-mode-buttons></dgt-mode-buttons>
     </div>
-    <div class="quadrant tr">
-
-    </div>
+    <div class="quadrant tr"></div>
   </div>
 
   <div class="half bottom-half">
@@ -29,7 +27,6 @@
           <dgt-icon-btn icon="minus" cssClass="bg std cursor-pointer" (trigger)="onZoomOut()" title="Zoom Out">
           </dgt-icon-btn>
         </div>
-
       </div>
     </div>
   </div>

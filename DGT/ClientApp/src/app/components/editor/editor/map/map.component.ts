@@ -14,11 +14,13 @@ import { FeatureCollection } from 'geojson';
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   @Input() currentRecord: CrashEvent | undefined;
-  private _map: mapbox.Map;
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
-  private _ghostMarker: mapbox.Marker;
-  private _marker: mapbox.Marker;
   private _featureCollection: FeatureCollection;
+  private _ghostMarker: mapbox.Marker;
+  private _hasARecordWaiting = false;
+  private _map: mapbox.Map;
+  private _marker: mapbox.Marker;
+
   @ViewChild('map') mapElement: ElementRef;
 
   @HostListener('window:click', ['$event'])
@@ -53,14 +55,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     const currentRecord = changes.currentRecord;
-    console.log(currentRecord);
     if(currentRecord.currentValue === undefined && !currentRecord.isFirstChange) {
       this._clearMap();
       return;
     }
     if (currentRecord.currentValue !== undefined) {
-      console.log(currentRecord.currentValue);
-      this._loadCrashEvent();
+      this._loadRecord();
     }
   }
 
@@ -69,8 +69,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
     .map((feature: any) => feature.geometry.coordinates);
   }
 
-  public onLocationChanged(e: any) {
-    // TODO
+  public onLocationChanged(lngLat: mapbox.LngLat | undefined) {
+    if(this._map && lngLat) {
+      this._map.easeTo({center: lngLat,zoom: 15})
+    }
   }
   public onZoomIn() { this._map.zoomIn(); }
   public onZoomOut() { this._map.zoomOut(); }
@@ -109,6 +111,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
       });
 
       this._map = map;
+      if(this._hasARecordWaiting) {
+        this._loadRecord();
+      }
     })
   }
 
@@ -263,7 +268,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       }
     });
     const bounds = new mapbox.LngLatBounds(sw, ne);
-    map.fitBounds(bounds, { padding: 50 });
+    map.fitBounds(bounds, { padding: {top: 100, left: 100, right: 50, bottom: 50} });
   }
 
   private _getNewFeatureCollection(): FeatureCollection {
@@ -283,14 +288,16 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
       })
   }
-  private async _loadCrashEvent() {
-    console.log(this.currentRecord, this._map);
+  private async _loadRecord() {
     if(this._map && this.currentRecord) {
+      this._hasARecordWaiting = false;
       await this._createGeoJSONFeatures(this.currentRecord).then(featureCollection => {
         this._featureCollection = featureCollection;
         this._updateGeoJSONSource(featureCollection);
         this._fitToFeatures(this._map, this._coordinates);
       });
+    } else if(!this._map) {
+      this._hasARecordWaiting = true;
     }
   }
 
