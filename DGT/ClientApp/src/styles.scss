@@ -148,9 +148,21 @@ span.etl-status-indicator {
   background: transparent;
   pointer-events: none;
   .search-form {
-    width: 40%;
+    position: relative;
+    width: 50%;
     background: $bg;
     margin: 0 auto;
+    padding:1em 2em;
+    pointer-events: auto;
+    border-radius: 500px !important; // more effective than trying to round each corner
+    box-shadow: $box-shadow-flat;
+    border: 1px solid $light;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    #search-autocomplete, #search-autocomplete:focus {
+      outline: none;
+    }
   }
 }
 // .search {
@@ -170,6 +182,7 @@ span.etl-status-indicator {
     justify-content: flex-start;
     align-items: center;
     border-radius: $border-radius;
+    border: .5px solid $light;
     box-shadow: $box-shadow-flat;
     .mode-icon{
       width:1rem;

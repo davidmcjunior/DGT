@@ -3,9 +3,7 @@ import { ArcgisSuggestion as Suggestion} from 'app/models/geolocation/suggestion
 import { ArcGisSuggestionService as SuggestionService } from 'app/services/arcgis/arcgis-suggestion.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { CrashEvent } from 'app/models/crash-event/crash-event';
-import { MapPoint } from 'app/models/geolocation/map-point';
-import { MatOptionSelectionChange } from '@angular/material/core';
+import * as mapboxgl from 'mapbox-gl';
 
 
 @Component({
@@ -39,10 +37,19 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  public onClearInput(el:any) {
+    this.input.setValue(null);
+    el.focus();
+  }
+
   public onSuggestionSelect(suggestion: Suggestion): void {
-    this.input.setValue('');
-    this.suggestions = [];
-    this.locationChanged.emit(suggestion.location);
+    // this.input.setValue('');
+    // this.suggestions = [];
+    let lngLat: mapboxgl.LngLatLike | undefined;
+    if (suggestion && suggestion.location ){
+      lngLat = [suggestion.location.x, suggestion.location.y];
+    }
+    this.locationChanged.emit(lngLat);
   }
 }
 

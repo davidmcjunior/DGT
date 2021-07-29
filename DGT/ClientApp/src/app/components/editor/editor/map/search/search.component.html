@@ -1,13 +1,18 @@
 <form class="search-form">
-  <mat-form-field [classList]="classList">
-    <mat-form-field >
-      <input class="search" type="text" matInput [formControl]="input" [matAutocomplete]="auto">
-    </mat-form-field>
+  <input #autoInput id="search-autocomplete" class="w100" placeholder="Search" [formControl]="input"
+    [matAutocomplete]="auto">
 
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option (onSelectionChange)="onSuggestionSelect(suggestion)" *ngFor="let suggestion of suggestions" [value]="suggestion.location">
-        {{ suggestion.address }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let suggestion of suggestions" [value]="suggestion.address"
+      (onSelectionChange)="onSuggestionSelect(suggestion)">
+      {{ suggestion.address }}
+    </mat-option>
+  </mat-autocomplete>
+  <div>
+    <button *ngIf="input.value !== null && input.value !== ''"
+      class='pos-abs clr-primary opacity-low hover-clr-primary hover-fill' style="right: 5%; top:25%; height: 50%;"
+      (click)="onClearInput(autoInput)">
+      <i class="fal fa-times"></i>
+    </button>
+  </div>
 </form>
