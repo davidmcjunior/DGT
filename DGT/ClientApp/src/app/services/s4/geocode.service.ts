@@ -39,10 +39,12 @@ export class GeocodeService extends WatchableService implements OnInit {
     const url = configs.url + encodeURI(`${configs.key}/${lat}/${lng}/${configs.agency}/${this.mode$.getValue()}`);
 
     return this._http.get<any>(url).pipe(map( (v) => {
-      console.log(v);
+      console.log('Offset ft', v.Location);
       this.geocoding$.next(v);
       this.crashEvent.getFieldSubject('onStreet')?.next(v.Location.StreetName);
       this.crashEvent.getFieldSubject('intersectingStreet')?.next(v.Location.NearestIntersectingStreetName);
+      this.crashEvent.getFieldSubject('offsetDistance')?.next(v.Location.NearestIntersectionOffsetFeet);
+      this.crashEvent.getFieldSubject('direction')?.next(v.Location.NearestIntersectionOffsetDir);
       return v;
     }));
   }
