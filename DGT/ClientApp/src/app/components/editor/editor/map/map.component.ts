@@ -268,7 +268,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       }
     });
     const bounds = new mapbox.LngLatBounds(sw, ne);
-    map.fitBounds(bounds, { padding: 50 });
+    map.fitBounds(bounds, { padding: {top: 100, left: 100, right: 50, bottom: 50} });
   }
 
   private _getNewFeatureCollection(): FeatureCollection {
