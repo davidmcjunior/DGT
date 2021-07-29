@@ -49,10 +49,28 @@ export class CrashInfoPanelComponent implements OnInit, AfterViewInit {
 
   private _initFields(): void {
     this.crashEvent.getFieldSubject('city')?.subscribe({
-      next: (v) => { this.city = v.toUpperCase(); }
+      next: (v) => {
+        this.city = v.toUpperCase();
+
+        if (v !== this._ogCity) {
+          this.ogCity = this._ogCity;
+        }
+        else {
+          this.ogCity = '.';
+        }
+      }
     });
     this.crashEvent.getFieldSubject('county')?.subscribe({
-      next: (v) => { this.county = v.toUpperCase(); }
+      next: (v) => {
+        this.county = v.toUpperCase();
+
+        if (v !== this._ogCounty) {
+          this.ogCounty = this._ogCounty;
+        }
+        else {
+          this.ogCounty = '.';
+        }
+      }
     });
     this.crashEvent.getFieldSubject('onStreet')?.subscribe({
       next: (v) => {
