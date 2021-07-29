@@ -58,7 +58,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const currentRecord = changes.currentRecord;
     console.log(currentRecord)
-    if(currentRecord.currentValue === undefined) {
+    if (currentRecord.currentValue === undefined) {
       console.log('clear');
       this._clearMap();
       return;
@@ -70,22 +70,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   get _coordinates(): number[][] {
     return this._featureCollection.features
-    .map((feature: any) => feature.geometry.coordinates);
+      .map((feature: any) => feature.geometry.coordinates);
   }
 
   public onLocationChanged(lngLat: mapbox.LngLat | undefined) {
-    if(this._map && lngLat) {
-      this._map.easeTo({center: lngLat,zoom: 15})
+    if (this._map && lngLat) {
+      this._map.easeTo({ center: lngLat, zoom: 15, animate: false })
     }
   }
   public onZoomIn() { this._map.zoomIn(); }
   public onZoomOut() { this._map.zoomOut(); }
-  public onZoomToState() {this._map.fitBounds(MAP_BOUNDARY); }
+  public onZoomToState() { this._map.fitBounds(MAP_BOUNDARY, { animate: false }); }
   public onZoomToCurrent() {
-    const coordinates:number[][] = [...this._coordinates];
+    const coordinates: number[][] = [...this._coordinates];
     if (this._marker) {
-      const lngLat:mapbox.LngLat = this._marker.getLngLat();
-      if(lngLat) {
+      const lngLat: mapbox.LngLat = this._marker.getLngLat();
+      if (lngLat) {
         coordinates.push([lngLat.lng, lngLat.lat])
       }
     }
@@ -104,7 +104,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     map.on('load', async () => {
       await this._addSources(map, this._getNewFeatureCollection());
       await this._addLayers(map);
-      map.fitBounds(MAP_BOUNDARY);
+      map.fitBounds(MAP_BOUNDARY, { animate: false });
 
 
       map.on('click', (e) => {
@@ -115,7 +115,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       });
 
       this._map = map;
-      if(this._hasARecordWaiting) {
+      if (this._hasARecordWaiting) {
         this._loadRecord();
       }
     })
@@ -126,8 +126,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
   * @private
   */
   private _addDragableMarker(point: mapbox.LngLat) {
-    if (this._marker) { this._marker.remove(); this._marker = undefined;}
-    if (this._ghostMarker) {this._ghostMarker.remove(); this._ghostMarker = undefined; }
+    if (this._marker) { this._marker.remove(); this._marker = undefined; }
+    if (this._ghostMarker) { this._ghostMarker.remove(); this._ghostMarker = undefined; }
 
     const marker = new mapbox.Marker({
       draggable: true,
@@ -197,11 +197,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
   private _clearMap() {
     this._geocoder.mode$.next('');
-    if(this._marker){ this._marker.remove(); this._marker = undefined;}
-    if(this._ghostMarker) {this._ghostMarker.remove(); this._ghostMarker = undefined;}
-    if(this._map) {
+    if (this._marker) { this._marker.remove(); this._marker = undefined; }
+    if (this._ghostMarker) { this._ghostMarker.remove(); this._ghostMarker = undefined; }
+    if (this._map) {
       const streetLayer = this._map.getLayer('streets-selected');
-      if(streetLayer){
+      if (streetLayer) {
         this._map.setLayoutProperty('streets-selected', 'visibility', 'none');
         this._map.setFilter('streets-selected', null);
       }
@@ -224,27 +224,30 @@ export class MapComponent implements AfterViewInit, OnChanges {
     let featureCollection: any = this._getNewFeatureCollection();
     if (crashEvent && crashEvent.geocoding) {
       let etlStatus = crashEvent.geocoding.etlGeoLocationStatus;
-      const etlStatusCode = etlStatus ? ETL_STATUS[etlStatus][0] : 0;
-      featureCollection.features = crashEvent.geocoding.mapPoints.map((point: MapPoint) => {
-        return {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [point.x, point.y]
-          },
-          properties: {
-            etlStatus: etlStatusCode
-          }
-        };
-      });
-      if(crashEvent.originalLng && crashEvent.originalLat) {
+      console.log(etlStatus);
+      if (etlStatus !== 'Not Mapped') {
+        const etlStatusCode = etlStatus ? ETL_STATUS[etlStatus][0] : 0;
+        featureCollection.features = crashEvent.geocoding.mapPoints.map((point: MapPoint) => {
+          return {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [point.x, point.y]
+            },
+            properties: {
+              etlStatus: etlStatusCode
+            }
+          };
+        });
+      }
+      if (crashEvent.originalLng && crashEvent.originalLat) {
         featureCollection.features.push({
           type: 'Feature',
           geometry: {
             type: 'Point',
             coordinates: [crashEvent.originalLng, crashEvent.originalLat]
           },
-          properties:{
+          properties: {
             etlStatus: 5
           }
         })
@@ -254,6 +257,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   private _fitToFeatures(map: mapbox.Map, coordinates: number[][]) {
+    if(coordinates.length === 0) {
+      this.onZoomToState();
+      return;
+    }
     let ne: any = [...MAP_BOUNDARY[0]],
       sw: any = [...MAP_BOUNDARY[1]];
 
@@ -272,7 +279,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       }
     });
     const bounds = new mapbox.LngLatBounds(sw, ne);
-    map.fitBounds(bounds, { padding: {top: 100, left: 100, right: 50, bottom: 50} });
+    map.fitBounds(bounds, { padding: { top: 150, left: 150, right: 150, bottom: 150 }, animate: false });
   }
 
   private _getNewFeatureCollection(): FeatureCollection {
@@ -293,14 +300,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
       })
   }
   private async _loadRecord() {
-    if(this._map && this.currentRecord) {
+    if (this._map && this.currentRecord) {
       this._hasARecordWaiting = false;
       await this._createGeoJSONFeatures(this.currentRecord).then(featureCollection => {
         this._featureCollection = featureCollection;
         this._updateGeoJSONSource(featureCollection);
         this._fitToFeatures(this._map, this._coordinates);
       });
-    } else if(!this._map) {
+    } else if (!this._map) {
       this._hasARecordWaiting = true;
     }
   }
@@ -309,7 +316,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     // this.mapElement.nativeElement.className += ' ' + mode;
   }
 
-  private _updateGeoJSONSource(data: FeatureCollection){
+  private _updateGeoJSONSource(data: FeatureCollection) {
     let source = this._map.getSource('crash-point-source') as mapbox.GeoJSONSource;
     if (source) { source.setData(data); }
   }
