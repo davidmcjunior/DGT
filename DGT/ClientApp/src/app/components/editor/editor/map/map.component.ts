@@ -16,23 +16,25 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() currentRecord: CrashEvent | undefined;
   private _defaultCenter = <mapbox.LngLatLike>[-83.21, 27.945];
   private _featureCollection: FeatureCollection;
-  private _ghostMarker: mapbox.Marker;
+  private _ghostMarker: mapbox.Marker | undefined;
   private _hasARecordWaiting = false;
   private _map: mapbox.Map;
-  private _marker: mapbox.Marker;
+  private _marker: mapbox.Marker | undefined;
 
   @ViewChild('map') mapElement: ElementRef;
 
   @HostListener('window:click', ['$event'])
   handleMarkerPopupClick = (event: MouseEvent | any) => {
-    if (event.target.id === 'popup-reject') {
+    if (event.target.id === 'popup-reject' && this._marker && this._ghostMarker) {
       const lngLat = this._ghostMarker.getLngLat();
       this._ghostMarker.remove();
+      this._ghostMarker = undefined;
       this._marker.togglePopup().setLngLat(lngLat).setDraggable(true);
     }
-    else if (event.target.id === 'popup-confirm') {
+    else if (event.target.id === 'popup-confirm' && this._marker && this._ghostMarker) {
       this._marker.togglePopup().setDraggable(true);
       this._ghostMarker.remove();
+      this._ghostMarker = undefined;
       this._highlightStreetSegment(this._marker.getLngLat())
     }
   }
@@ -55,7 +57,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     const currentRecord = changes.currentRecord;
-    if(currentRecord.currentValue === undefined && !currentRecord.isFirstChange) {
+    console.log(currentRecord)
+    if(currentRecord.currentValue === undefined) {
+      console.log('clear');
       this._clearMap();
       return;
     }
@@ -122,8 +126,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
   * @private
   */
   private _addDragableMarker(point: mapbox.LngLat) {
-    if (this._marker) { this._marker.remove(); }
-    if (this._ghostMarker) {this._ghostMarker.remove(); }
+    if (this._marker) { this._marker.remove(); this._marker = undefined;}
+    if (this._ghostMarker) {this._ghostMarker.remove(); this._ghostMarker = undefined; }
 
     const marker = new mapbox.Marker({
       draggable: true,
@@ -193,13 +197,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
   private _clearMap() {
     this._geocoder.mode$.next('');
-    if(this._marker){ this._marker.remove();}
-    if(this._ghostMarker) {this._ghostMarker.remove(); }
+    if(this._marker){ this._marker.remove(); this._marker = undefined;}
+    if(this._ghostMarker) {this._ghostMarker.remove(); this._ghostMarker = undefined;}
     if(this._map) {
       const streetLayer = this._map.getLayer('streets-selected');
       if(streetLayer){
         this._map.setLayoutProperty('streets-selected', 'visibility', 'none');
-        this._map.setFilter('streets-selected', []);
+        this._map.setFilter('streets-selected', null);
       }
       this._updateGeoJSONSource(this._getNewFeatureCollection());
     }
