@@ -24,7 +24,7 @@ export class CrashEventRecordComponent implements OnInit {
 
   @ViewChild(SiteLocationComponent) siteLocation: SiteLocationComponent;
   @ViewChild(BicyclistCountComponent) bicycleCount: BicyclistCountComponent;
-  @ViewChild(CrashInfoPanelComponent) crashInfoPanel: CrashInfoPanelComponent;
+  // @ViewChild(CrashInfoPanelComponent) crashInfoPanel: CrashInfoPanelComponent;
   @ViewChild(CrashInjuryComponent) crashInjury: CrashInjuryComponent;
   @ViewChild(CrashLaneComponent) crashLane: CrashLaneComponent;
   @ViewChild(DotPropertyComponent) dotProperty: DotPropertyComponent;
