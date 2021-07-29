@@ -21,11 +21,14 @@ export class EditorComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.crashEvent.recordIsLoaded$.subscribe((isLoaded) => {
       if (isLoaded === true) {
+        console.log('true')
       this.currentRecord = this.crashEvent.getCurrentRecord();
 
         this.loadingOverlay.hide();
       } else {
         this.loadingOverlay.show();
+        console.log('false')
+
         this.currentRecord = undefined;
       }
     });
