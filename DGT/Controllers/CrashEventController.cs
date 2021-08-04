@@ -427,7 +427,6 @@ namespace DGT.Controllers
                     EtlGeoLocationStatus = "Lat Long Plot",
                     MapPoints = new List<Geocoding.MapPoint>
                     {
-                        new Geocoding.MapPoint{ X = -82.4223950853538, Y = 29.6520262594005 }
                     }
                 }
             };
@@ -580,6 +579,10 @@ namespace DGT.Controllers
                 else if (hsmvReportNumber == 88437237)
                 {
                     ceReturn = ce14;
+                }
+                else if (hsmvReportNumber == 11111111)
+                {
+                    ceReturn = ce15;
                 }
                 else
                 {

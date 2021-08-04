@@ -81,7 +81,7 @@ export class CrashEventService extends WatchableService {
    * @param hsmvReportNumber
    * @private
    */
-  private async _loadNext(hsmvReportNumber: number): Promise<any> {
+  private async _loadNext(hsmvReportNumber: number): Promise<this> {
     this.recordIsLoaded$.next(false);
     this.serviceIsLoaded$.next(false);
 
@@ -92,6 +92,8 @@ export class CrashEventService extends WatchableService {
         this._initInterFieldSubscriptions();
       });
     });
+
+    return this;
   }
 
   /**
@@ -99,7 +101,7 @@ export class CrashEventService extends WatchableService {
    * @param ce
    * @private
    */
-  private async _initData(ce: CrashEvent): Promise<any> {
+  private async _initData(ce: CrashEvent): Promise<this> {
     this._fields = new Map<string, BehaviorSubject<any>>();
     this._data = this._cache = ce;
 
@@ -116,6 +118,8 @@ export class CrashEventService extends WatchableService {
 
     this._initInterFieldSubscriptions();
     this.record$ = of(ce);
+
+    return this;
   }
 
   /**
@@ -144,7 +148,7 @@ export class CrashEventService extends WatchableService {
     return this;
   }
 
-  private _initInterFieldSubscriptions(): void {
+  private _initInterFieldSubscriptions(): this {
     const onPublicRoads$ = this._fields.get('onPublicRoads');
     const siteLocation$  = this._fields.get('siteLocation');
     const crashInjury$   = this._fields.get('crashInjury');
@@ -178,6 +182,7 @@ export class CrashEventService extends WatchableService {
       }
     });
 
+    return this;
   }
 
   /**
